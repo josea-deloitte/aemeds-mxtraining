@@ -7,7 +7,7 @@ const isDesktop = window.matchMedia('(min-width: 992px)');
 
 function buildUtilityNav(nav) {
   const utilitySection = nav.querySelector(':scope > div:first-child');
-  if (!utilitySection) return;
+  if (!utilitySection) return null;
 
   const utilityNav = document.createElement('div');
   utilityNav.className = 'header-utility';
@@ -33,12 +33,12 @@ function buildUtilityNav(nav) {
 
 function buildMainNav(nav) {
   const navSection = nav.querySelector(':scope > div:nth-child(2)');
-  if (!navSection) return;
+  if (!navSection) return null;
 
   navSection.className = 'header-nav';
 
   const list = navSection.querySelector('ul');
-  if (!list) return;
+  if (!list) return null;
 
   list.className = 'header-nav-list';
 
@@ -74,12 +74,12 @@ function buildMainNav(nav) {
 
 function buildTools(nav) {
   const toolsSection = nav.querySelector(':scope > div:nth-child(3)');
-  if (!toolsSection) return;
+  if (!toolsSection) return null;
 
   toolsSection.className = 'header-tools';
   const links = toolsSection.querySelectorAll('a');
 
-  const toolIcons = { 'sign up': 'mail', 'infusion locator': 'locator', 'savings': 'savings' };
+  const toolIcons = { 'sign up': 'mail', 'infusion locator': 'locator', savings: 'savings' };
   links.forEach((link) => {
     const key = link.textContent.trim().toLowerCase();
     if (toolIcons[key]) {
@@ -96,7 +96,7 @@ function buildTools(nav) {
 
 function buildSocial(nav) {
   const socialSection = nav.querySelector(':scope > div:nth-child(4)');
-  if (!socialSection) return;
+  if (!socialSection) return null;
 
   socialSection.className = 'header-social';
   const links = socialSection.querySelectorAll('a');

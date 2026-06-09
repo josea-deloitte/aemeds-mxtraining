@@ -15,7 +15,7 @@
 
 .cta-card {
   background: #fff;
-  box-shadow: 0 4px 16px rgba(0 0 0 / 12%);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
   border-radius: 4px;
   padding: var(--spacing-lg) var(--spacing-md);
   display: flex;
@@ -80,7 +80,7 @@
   height: auto;
 }
 
-@media (min-width: 900px) {
+@media (width >= 900px) {
   .cta-cards {
     padding: var(--spacing-xl);
   }

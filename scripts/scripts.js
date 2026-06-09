@@ -1,5 +1,6 @@
 import {
   buildBlock,
+  loadBlock,
   loadHeader,
   loadFooter,
   decorateIcons,
@@ -43,6 +44,12 @@ async function loadFonts() {
   }
 }
 
+function buildPrescriptionModal(main) {
+  if (document.cookie.includes('vyepti-px=')) return;
+  const modal = buildBlock('prescription-modal', '');
+  main.prepend(modal);
+}
+
 /**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
@@ -68,6 +75,7 @@ function buildAutoBlocks(main) {
     }
 
     buildHeroBlock(main);
+    buildPrescriptionModal(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
@@ -134,13 +142,12 @@ async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
-  
+
   // ISI:
   await Promise.all([
     loadSection(main.querySelector('.section'), waitForFirstImage),
-    loadBlock(document.querySelector('.isi')),   // ← add this
+    loadBlock(document.querySelector('.isi')), // ← add this
   ]);
-
 
   if (main) {
     decorateMain(main);
@@ -192,12 +199,6 @@ async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
-}
-
-function buildPrescriptionModal(main) {
-  if (document.cookie.includes('vyepti-px=')) return;
-  const modal = buildBlock('prescription-modal', '');
-  main.prepend(modal);
 }
 
 loadPage();

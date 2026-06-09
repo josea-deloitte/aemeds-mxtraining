@@ -40,7 +40,7 @@
   text-decoration: underline;
 }
 
-@media (min-width: 900px) {
+@media (width >= 900px) {
   .alert-strip {
     padding: var(--spacing-sm) var(--spacing-xl);
   }

@@ -36,7 +36,9 @@
 }
 
 /* Adobe Typekit — loaded via head.html preload links */
+
 /* Kit IDs: ysg8ozy (primary) and tyf5kxj (secondary) */
+
 /* Both are loaded in head.html via:
    <link rel="preload" href="https://use.typekit.net/ysg8ozy.css" as="style" ...>
    <link rel="preload" href="https://use.typekit.net/tyf5kxj.css" as="style" ...>

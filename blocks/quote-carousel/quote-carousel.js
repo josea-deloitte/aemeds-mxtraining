@@ -50,24 +50,17 @@ export default async function decorate(block) {
   nav.className = 'quote-carousel-nav';
 
   const prev = document.createElement('button');
-  prev.className = 'quote-carousel-btn quote-carousel-btn--prev';
+  prev.className = 'quote-carousel-btn quote-carousel-btn-prev';
   prev.setAttribute('aria-label', 'Previous quote');
   prev.innerHTML = '<span aria-hidden="true"></span>';
 
   const next = document.createElement('button');
-  next.className = 'quote-carousel-btn quote-carousel-btn--next';
+  next.className = 'quote-carousel-btn quote-carousel-btn-next';
   next.setAttribute('aria-label', 'Next quote');
   next.innerHTML = '<span aria-hidden="true"></span>';
 
   const dots = document.createElement('div');
   dots.className = 'quote-carousel-dots';
-  slides.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = `quote-carousel-dot${i === 0 ? ' active' : ''}`;
-    dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
-    dot.addEventListener('click', () => goTo(i));
-    dots.append(dot);
-  });
 
   function goTo(index) {
     slides[current].setAttribute('aria-hidden', true);
@@ -80,6 +73,14 @@ export default async function decorate(block) {
     slides[current].classList.add('active');
     dots.children[current].classList.add('active');
   }
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = `quote-carousel-dot${i === 0 ? ' active' : ''}`;
+    dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+    dot.addEventListener('click', () => goTo(i));
+    dots.append(dot);
+  });
 
   prev.addEventListener('click', () => goTo(current - 1));
   next.addEventListener('click', () => goTo(current + 1));

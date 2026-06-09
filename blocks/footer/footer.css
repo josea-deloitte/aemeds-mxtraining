@@ -43,6 +43,7 @@
   margin-bottom: var(--spacing-sm);
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .footer-phone a {
   display: inline-flex;
   align-items: center;
@@ -102,7 +103,7 @@
   width: auto;
 }
 
-@media (min-width: 900px) {
+@media (width >= 900px) {
   .footer-legal ul {
     justify-content: flex-start;
   }

@@ -4,7 +4,7 @@ export default async function decorate(block) {
   const cols = [...block.firstElementChild.children];
 
   cols.forEach((col, i) => {
-    col.classList.add('split-hero-col', i === 0 ? 'split-hero-col--left' : 'split-hero-col--right');
+    col.classList.add('split-hero-col', i === 0 ? 'split-hero-col-left' : 'split-hero-col-right');
 
     const picture = col.querySelector('picture');
     if (picture) {
