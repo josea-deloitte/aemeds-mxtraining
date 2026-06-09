@@ -38,6 +38,24 @@
 
   /* nav height */
   --nav-height: 64px;
+
+    /* Brand colors */
+  --color-brand-teal: #007a87;
+  --color-brand-teal-light: #4a8c96;
+  --color-brand-red: #be2529;
+  --color-brand-coral: #e06050;
+  --color-bg-light: #f5f5f5;
+
+  /* Typography — Typekit kits ysg8ozy + tyf5kxj */
+  --font-body: 'proxima-nova', 'Helvetica Neue', arial, sans-serif;
+  --font-heading: 'proxima-nova', 'Helvetica Neue', arial, sans-serif;
+
+  /* Spacing scale */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2.5rem;
+  --spacing-xl: 4rem;
 }
 
 /* fallback fonts */

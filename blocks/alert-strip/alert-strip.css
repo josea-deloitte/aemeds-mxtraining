@@ -1,0 +1,51 @@
+/* /blocks/alert-strip/alert-strip.css */
+
+.alert-strip {
+  background-color: var(--color-bg-light, #f5f5f5);
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.alert-strip-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.alert-strip-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background-image: url('/icons/information.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.alert-strip-content {
+  font-size: 0.875rem;
+  color: var(--color-text-dark, #2d2d2d);
+}
+
+.alert-strip-content p {
+  margin: 0;
+}
+
+.alert-strip-content a {
+  color: var(--color-brand-teal);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+@media (min-width: 900px) {
+  .alert-strip {
+    padding: var(--spacing-sm) var(--spacing-xl);
+  }
+
+  .alert-strip-content {
+    font-size: 1rem;
+  }
+}

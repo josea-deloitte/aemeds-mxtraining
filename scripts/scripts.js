@@ -134,6 +134,14 @@ async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
+  
+  // ISI:
+  await Promise.all([
+    loadSection(main.querySelector('.section'), waitForFirstImage),
+    loadBlock(document.querySelector('.isi')),   // ← add this
+  ]);
+
+
   if (main) {
     decorateMain(main);
     document.body.classList.add('appear');
@@ -184,6 +192,12 @@ async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
+}
+
+function buildPrescriptionModal(main) {
+  if (document.cookie.includes('vyepti-px=')) return;
+  const modal = buildBlock('prescription-modal', '');
+  main.prepend(modal);
 }
 
 loadPage();
