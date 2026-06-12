@@ -36,8 +36,8 @@
   --heading-font-size-s: 24px;
   --heading-font-size-xs: 22px;
 
-  /* nav height — utility strip (~32px) + main nav row (~64px) */
-  --nav-height: 96px;
+  /* nav height — utility strip (~30px) + main nav row (~72px) */
+  --nav-height: 102px;
 
     /* Brand colors */
   --color-brand-teal: #007a87;
