@@ -42,14 +42,14 @@
   white-space: nowrap;
 }
 
-.header-utility-links a:hover {
-  text-decoration: underline;
-}
-
 .header-utility-hcp a {
   border: 1px solid #fff;
   padding: 0.2rem 0.6rem;
   border-radius: 2px;
+}
+
+.header-utility-links a:hover {
+  text-decoration: underline;
 }
 
 /* ─── Main header row ────────────────────────────────────────────── */
