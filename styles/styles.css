@@ -47,8 +47,8 @@
   --color-bg-light: #f5f5f5;
 
   /* Typography — Typekit kits ysg8ozy + tyf5kxj */
-  --font-body: 'proxima-nova', 'Helvetica Neue', arial, sans-serif;
-  --font-heading: 'proxima-nova', 'Helvetica Neue', arial, sans-serif;
+  --font-body: 'proxima-nova', proxima-nova-fallback, 'Helvetica Neue', arial, sans-serif;
+  --font-heading: 'proxima-nova', proxima-nova-fallback, 'Helvetica Neue', arial, sans-serif;
 
   /* Spacing scale */
   --spacing-xs: 0.5rem;
