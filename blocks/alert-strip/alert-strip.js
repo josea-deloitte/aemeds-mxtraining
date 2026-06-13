@@ -1,26 +1,28 @@
-/* /blocks/alert-strip/alert-strip.js */
-
-export default async function decorate(block) {
-  block.setAttribute('role', 'complementary');
-  block.setAttribute('aria-label', 'Support information');
-
+/**
+ * Decorates the alert strip block.
+ *
+ * Authoring contract (one row, up to two cells):
+ * | alert-strip |
+ * | :information: | **Need help getting started on VYEPTI?
+ *   Call [833-4-VYEPTI](tel:8334893784) (833-489-3784).** |
+ *
+ * The icon cell is optional; a single cell is treated as text only.
+ *
+ * @param {Element} block The alert-strip block element
+ */
+export default function decorate(block) {
   const row = block.firstElementChild;
-  const cell = row?.firstElementChild;
-  if (!cell) return;
+  if (!row) return;
 
-  const icon = document.createElement('span');
-  icon.className = 'alert-strip-icon';
-  icon.setAttribute('aria-hidden', 'true');
+  const cells = [...row.children];
+  cells.forEach((cell) => {
+    const isIconOnly = cell.querySelector('.icon') && !cell.textContent.trim();
+    cell.classList.add(isIconOnly ? 'alert-strip-icon' : 'alert-strip-text');
+  });
 
-  const existingIcon = cell.querySelector('picture, img');
-  if (existingIcon) {
-    existingIcon.closest('p')?.remove();
-  }
+  // an icon-only cell is decorative
+  const icon = block.querySelector('.alert-strip-icon');
+  if (icon) icon.setAttribute('aria-hidden', 'true');
 
-  const content = document.createElement('div');
-  content.className = 'alert-strip-content';
-  content.append(...cell.childNodes);
-
-  cell.append(icon, content);
-  cell.className = 'alert-strip-inner';
+  block.setAttribute('role', 'note');
 }
