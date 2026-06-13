@@ -1,52 +1,17 @@
 /* stylelint-disable max-line-length */
 
-/* Proxima Nova — self-hosted */
-@font-face {
-  font-family: proxima-nova;
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url('../fonts/ProximaNova-Light.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: proxima-nova;
-  font-style: italic;
-  font-weight: 300;
-  font-display: swap;
-  src: url('../fonts/ProximaNova-LightItalic.ttf') format('truetype');
-}
+/*
+ * proxima-nova is served from Adobe Fonts (Typekit) under the site's existing
+ * web font license. Only the weights actually used on the site are loaded
+ * (400 regular, 600 semibold, 700 bold) as woff2, post-LCP via loadFonts().
+ */
 
 @font-face {
   font-family: proxima-nova;
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('../fonts/ProximaNova-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: proxima-nova;
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url('../fonts/ProximaNova-Italic.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: proxima-nova;
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('../fonts/ProximaNova-Medium.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: proxima-nova;
-  font-style: italic;
-  font-weight: 500;
-  font-display: swap;
-  src: url('../fonts/ProximaNova-MediumItalic.ttf') format('truetype');
+  src: url('https://use.typekit.net/af/efe4a5/00000000000000007735e609/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3') format('woff2');
 }
 
 @font-face {
@@ -54,15 +19,7 @@
   font-style: normal;
   font-weight: 600;
   font-display: swap;
-  src: url('../fonts/ProximaNova-Semibold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: proxima-nova;
-  font-style: italic;
-  font-weight: 600;
-  font-display: swap;
-  src: url('../fonts/ProximaNova-SemiboldItalic.ttf') format('truetype');
+  src: url('https://use.typekit.net/af/78aca8/00000000000000007735e60d/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3') format('woff2');
 }
 
 @font-face {
@@ -70,49 +27,5 @@
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('../fonts/ProximaNova-Bold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: proxima-nova;
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-  src: url('../fonts/ProximaNova-BoldItalic.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: proxima-nova;
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-  src: url('../fonts/ProximaNova-Extrabold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: proxima-nova;
-  font-style: italic;
-  font-weight: 800;
-  font-display: swap;
-  src: url('../fonts/ProximaNova-ExtraboldItalic.ttf') format('truetype');
-}
-
-/* Proxima Nova fallback — sized to match Arial to minimise CLS */
-@font-face {
-  font-family: proxima-nova-fallback;
-  size-adjust: 99%;
-  src: local('Arial');
-}
-
-/* Roboto fallbacks — used by boilerplate components */
-@font-face {
-  font-family: roboto-condensed-fallback;
-  size-adjust: 88.82%;
-  src: local('Arial');
-}
-
-@font-face {
-  font-family: roboto-fallback;
-  size-adjust: 99.529%;
-  src: local('Arial');
+  src: url('https://use.typekit.net/af/2555e1/00000000000000007735e603/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3') format('woff2');
 }

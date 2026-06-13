@@ -1,6 +1,4 @@
 import {
-  buildBlock,
-  loadBlock,
   loadHeader,
   loadFooter,
   decorateIcons,
@@ -11,26 +9,8 @@ import {
   loadSection,
   loadSections,
   loadCSS,
+  buildBlock,
 } from './aem.js';
-
-/**
- * Builds hero block and prepends to main in a new section.
- * @param {Element} main The container element
- */
-function buildHeroBlock(main) {
-  const h1 = main.querySelector('h1');
-  const picture = main.querySelector('picture');
-  // eslint-disable-next-line no-bitwise
-  if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
-    // Check if h1 or picture is already inside a hero block
-    if (h1.closest('.hero') || picture.closest('.hero')) {
-      return; // Don't create a duplicate hero block
-    }
-    const section = document.createElement('div');
-    section.append(buildBlock('hero', { elems: [picture, h1] }));
-    main.prepend(section);
-  }
-}
 
 /**
  * load fonts.css and set a session storage flag
@@ -44,10 +24,28 @@ async function loadFonts() {
   }
 }
 
-function buildPrescriptionModal(main) {
-  if (document.cookie.includes('vyepti-px=')) return;
-  const modal = buildBlock('prescription-modal', '');
-  main.prepend(modal);
+/**
+ * Turns `/widgets/...` links into widget blocks.
+ * @param {Element} main The container element
+ */
+function buildWidgetAutoBlocks(main) {
+  const widgetLinks = [...main.querySelectorAll('a[href*="/widgets/"]')];
+  widgetLinks.forEach((link) => {
+    if (link.closest('.widget')) return;
+    const newLink = link.cloneNode(true);
+    const widgetBlock = buildBlock('widget', { elems: [newLink] });
+    const p = link.closest('p');
+    if (
+      p
+      && p.querySelectorAll('a').length === 1
+      && p.querySelector('a') === link
+      && p.textContent.trim() === link.textContent.trim()
+    ) {
+      p.replaceWith(widgetBlock);
+    } else {
+      link.replaceWith(widgetBlock);
+    }
+  });
 }
 
 /**
@@ -73,9 +71,7 @@ function buildAutoBlocks(main) {
         });
       });
     }
-
-    buildHeroBlock(main);
-    buildPrescriptionModal(main);
+    buildWidgetAutoBlocks(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
@@ -122,6 +118,22 @@ function decorateButtons(main) {
 }
 
 /**
+ * Opens links to other domains in a new tab.
+ * @param {HTMLElement} main The main container element
+ */
+function decorateExternalLinks(main) {
+  main.querySelectorAll('a[href^="http"]').forEach((a) => {
+    try {
+      const url = new URL(a.href);
+      if (url.hostname !== window.location.hostname) {
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+      }
+    } catch { /* leave malformed links untouched */ }
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -132,6 +144,7 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
+  decorateExternalLinks(main);
 }
 
 /**
@@ -142,13 +155,6 @@ async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
-
-  // ISI:
-  await Promise.all([
-    loadSection(main.querySelector('.section'), waitForFirstImage),
-    loadBlock(document.querySelector('.isi')), // ← add this
-  ]);
-
   if (main) {
     decorateMain(main);
     document.body.classList.add('appear');
