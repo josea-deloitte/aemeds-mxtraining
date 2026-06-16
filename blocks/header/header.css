@@ -130,8 +130,12 @@ header nav .nav-brand {
 }
 
 header nav .nav-brand .icon {
-  width: 110px;
-  height: 67px;
+  width: 105px;
+  height: auto;
+}
+
+header nav .nav-brand .icon img {
+  height: auto;
 }
 
 /* tools (sign up, infusion locator, savings) */
@@ -252,7 +256,7 @@ header nav .nav-utility .default-content-wrapper {
 
 header nav .nav-utility p {
   color: var(--light-color);
-  font-weight: 400;
+  font-weight: 800;
   flex: 1 1 100%;
 }
 
@@ -335,8 +339,8 @@ header nav .nav-utility .nav-drop > ul li a:hover {
   }
 
   header nav .nav-brand .icon {
-    width: 140px;
-    height: 85px;
+    width: 130px;
+    height: auto;
   }
 
   header nav .nav-tools {
@@ -353,6 +357,11 @@ header nav .nav-utility .nav-drop > ul li a:hover {
     border-top: 0;
   }
 
+  header nav .nav-utility {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
   header nav .nav-utility .default-content-wrapper {
     flex-wrap: nowrap;
     padding: 10px 24px;
@@ -364,7 +373,7 @@ header nav .nav-utility .nav-drop > ul li a:hover {
 
   header nav .nav-utility > .default-content-wrapper > ul {
     flex-wrap: nowrap;
-    gap: 24px;
+    gap: 21px;
   }
 
   /* pill navigation */
@@ -420,6 +429,9 @@ header nav .nav-utility .nav-drop > ul li a:hover {
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     padding: 8px 20px;
     font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
     white-space: normal;
   }
 

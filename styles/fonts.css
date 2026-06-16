@@ -29,3 +29,11 @@
   font-display: swap;
   src: url('https://use.typekit.net/af/2555e1/00000000000000007735e603/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3') format('woff2');
 }
+
+@font-face {
+  font-family: proxima-nova;
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('https://use.typekit.net/af/8738d8/00000000000000007735e611/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n8&v=3') format('woff2');
+}

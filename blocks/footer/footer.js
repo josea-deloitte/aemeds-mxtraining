@@ -21,6 +21,53 @@ function decorateIconLinks(scope) {
 }
 
 /**
+ * Removes stray literal markdown bold markers (`**`) left around a node when
+ * an author typed `**…**` instead of using the editor's bold formatting.
+ * @param {Element} el The element whose child text nodes to clean
+ */
+function stripBoldMarkers(el) {
+  el.childNodes.forEach((node) => {
+    if (node.nodeType === Node.TEXT_NODE && /^\s*\*+\s*$/.test(node.textContent)) {
+      node.remove();
+    } else if (node.nodeType === Node.TEXT_NODE && node.textContent.includes('**')) {
+      node.textContent = node.textContent.replace(/\*\*/g, '');
+    }
+  });
+}
+
+/**
+ * Turns the "For assistance, call" tel link into the magenta call button and
+ * groups it with its label into a right-aligned CTA. Works regardless of
+ * whether the author bolded the link, so it never relies on auto-buttonization.
+ * @param {Element} footer The footer container
+ */
+function decorateCallToAction(footer) {
+  const tel = footer.querySelector('a[href^="tel:"]');
+  if (!tel) return;
+
+  const buttonP = tel.closest('p') || tel.parentElement;
+  stripBoldMarkers(buttonP);
+  // unwrap any leftover strong/em so the link is the button itself
+  const wrap = tel.closest('strong, em');
+  if (wrap && wrap.parentElement === buttonP) wrap.replaceWith(tel);
+
+  tel.classList.add('button', 'primary', 'footer-call');
+  buttonP.classList.add('button-wrapper');
+
+  const info = footer.querySelector('.footer-info .default-content-wrapper')
+    || footer.querySelector('.footer-info') || buttonP.parentElement;
+  const cta = document.createElement('div');
+  cta.className = 'footer-cta';
+  // the paragraph immediately before the button is the "For assistance, call" label
+  const label = buttonP.previousElementSibling;
+  if (label && label.tagName === 'P' && !label.classList.contains('button-wrapper')) {
+    cta.append(label);
+  }
+  cta.append(buttonP);
+  info.prepend(cta);
+}
+
+/**
  * loads and decorates the footer
  * @param {Element} block The footer block element
  */
@@ -42,11 +89,7 @@ export default async function decorate(block) {
     if (section) section.classList.add(`footer-${c}`);
   });
 
-  // the tel: button gets a phone icon
-  footer.querySelectorAll('a.button[href^="tel:"]').forEach((a) => {
-    a.classList.add('footer-call');
-  });
-
+  decorateCallToAction(footer);
   decorateIconLinks(footer);
 
   block.append(footer);
