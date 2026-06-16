@@ -1,4 +1,4 @@
-import { getMetadata } from '../../scripts/aem.js';
+import { getMetadata, decorateIcons } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 // media query match that indicates mobile/tablet width
@@ -169,6 +169,39 @@ function decorateSocialLinks(scope) {
 }
 
 /**
+ * Builds the search box into the tools area. Submits to /search as a GET so it
+ * works as soon as a search page exists, while matching the site's UI now.
+ * @param {Element} navTools The tools section of the nav
+ */
+function decorateSearch(navTools) {
+  if (!navTools) return;
+  const form = document.createElement('form');
+  form.className = 'nav-search';
+  form.setAttribute('role', 'search');
+  form.action = '/search';
+  form.innerHTML = `<input type="search" name="q" placeholder="Search" aria-label="Search">
+    <button type="submit" aria-label="Submit search"><span class="icon icon-search"></span></button>`;
+  navTools.append(form);
+  decorateIcons(form);
+}
+
+/**
+ * Flags the nav item matching the current page so it can show the active
+ * (red) underline.
+ * @param {Element} navSections The main nav sections
+ */
+function markActiveNavItem(navSections) {
+  if (!navSections) return;
+  const here = window.location.pathname.replace(/index\.html$/, '') || '/';
+  navSections.querySelectorAll(':scope a[href]').forEach((a) => {
+    try {
+      const path = new URL(a.href, window.location).pathname.replace(/index\.html$/, '') || '/';
+      if (path === here) a.closest('li').classList.add('active');
+    } catch { /* ignore malformed hrefs */ }
+  });
+}
+
+/**
  * loads and decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
@@ -244,6 +277,8 @@ export default async function decorate(block) {
   if (navBrand) navBar.append(navBrand);
   const navTools = nav.querySelector('.nav-tools');
   if (navTools) navBar.append(navTools);
+  decorateSearch(navTools);
+  markActiveNavItem(navSections);
   if (navSections) nav.insertBefore(navBar, navSections);
   else nav.append(navBar);
 

@@ -179,6 +179,50 @@ header nav .nav-tools ul li a:hover {
   color: var(--link-hover-color);
 }
 
+/* search box */
+header nav .nav-search {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 12px;
+  border: 1px solid var(--dark-color);
+  border-radius: 20px;
+  background-color: var(--background-color);
+  overflow: hidden;
+}
+
+header nav .nav-search input {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  border: 0;
+  padding: 8px 16px;
+  background: transparent;
+  color: var(--text-color);
+  font-size: var(--body-font-size-s);
+}
+
+header nav .nav-search input:focus {
+  outline: none;
+}
+
+header nav .nav-search button {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  border: 0;
+  padding: 6px 14px;
+  background: transparent;
+  color: var(--dark-color);
+  cursor: pointer;
+}
+
+header nav .nav-search button .icon {
+  width: 18px;
+  height: 18px;
+}
+
 /* main nav sections */
 header nav .nav-sections {
   display: none;
@@ -292,14 +336,20 @@ header nav .nav-utility .nav-drop > button {
 
 header nav .nav-utility .nav-drop > button::after {
   content: "";
-  width: 16px;
-  height: 16px;
+  position: relative;
+  top: 1px;
+  width: 0.5em;
+  height: 0.5em;
   flex: 0 0 auto;
-  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='8' fill='%23fff'/><path d='M7 4h2v8H7zM4 7h8v2H4z' fill='%23046183'/></svg>") no-repeat center / contain;
+  border-top: 0.1em solid currentcolor;
+  border-right: 0.1em solid currentcolor;
+  transform: rotate(135deg);
+  transition: transform 0.2s linear, top 0.2s linear;
 }
 
 header nav .nav-utility .nav-drop > button[aria-expanded="true"]::after {
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='8' fill='%23fff'/><rect x='4' y='7' width='8' height='2' fill='%23046183'/></svg>");
+  top: 4px;
+  transform: rotate(-45deg);
 }
 
 header nav .nav-utility .nav-drop > ul {
@@ -352,7 +402,9 @@ header nav .nav-utility .nav-drop > ul li a:hover {
   }
 
   header nav .nav-tools {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 24px;
     order: 3;
     width: auto;
     margin-left: auto;
@@ -363,6 +415,11 @@ header nav .nav-utility .nav-drop > ul li a:hover {
     gap: 32px;
     padding: 0;
     border-top: 0;
+  }
+
+  header nav .nav-search {
+    width: 190px;
+    margin-top: 0;
   }
 
   header nav .nav-utility {
@@ -428,8 +485,8 @@ header nav .nav-utility .nav-drop > ul li a:hover {
     min-width: 260px;
     margin-top: 0;
     padding: 8px 0;
-    border-top: 4px solid var(--link-color);
-    border-radius: 2px;
+    border-bottom: 4px solid var(--nav-accent-color);
+    border-radius: 0 0 2px 2px;
     background-color: var(--background-color);
     box-shadow: 0 2px 8px rgb(46 50 51 / 20%);
   }
@@ -453,6 +510,19 @@ header nav .nav-utility .nav-drop > ul li a:hover {
 
   header nav .nav-sections .default-content-wrapper > ul > li:hover {
     color: var(--link-hover-color);
+  }
+
+  /* active page indicator (e.g. Home) */
+  header nav .nav-sections .default-content-wrapper > ul > li.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 8px;
+    width: 24px;
+    height: 3px;
+    margin: auto;
+    background-color: var(--nav-accent-color);
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded="true"] > ul {
