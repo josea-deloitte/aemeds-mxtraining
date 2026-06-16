@@ -164,13 +164,14 @@ header nav .nav-tools ul li {
 }
 
 header nav .nav-tools li .icon {
-  width: 32px;
-  height: 32px;
+  width: 38px;
+  height: 38px;
 }
 
 header nav .nav-tools ul li a {
   color: var(--link-color);
-  font-size: var(--body-font-size-s);
+  font-size: 18px;
+  line-height: 22px;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -401,7 +402,9 @@ header nav .nav-utility .nav-drop > ul li a:hover {
     height: auto;
   }
 
-  header nav .nav-tools {
+  /* attribute selector needed: nav is aria-expanded="true" on desktop, so the
+     mobile "display:block" rule would otherwise win on specificity */
+  header nav[aria-expanded] .nav-tools {
     display: flex;
     align-items: center;
     gap: 24px;
@@ -412,19 +415,19 @@ header nav .nav-utility .nav-drop > ul li a:hover {
 
   header nav .nav-tools ul {
     flex-direction: row;
-    gap: 32px;
+    gap: 24px;
     padding: 0;
     border-top: 0;
   }
 
   header nav .nav-search {
-    width: 190px;
+    width: 170px;
     margin-top: 0;
   }
 
   header nav .nav-utility {
-    font-size: 16px;
-    line-height: 22px;
+    font-size: 14px;
+    line-height: 20px;
   }
 
   header nav .nav-utility .default-content-wrapper {
@@ -434,6 +437,7 @@ header nav .nav-utility .nav-drop > ul li a:hover {
 
   header nav .nav-utility p {
     flex: 1 1 auto;
+    white-space: nowrap;
   }
 
   header nav .nav-utility > .default-content-wrapper > ul {
@@ -447,7 +451,6 @@ header nav .nav-utility .nav-drop > ul li a:hover {
     flex: 0 0 auto;
     width: 100%;
     padding-bottom: 16px;
-    background: linear-gradient(to bottom, var(--background-color), transparent);
   }
 
   header nav .nav-sections .default-content-wrapper {
@@ -518,7 +521,7 @@ header nav .nav-utility .nav-drop > ul li a:hover {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 8px;
+    bottom: 10px;
     width: 24px;
     height: 3px;
     margin: auto;
