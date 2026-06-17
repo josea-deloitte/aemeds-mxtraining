@@ -76,7 +76,9 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   const button = nav.querySelector('.nav-hamburger button');
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
+  // always collapse sections: desktop dropdowns open on hover, mobile sections
+  // are an accordion (tapped open individually)
+  toggleAllNavSections(navSections, false);
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
   // enable nav dropdown keyboard accessibility
   if (navSections) {
@@ -252,12 +254,16 @@ export default async function decorate(block) {
   if (navSections) {
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-      navSection.addEventListener('click', () => {
-        if (isDesktop.matches) {
-          const expanded = navSection.getAttribute('aria-expanded') === 'true';
-          toggleAllNavSections(navSections);
-          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        }
+      navSection.addEventListener('click', (e) => {
+        // desktop opens dropdowns on hover (+ keyboard); only mobile toggles
+        // the accordion on tap
+        if (isDesktop.matches) return;
+        // let links navigate without collapsing their section
+        if (e.target.closest('a')) return;
+        if (!navSection.classList.contains('nav-drop')) return;
+        const expanded = navSection.getAttribute('aria-expanded') === 'true';
+        toggleAllNavSections(navSections);
+        navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
       });
     });
   }
