@@ -1,9 +1,9 @@
 /* stylelint-disable max-line-length */
 
 /*
- * proxima-nova is served from Adobe Fonts (Typekit) under the site's existing
- * web font license. Only the weights actually used on the site are loaded
- * (400 regular, 600 semibold, 700 bold) as woff2, post-LCP via loadFonts().
+ * proxima-nova, self-hosted as woff2. Only the weights used on the site are
+ * included (400 regular, 600 semibold, 700 bold, 800 extrabold). Loaded
+ * post-LCP via loadFonts() with a size-adjusted fallback to minimize CLS.
  */
 
 @font-face {
@@ -11,7 +11,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('https://use.typekit.net/af/efe4a5/00000000000000007735e609/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3') format('woff2');
+  src: url('../fonts/proxima-nova-regular.woff2') format('woff2');
 }
 
 @font-face {
@@ -19,7 +19,7 @@
   font-style: normal;
   font-weight: 600;
   font-display: swap;
-  src: url('https://use.typekit.net/af/78aca8/00000000000000007735e60d/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3') format('woff2');
+  src: url('../fonts/proxima-nova-semibold.woff2') format('woff2');
 }
 
 @font-face {
@@ -27,7 +27,7 @@
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('https://use.typekit.net/af/2555e1/00000000000000007735e603/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3') format('woff2');
+  src: url('../fonts/proxima-nova-bold.woff2') format('woff2');
 }
 
 @font-face {
@@ -35,5 +35,5 @@
   font-style: normal;
   font-weight: 800;
   font-display: swap;
-  src: url('https://use.typekit.net/af/8738d8/00000000000000007735e611/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n8&v=3') format('woff2');
+  src: url('../fonts/proxima-nova-extrabold.woff2') format('woff2');
 }
