@@ -31,3 +31,42 @@
     order: unset;
   }
 }
+
+/* VYEPTI Card Styles */
+.columns.cards > div {
+  gap: 24px;
+  align-items: stretch;
+}
+
+.columns.cards > div > div {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 40px 32px;
+  box-shadow: 0 2px 12px rgb(0 0 0 / 8%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.columns.cards > div > div p:first-child {
+  color: #1a4a5c;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.columns.cards > div > div h2 {
+  color: #c0006a;
+  font-size: 1.6rem;
+}
+
+.columns.cards > div > div a {
+  background-color: #1a4a5c;
+  color: white;
+  padding: 14px 28px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 700;
+  margin-top: auto;
+}
