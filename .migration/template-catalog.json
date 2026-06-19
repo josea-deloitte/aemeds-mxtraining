@@ -1,0 +1,126 @@
+{
+  "templates": [
+    {
+      "name": "homepage",
+      "representativePages": [
+        "https://www.vyepti.com/"
+      ],
+      "urls": [
+        "https://www.vyepti.com/"
+      ],
+      "description": "Landing page with rotating carousel banners, split image-and-text hero sections, and a tabbed content module"
+    },
+    {
+      "name": "content-hero-tabs",
+      "representativePages": [
+        "https://www.vyepti.com/could-vyepti-be-right-for-you",
+        "https://www.vyepti.com/financial-assistance",
+        "https://www.vyepti.com/how-vyepti-works",
+        "https://www.vyepti.com/what-to-expect",
+        "https://www.vyepti.com/real-patient-stories"
+      ],
+      "urls": [
+        "https://www.vyepti.com/could-vyepti-be-right-for-you",
+        "https://www.vyepti.com/doctor-discussion-guide",
+        "https://www.vyepti.com/financial-assistance",
+        "https://www.vyepti.com/how-vyepti-works",
+        "https://www.vyepti.com/real-patient-stories",
+        "https://www.vyepti.com/stay-connected",
+        "https://www.vyepti.com/vyepti-side-effects",
+        "https://www.vyepti.com/what-to-expect",
+        "https://www.vyepti.com/why-iv-treatment"
+      ],
+      "description": "Standard content page with stacked split hero sections, supporting copy blocks, and a tabbed content module"
+    },
+    {
+      "name": "resource-list",
+      "representativePages": [
+        "https://www.vyepti.com/downloadable-resources"
+      ],
+      "urls": [
+        "https://www.vyepti.com/downloadable-resources"
+      ],
+      "description": "Single-block resource listing page presenting downloadable assets in a simple grid"
+    },
+    {
+      "name": "hero-tabs-support",
+      "representativePages": [
+        "https://www.vyepti.com/nurse-support"
+      ],
+      "urls": [
+        "https://www.vyepti.com/nurse-support"
+      ],
+      "description": "Support page with a single split hero followed by a tabbed content module"
+    },
+    {
+      "name": "story-cards",
+      "representativePages": [
+        "https://www.vyepti.com/real-life-impact"
+      ],
+      "urls": [
+        "https://www.vyepti.com/real-life-impact"
+      ],
+      "description": "Page with hero intro, supporting copy, a tabbed module, and a card grid of stories"
+    },
+    {
+      "name": "engagement-cards",
+      "representativePages": [
+        "https://www.vyepti.com/share-your-migraine-story"
+      ],
+      "urls": [
+        "https://www.vyepti.com/share-your-migraine-story"
+      ],
+      "description": "Engagement page with stacked hero sections followed by a card grid call to action"
+    },
+    {
+      "name": "sitemap",
+      "representativePages": [
+        "https://www.vyepti.com/site-map"
+      ],
+      "urls": [
+        "https://www.vyepti.com/site-map"
+      ],
+      "description": "Plain sitemap page with default content link list and no decorated blocks"
+    },
+    {
+      "name": "faq-accordion",
+      "representativePages": [
+        "https://www.vyepti.com/vyepti-faq"
+      ],
+      "urls": [
+        "https://www.vyepti.com/vyepti-faq"
+      ],
+      "description": "FAQ page with a hero intro followed by accordion-style question and answer blocks"
+    },
+    {
+      "name": "coverage-carousel",
+      "representativePages": [
+        "https://www.vyepti.com/vyepti-insurance-coverage"
+      ],
+      "urls": [
+        "https://www.vyepti.com/vyepti-insurance-coverage"
+      ],
+      "description": "Coverage page with hero intro, an informational carousel, and supporting copy"
+    },
+    {
+      "name": "locator-form",
+      "representativePages": [
+        "https://www.vyepti.com/vyepti-locator"
+      ],
+      "urls": [
+        "https://www.vyepti.com/vyepti-locator"
+      ],
+      "description": "Locator page with hero intro, an embedded search form, and a map embed"
+    },
+    {
+      "name": "data-hero-tabs",
+      "representativePages": [
+        "https://www.vyepti.com/vyepti-study-results"
+      ],
+      "urls": [
+        "https://www.vyepti.com/vyepti-study-results"
+      ],
+      "description": "Clinical data page with stacked hero sections, supporting data callouts, and a tabbed content module"
+    }
+  ]
+}
