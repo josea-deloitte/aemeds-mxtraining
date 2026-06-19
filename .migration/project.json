@@ -4,7 +4,8 @@
     "aemeds-mxtraining": {
       "previewOrg": "josea-deloitte",
       "previewSite": "aemeds-mxtraining",
-      "contentHostUrl": "https://content.da.live/josea-deloitte/aemeds-mxtraining/"
+      "contentHostUrl": "https://content.da.live/josea-deloitte/aemeds-mxtraining/",
+      "libraryUrl": "https://main--sta-boilerplate--aemdemos.aem.page/tools/sidekick/library.json"
     }
   }
 }
