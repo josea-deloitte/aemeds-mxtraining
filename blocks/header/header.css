@@ -172,7 +172,7 @@ header nav .nav-tools ul li a {
   color: var(--link-color);
   font-size: 18px;
   line-height: 22px;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
 }
 
@@ -501,7 +501,10 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
     justify-content: space-between;
     align-items: center;
     gap: 16px;
-    font-size: var(--body-font-size-s);
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 24px;
+    text-transform: uppercase;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li {
@@ -534,6 +537,7 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
     font-size: 16px;
     line-height: 22px;
     text-align: center;
+    text-transform: none;
     white-space: normal;
   }
 
