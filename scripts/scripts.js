@@ -172,6 +172,26 @@ async function loadEager(doc) {
 }
 
 /**
+ * Loads the global Important Safety Information (ISI) block on every page.
+ * The ISI content lives in a shared fragment so it is authored in one place;
+ * the isi block renders both the inline panel and the fixed condensed band.
+ * @param {Element} main The main container element
+ */
+async function loadISI(main) {
+  if (!main || main.querySelector('.isi')) return;
+  // eslint-disable-next-line import/no-cycle
+  const { loadFragment } = await import('../blocks/fragment/fragment.js');
+  const fragment = await loadFragment('/fragments/isi');
+  if (!fragment) return;
+  const isiBlock = buildBlock('isi', { elems: [...fragment.childNodes] });
+  const section = document.createElement('div');
+  section.append(isiBlock);
+  main.append(section);
+  decorateSections(main);
+  await loadSection(section);
+}
+
+/**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
  */
@@ -180,6 +200,8 @@ async function loadLazy(doc) {
 
   const main = doc.querySelector('main');
   await loadSections(main);
+
+  await loadISI(main);
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;

@@ -1,0 +1,10 @@
+{
+  "type": "da",
+  "sites": {
+    "aemeds-mxtraining": {
+      "previewOrg": "josea-deloitte",
+      "previewSite": "aemeds-mxtraining",
+      "contentHostUrl": "https://content.da.live/josea-deloitte/aemeds-mxtraining/"
+    }
+  }
+}

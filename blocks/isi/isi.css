@@ -1,0 +1,154 @@
+/*
+ * ISI (Important Safety Information) block styles.
+ * Colors and typography mirror the source site:
+ *   heading 18px/700 teal #41748d, body 16px/24px #484848.
+ */
+
+/*
+ * Custom properties on :root so the fixed band (appended to <body>, outside
+ * the .isi block) inherits the same tokens as the inline panel.
+ */
+:root {
+  --isi-heading-color: #41748d;
+  --isi-text-color: #484848;
+  --isi-border-color: #d1d1d1;
+  --isi-band-max-height: 70vh;
+}
+
+/* Shared typography for both the inline panel and the condensed band */
+.isi-panel,
+.isi-band-inner {
+  color: var(--isi-text-color);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.isi-panel h5,
+.isi-band-inner h5 {
+  margin: 0 0 8px;
+  color: var(--isi-heading-color);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.isi-panel p,
+.isi-band-inner p {
+  margin: 0 0 16px;
+}
+
+.isi-panel ul,
+.isi-band-inner ul {
+  margin: 0 0 16px;
+  padding-left: 20px;
+}
+
+.isi-panel li,
+.isi-band-inner li {
+  margin-bottom: 12px;
+}
+
+.isi-panel a,
+.isi-band-inner a {
+  color: var(--isi-heading-color);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* Full inline panel above the footer */
+.isi-panel {
+  padding: 24px 16px;
+}
+
+/*
+ * Condensed fixed band — appended to <body>, scoped under .isi-band so it does
+ * not collide with section container/wrapper classes.
+ */
+.isi-band {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 5;
+  max-height: 50vh;
+  overflow: hidden auto;
+  background: #fff;
+  border-top: 1px solid var(--isi-border-color);
+  color: var(--isi-text-color);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  line-height: 24px;
+  transition: max-height 0.3s ease;
+}
+
+/* Hidden once the full panel is on screen */
+.isi-band.isi-band-docked {
+  transform: translateY(100%);
+  pointer-events: none;
+}
+
+.isi-band-toggle {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: var(--isi-heading-color);
+  cursor: pointer;
+}
+
+.isi-band-toggle::before,
+.isi-band-toggle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 2px;
+  background: currentcolor;
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s ease;
+}
+
+/* plus icon when collapsed; rotate to minus when expanded */
+.isi-band-toggle::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.isi-band.isi-band-expanded .isi-band-toggle::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.isi-band-inner {
+  padding: 13px 16px 16px;
+}
+
+/* Collapsed: show only the teaser (first heading + first paragraph of each col) */
+.isi-band:not(.isi-band-expanded) .isi-band-inner ul,
+.isi-band:not(.isi-band-expanded) .isi-band-inner p ~ p,
+.isi-band:not(.isi-band-expanded) .isi-band-inner h5 ~ p ~ * {
+  display: none;
+}
+
+.isi-band.isi-band-expanded {
+  max-height: var(--isi-band-max-height);
+}
+
+@media (width >= 900px) {
+  .isi .isi-panel {
+    padding: 40px max(32px, calc((100% - 1200px) / 2));
+  }
+
+  .isi-band-inner {
+    padding: 13px max(32px, calc((100% - 1200px) / 2)) 16px;
+  }
+
+  /* On desktop the band teaser shows the two lead columns side by side */
+  .isi-band:not(.isi-band-expanded) .isi-band-inner > * {
+    column-count: 2;
+    column-gap: 32px;
+  }
+}
