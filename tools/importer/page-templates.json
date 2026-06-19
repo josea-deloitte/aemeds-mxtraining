@@ -1,0 +1,48 @@
+{
+  "metadata": {
+    "projectType": "da"
+  },
+  "templates": [
+    {
+      "name": "homepage",
+      "urls": [
+        "https://www.vyepti.com/"
+      ],
+      "representativeUrl": "https://www.vyepti.com/",
+      "coverageGaps": [],
+      "description": "VYEPTI homepage: split hero banner area, a call-out alert strip, a 3-up text-and-image column grid, a patient-quotes carousel, and a 2-up text-and-image card row. Global header, footer, and ISI are handled separately.",
+      "blocks": [
+        {
+          "name": "columns-hero",
+          "instances": [
+            "#vyepti-banner-swap > div.aem-Grid.aem-Grid--12.aem-Grid--default--12 > div.columncontainer.aem-GridColumn.aem-GridColumn--default--12:nth-of-type(1)"
+          ]
+        },
+        {
+          "name": "alert-strip",
+          "instances": [
+            "#vyepti-banner-swap > div.aem-Grid.aem-Grid--12.aem-Grid--default--12 > div.columncontainer.aem-GridColumn.aem-GridColumn--default--12:nth-of-type(2)"
+          ]
+        },
+        {
+          "name": "cards-feature",
+          "instances": [
+            "#vyepti-banner-swap > div.aem-Grid.aem-Grid--12.aem-Grid--default--12 > div.columncontainer.aem-GridColumn.aem-GridColumn--default--12:nth-of-type(3)"
+          ]
+        },
+        {
+          "name": "carousel-quote",
+          "instances": [
+            "#vyepti-banner-swap > div.aem-Grid.aem-Grid--12.aem-Grid--default--12 > div.quotescardcarousel.aem-GridColumn.aem-GridColumn--default--12"
+          ]
+        },
+        {
+          "name": "cards-callout",
+          "instances": [
+            "#vyepti-banner-swap > div.aem-Grid.aem-Grid--12.aem-Grid--default--12 > div.columncontainer.aem-GridColumn.aem-GridColumn--default--12:nth-of-type(5)"
+          ]
+        }
+      ]
+    }
+  ]
+}
