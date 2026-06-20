@@ -356,7 +356,7 @@ header nav .nav-utility .nav-drop > button[aria-expanded="true"]::after {
 header nav .nav-utility .nav-drop > ul {
   display: none;
   position: absolute;
-  top: calc(100% + 8px);
+  top: 100%;
   left: 0;
   z-index: 3;
   min-width: 220px;
@@ -589,5 +589,17 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
   header nav .nav-sections .nav-drop:hover::after,
   header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
     transform: rotate(-45deg) translate(2px, -2px);
+  }
+
+  /* desktop: open the utility dropdowns on hover, like the main nav
+     (the button's click/keyboard path still works for touch and a11y) */
+  header nav .nav-utility .nav-drop:hover > button::after {
+    top: 4px;
+    transform: rotate(-45deg);
+  }
+
+  /* stylelint-disable-next-line no-descending-specificity */
+  header nav .nav-utility .nav-drop:hover > ul {
+    display: block;
   }
 }
