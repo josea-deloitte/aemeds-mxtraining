@@ -34,7 +34,7 @@ footer .footer .footer-legal ul {
 
 footer .footer .footer-legal a:any-link {
   color: var(--background-color);
-  font-size: 16px;
+  font-size: 14px;
   line-height: 22px;
   font-weight: 600;
 }
@@ -59,7 +59,7 @@ footer .footer .footer-info > div {
 
 footer .footer .footer-info p {
   font-size: 14px;
-  line-height: 20px;
+  line-height: 1.5;
 }
 
 footer .footer .footer-info a:any-link:not(.button) {
@@ -136,8 +136,8 @@ footer .footer .footer-brand ul {
 }
 
 footer .footer .footer-brand ul .icon {
-  width: 27px;
-  height: 27px;
+  width: 32px;
+  height: 32px;
 }
 
 footer .footer .footer-brand a:hover .icon {
@@ -157,6 +157,10 @@ footer .footer .footer-brand .icon-lundbeck {
 
   footer .footer .footer-legal ul {
     gap: 8px 40px;
+  }
+
+  footer .footer .footer-legal a:any-link {
+    font-size: 16px;
   }
 
   /* copy on the left, call-to-action on the right */

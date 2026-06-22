@@ -170,9 +170,9 @@ header nav .nav-tools li .icon {
 
 header nav .nav-tools ul li a {
   color: var(--link-color);
-  font-size: 18px;
+  font-size: 16px;
   line-height: 22px;
-  font-weight: 800;
+  font-weight: 600;
   text-transform: uppercase;
 }
 
@@ -284,7 +284,7 @@ header nav .nav-social a:hover .icon {
 header nav .nav-utility {
   background-color: var(--link-color);
   color: var(--background-color);
-  font-size: var(--body-font-size-xs);
+  font-size: 14px;
   font-weight: 600;
   order: -1;
 }
@@ -301,7 +301,7 @@ header nav .nav-utility .default-content-wrapper {
 }
 
 header nav .nav-utility p {
-  color: var(--light-color);
+  color: var(--background-color);
   font-weight: 800;
   flex: 1 1 100%;
 }
@@ -356,7 +356,7 @@ header nav .nav-utility .nav-drop > button[aria-expanded="true"]::after {
 header nav .nav-utility .nav-drop > ul {
   display: none;
   position: absolute;
-  top: calc(100% + 8px);
+  top: 100%;
   left: 0;
   z-index: 3;
   min-width: 220px;
@@ -432,7 +432,7 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
   }
 
   header nav .nav-brand .icon {
-    width: 130px;
+    width: 112px;
     height: auto;
   }
 
@@ -460,13 +460,13 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
   }
 
   header nav .nav-utility {
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 16px;
+    line-height: 22px;
   }
 
   header nav .nav-utility .default-content-wrapper {
     flex-wrap: nowrap;
-    padding: 10px 24px;
+    padding: 14px 24px;
   }
 
   header nav .nav-utility p {
@@ -501,10 +501,10 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
     justify-content: space-between;
     align-items: center;
     gap: 16px;
-    font-size: 20px;
-    font-weight: 800;
-    line-height: 24px;
-    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+    text-transform: none;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li {
@@ -534,15 +534,15 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     padding: 8px 20px;
     font-weight: 600;
-    font-size: 16px;
-    line-height: 22px;
+    font-size: 13px;
+    line-height: 18px;
     text-align: center;
     text-transform: none;
     white-space: normal;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li a {
-    color: var(--link-color);
+    color: var(--dark-color);
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li a:hover {
@@ -589,5 +589,24 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
   header nav .nav-sections .nav-drop:hover::after,
   header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
     transform: rotate(-45deg) translate(2px, -2px);
+  }
+
+  /* desktop: open the utility dropdowns on hover, like the main nav
+     (the button's click/keyboard path still works for touch and a11y) */
+  header nav .nav-utility .nav-drop:hover > button::after {
+    top: 4px;
+    transform: rotate(-45deg);
+  }
+
+  /* stylelint-disable-next-line no-descending-specificity */
+  header nav .nav-utility .nav-drop:hover > ul {
+    display: block;
+  }
+}
+
+@media (width >= 1200px) {
+  header nav .nav-brand .icon {
+    width: 130px;
+    height: auto;
   }
 }
