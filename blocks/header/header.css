@@ -170,11 +170,10 @@ header nav .nav-tools li .icon {
 
 header nav .nav-tools ul li a {
   color: var(--link-color);
-  font-size: 20x;
+  font-size: 20px;
   text-transform: uppercase;
   font-weight: 800;
   line-height: 24px;
-  font-family: "proxima-nova";
 }
 
 header nav .nav-tools ul li a:hover {
@@ -292,13 +291,9 @@ header nav .nav-utility {
 
 header nav .nav-utility .default-content-wrapper {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 4px 20px;
   box-sizing: border-box;
   max-width: 1140px;
   margin: auto;
-  padding: 8px 16px;
 }
 
 header nav .nav-utility p {
@@ -467,22 +462,33 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
 
   header nav .nav-utility .default-content-wrapper {
     flex-wrap: nowrap;
-    padding: 14px 0 10px 0;
+    padding: 14px 15px 0;
   }
 
   header nav .nav-utility p {
-    flex: 1 1 auto;
+    flex: none;
     white-space: nowrap;
     color: var(--light-color);
+    padding-bottom: 10px 
   }
 
   header nav .nav-utility > .default-content-wrapper > ul {
     flex-wrap: nowrap;
-    gap: 21px;
+    gap: 0;
+    padding-bottom: 7px;
   }
 
-    header nav .nav-utility .default-content-wrapper ul li p {
+  header nav .nav-utility .default-content-wrapper ul li p {
     color: var(--background-color);
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 600;
+    margin-left: 15px;
+    padding: 0;
+  }
+
+  header nav .nav-utility .default-content-wrapper ul li:first-child p {
+    margin-left: 24px;
   }
 
   /* pill navigation */
@@ -607,6 +613,7 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
   /* stylelint-disable-next-line no-descending-specificity */
   header nav .nav-utility .nav-drop:hover > ul {
     display: block;
+    border-bottom: 4px solid var(--nav-accent-color);
   }
 }
 
