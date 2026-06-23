@@ -17,7 +17,7 @@ function getCalloutStartIndex(columnChildren) {
   return columnChildren.length > 2 ? 2 : -1;
 }
 
-function buildCallout(column, columnIndex = 1) {
+function buildCallout(column) {
   const directChildren = [...column.children];
   const startIndex = getCalloutStartIndex(directChildren);
   if (startIndex < 0 || startIndex >= directChildren.length) return;
@@ -45,11 +45,13 @@ function buildCallout(column, columnIndex = 1) {
 
 /**
  * Decorates 2-column layout with optional callout.
- * data-callout="left" | "right" (default) | "both" controls which column(s) get callout.
+ * Configured via block variant: "Columns Content (callout-both)", "Columns Content (callout-left)"
+ * Or via data-callout="left" | "right" (default) | "both".
  * @param {Element} block
  */
 export default function decorate(block) {
-  const calloutConfig = (block.dataset.callout || 'right').toLowerCase();
+  const variantCallout = ['both', 'left', 'right'].find((v) => block.classList.contains(`callout-${v}`));
+  const calloutConfig = (variantCallout || block.dataset.callout || 'right').toLowerCase();
   const shouldDecorateLeft = calloutConfig === 'left' || calloutConfig === 'both';
   const shouldDecorateRight = calloutConfig === 'right' || calloutConfig === 'both';
 
@@ -61,7 +63,7 @@ export default function decorate(block) {
     cols[0].classList.add('columns-content-left');
     cols[1].classList.add('columns-content-right');
 
-    if (shouldDecorateLeft) buildCallout(cols[0], 0);
-    if (shouldDecorateRight) buildCallout(cols[1], 1);
+    if (shouldDecorateLeft) buildCallout(cols[0]);
+    if (shouldDecorateRight) buildCallout(cols[1]);
   });
 }
