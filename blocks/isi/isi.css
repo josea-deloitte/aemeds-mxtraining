@@ -17,6 +17,11 @@
 }
 
 /* Shared typography for both the inline panel and the condensed band */
+
+.isi-container{
+  border-top: 1px solid var(--isi-border-color);
+}
+
 .isi-panel,
 .isi-band-inner {
   color: var(--isi-text-color);
@@ -65,7 +70,7 @@
 .isi-panel {
   padding: 24px 16px;
   background: var(--isi-panel-bg);
-  border-top: 1px solid var(--isi-border-color);
+  
 }
 
 /*
@@ -79,7 +84,6 @@
   max-height: 50vh;
   overflow: hidden auto;
   background: #fff;
-  border-top: 1px solid var(--isi-border-color);
   color: var(--isi-text-color);
   font-family: var(--body-font-family);
   font-size: 16px;
