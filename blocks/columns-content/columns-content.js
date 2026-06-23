@@ -30,16 +30,26 @@ function buildCallout(column) {
   const callout = document.createElement('div');
   callout.className = 'columns-content-callout';
 
-  const icon = document.createElement('span');
-  icon.className = 'columns-content-callout-icon';
-  icon.setAttribute('aria-hidden', 'true');
+  const calloutChildren = directChildren.slice(startIndex);
+  const firstChild = calloutChildren[0];
+  const authoredIcon = firstChild?.querySelector('span[class*="icon"]') || (firstChild?.classList.contains('icon') ? firstChild : null);
+
+  if (authoredIcon) {
+    const iconWrapper = document.createElement('span');
+    iconWrapper.className = 'columns-content-callout-icon';
+    iconWrapper.setAttribute('aria-hidden', 'true');
+    iconWrapper.append(authoredIcon);
+    callout.append(iconWrapper);
+    callout.classList.add('has-icon');
+    if (!firstChild.hasChildNodes()) firstChild.remove();
+  }
 
   const content = document.createElement('div');
   content.className = 'columns-content-callout-content';
 
-  directChildren.slice(startIndex).forEach((element) => content.append(element));
+  calloutChildren.forEach((element) => content.append(element));
 
-  callout.append(icon, content);
+  callout.append(content);
   column.append(callout);
 }
 

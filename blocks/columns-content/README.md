@@ -14,25 +14,30 @@ Expected table structure:
 
 **Configuration**
 
-By default, the right column gets a callout. To customize:
-- In the block properties in da.live, set `data-callout` to:
-	- `right` (default) — callout in right column only
-	- `left` — callout in left column only
-	- `both` — callout in both columns
+By default, the right column gets a callout. To customize, use a block variant:
+
+- `Columns Content` -> callout on right (default)
+- `Columns Content (callout-left)` -> callout on left
+- `Columns Content (callout-both)` -> callout on both columns
 
 Authoring rules:
 
 - **Flexible content:** No required heading types or order.
 - **Optional callout marker:** Add a standalone row with one of these values where the callout should start in the configured column(s):
-	- `[callout]`
-	- `callout-start`
-	- `---`
+  - `[callout]`
+  - `callout-start`
+  - `---`
 
 How callout placement works:
 
 1. If a marker exists, everything after that marker is wrapped in the callout.
 2. If no marker exists, legacy fallback is used: the 3rd element and all following elements go into the callout (right column only).
 3. Callout appears in the column(s) specified by the `data-callout` configuration.
+
+Icon behavior (optional):
+
+1. If the first callout item contains an icon token (for example `:icon-phone:` or `:icon-call:`), the callout renders with an icon column.
+2. If no icon is authored, the callout renders as text-only (no icon column).
 
 Common mistakes:
 

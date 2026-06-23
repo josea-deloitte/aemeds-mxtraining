@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <title>Columns Content - Nurse Support Demo</title>
-    <meta name="description" content="Test columns-content block with callout on right column">
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="nav" content="/drafts/nav">
-    <meta name="footer" content="/drafts/footer">
-    <link rel="preconnect" href="https://use.typekit.net" crossorigin>
+    <meta name="description" content="Test columns-content block with callout on right column" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="nav" content="/drafts/nav" />
+    <meta name="footer" content="/drafts/footer" />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
     <script src="/scripts/aem.js" type="module"></script>
     <script src="/scripts/scripts.js" type="module"></script>
-    <link rel="stylesheet" href="/styles/styles.css"/>
+    <link rel="stylesheet" href="/styles/styles.css" />
   </head>
   <body>
     <header></header>
@@ -30,16 +30,19 @@
               <p>Live registered nurses are available Monday through Friday, 8 AM-8 PM (ET).</p>
               <!-- Marker for callout start -->
               <p>[callout]</p>
-              <p><strong>Call <a href="tel:8334893784">833-4-VYEPTI (833-489-3784)</a></strong> Option 2 to connect live with a registered nurse.</p>
+              <p><span class="icon icon-phone"></span></p>
+              <p>
+                <strong>Call <a href="tel:8334893784">833-4-VYEPTI (833-489-3784)</a></strong> Option 2 to connect live with a registered nurse.
+              </p>
               <p>Not yet prescribed VYEPTI? No problem. A nurse is happy to answer your questions.</p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Columns Content Block: Both Columns with Callouts -->
+      <!-- Columns Content Block: Both Columns with Callouts (Variant Pattern) -->
       <div>
-        <div class="columns-content" data-callout="both">
+        <div class="columns-content callout-both">
           <div>
             <!-- Left Column -->
             <div>
@@ -51,15 +54,16 @@
             <div>
               <h3>APPROVED USE</h3>
               <p>[callout]</p>
+              <p><span class="icon icon-information"></span></p>
               <p><strong>VYEPTI</strong> is a prescription medicine used for the preventive treatment of migraine in adults.</p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Columns Content Block: No Callout Configuration -->
+      <!-- Columns Content Block: No Callout (No Marker Authored) -->
       <div>
-        <div class="columns-content" data-callout="none">
+        <div class="columns-content">
           <div>
             <!-- Left Column -->
             <div>
