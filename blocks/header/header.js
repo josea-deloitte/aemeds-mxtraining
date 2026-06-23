@@ -299,11 +299,19 @@ export default async function decorate(block) {
   block.append(navWrapper);
 
   // keep the space reserved for the fixed header in sync with its
-  // rendered height (the utility strip wraps at narrow widths)
-  const syncNavHeight = new ResizeObserver(() => {
-    if (nav.getAttribute('aria-expanded') !== 'true' || isDesktop.matches) {
-      document.documentElement.style.setProperty('--nav-height', `${navWrapper.offsetHeight}px`);
-    }
-  });
-  syncNavHeight.observe(navWrapper);
+  // rendered height (the utility strip wraps to 2-3 rows at narrow widths,
+  // so a static --nav-height would let the header overlap page content)
+  const syncNavHeight = () => {
+    // when the mobile menu is open the nav fills the viewport (100dvh); don't
+    // reserve that height for the page flow
+    if (nav.getAttribute('aria-expanded') === 'true' && !isDesktop.matches) return;
+    document.documentElement.style.setProperty('--nav-height', `${navWrapper.offsetHeight}px`);
+  };
+  const navHeightObserver = new ResizeObserver(syncNavHeight);
+  navHeightObserver.observe(navWrapper);
+  // the ResizeObserver's first callback can fire before web fonts/icons load
+  // and under-measure the strip, so re-sync once they settle and on resize
+  if (document.fonts?.ready) document.fonts.ready.then(syncNavHeight);
+  window.addEventListener('load', syncNavHeight);
+  window.addEventListener('resize', syncNavHeight);
 }

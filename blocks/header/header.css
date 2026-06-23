@@ -291,9 +291,11 @@ header nav .nav-utility {
 
 header nav .nav-utility .default-content-wrapper {
   display: flex;
+  flex-wrap: wrap;
   box-sizing: border-box;
   max-width: 1140px;
   margin: auto;
+  padding: 10px 16px;
 }
 
 header nav .nav-utility p {
