@@ -63,13 +63,9 @@
  * legal/safety text reads as a self-contained disclaimer box.
  */
 .isi-panel {
-  max-height: 40vh;
   padding: 24px 16px;
-  overflow-y: auto;
   background: var(--isi-panel-bg);
   border-top: 1px solid var(--isi-border-color);
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
 }
 
 /*

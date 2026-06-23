@@ -1,1 +1,64 @@
 /* add global styles that can be loaded post LCP here */
+
+/* back-to-top control: teal circle + up chevron + "TOP" label, bottom-right.
+   sits above the fixed ISI band; revealed once the page is scrolled. */
+.back-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 90px;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--link-color);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.back-to-top-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--link-color);
+  color: var(--background-color);
+  box-shadow: 0 2px 8px rgb(46 50 51 / 25%);
+  transition: background-color 0.2s ease;
+}
+
+.back-to-top-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.back-to-top:hover .back-to-top-icon,
+.back-to-top:focus-visible .back-to-top-icon {
+  background-color: var(--link-hover-color);
+}
+
+@media (width >= 900px) {
+  .back-to-top {
+    right: 28px;
+  }
+}
