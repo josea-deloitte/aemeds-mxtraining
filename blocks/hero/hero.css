@@ -16,26 +16,16 @@
   min-height: 300px;
 }
 
-/* contrast scrim so the white heading stays legible over any background photo
-   (darker on the left where the left-aligned text sits) */
-.hero::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background: linear-gradient(90deg, rgb(0 0 0 / 55%) 0%, rgb(0 0 0 / 25%) 45%, rgb(0 0 0 / 0%) 100%);
-}
-
-.hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--background-color);
+.hero .hero-layout {
+  position: relative;
+  min-height: clamp(420px, 52vw, 740px);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .hero .hero-media {
   position: absolute;
-  z-index: -2;
   inset: 0;
 }
 
