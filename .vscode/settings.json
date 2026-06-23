@@ -9,5 +9,8 @@
   "[javascript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint",
     "editor.formatOnSave": true
-  }
+  },
+  "editor.tabSize": 2,
+  "editor.stickyTabStops": true,
+  "editor.tabCompletion": "on"
 }
