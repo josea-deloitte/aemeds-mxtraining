@@ -1,5 +1,14 @@
+.carousel-quote {
+  --cq-bg: #eaf4f8;
+  --cq-text: #005b84;
+  --cq-accent: #d62b70;
+  --cq-arrow-bg: rgb(255 255 255 / 88%);
+}
+
 .carousel-quote .carousel-quote-slides-container {
   position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .carousel-quote .carousel-quote-slides,
@@ -11,9 +20,10 @@
 
 .carousel-quote .carousel-quote-slides {
   display: flex;
+  overflow: auto hidden;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
-  overflow: scroll clip;
+  border-radius: 8px;
 }
 
 .carousel-quote .carousel-quote-slides::-webkit-scrollbar {
@@ -23,131 +33,227 @@
 .carousel-quote .carousel-quote-slide {
   flex: 0 0 100%;
   scroll-snap-align: start;
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  align-items: stretch;
+  width: 100%;
+  min-height: 410px;
+  background: var(--cq-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-quote .carousel-quote-slide .carousel-quote-slide-content {
+  order: 1;
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 48px 44px 44px 56px;
+  width: 100%;
+  color: var(--cq-text);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   justify-content: center;
+  align-items: flex-start;
+}
+
+.carousel-quote .carousel-quote-slide .carousel-quote-slide-image {
+  order: 2;
   position: relative;
-  width: 100%;
-  min-height: min(50vw, calc(100dvh - var(--header-height)));
-}
-
-.carousel-quote .carousel-quote-slide:has(.carousel-quote-slide-content[data-align='center']) {
-  align-items: center;
-}
-
-.carousel-quote .carousel-quote-slide:has(.carousel-quote-slide-content[data-align='right']) {
-  align-items: flex-end;
+  min-height: 410px;
+  overflow: hidden;
 }
 
 .carousel-quote .carousel-quote-slide .carousel-quote-slide-image picture {
   position: absolute;
   inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .carousel-quote .carousel-quote-slide .carousel-quote-slide-image picture > img {
-  height: 100%;
+  position: absolute;
+  right: -8px;
+  bottom: 0;
   width: 100%;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
-.carousel-quote .carousel-quote-slide .carousel-quote-slide-content {
-  z-index: 1;
-  margin: 68px;
-  padding: 16px;
-  color: white;
-  background-color: rgb(19 19 19 / 75%);
-  position: relative;
-  width: var(--slide-content-width, auto);
+.carousel-quote .carousel-quote-slide .carousel-quote-slide-content h1,
+.carousel-quote .carousel-quote-slide .carousel-quote-slide-content h2,
+.carousel-quote .carousel-quote-slide .carousel-quote-slide-content h3,
+.carousel-quote .carousel-quote-slide .carousel-quote-slide-content h4,
+.carousel-quote .carousel-quote-slide .carousel-quote-slide-content h5,
+.carousel-quote .carousel-quote-slide .carousel-quote-slide-content h6 {
+  margin: 0 0 16px;
+  max-width: 420px;
+  color: var(--cq-text);
+  font-size: clamp(1.9rem, 2.6vw, 2.9rem);
+  line-height: 1.15;
+}
+
+.carousel-quote .carousel-quote-slide .carousel-quote-slide-content p {
+  margin: 0 0 12px;
+  color: #222;
+  max-width: 430px;
+}
+
+.carousel-quote .carousel-quote-slide .carousel-quote-slide-content strong {
+  color: #222;
+}
+
+.carousel-quote .carousel-quote-slide .carousel-quote-slide-content a {
+  color: var(--cq-text);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.carousel-quote .carousel-quote-slide .carousel-quote-slide-content a:hover,
+.carousel-quote .carousel-quote-slide .carousel-quote-slide-content a:focus-visible {
+  text-decoration: underline;
+}
+
+/* SOLO el icono de quotation, no todos los iconos */
+.carousel-quote .carousel-quote-slide .carousel-quote-slide-content .quotation,
+.carousel-quote .carousel-quote-slide .carousel-quote-slide-content .icon.icon-quotation,
+.carousel-quote .carousel-quote-slide .carousel-quote-slide-content p:first-child .icon {
+  width: 42px;
+  height: 42px;
+  margin: 0 0 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.carousel-quote .carousel-quote-slide .carousel-quote-slide-content .quotation img,
+.carousel-quote .carousel-quote-slide .carousel-quote-slide-content .icon.icon-quotation img,
+.carousel-quote .carousel-quote-slide .carousel-quote-slide-content p:first-child .icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* CTA arrow pequeño y alineado */
+.carousel-quote .carousel-quote-slide .carousel-quote-slide-content a .icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 6px;
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.carousel-quote .carousel-quote-slide .carousel-quote-slide-content a .icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .carousel-quote .carousel-quote-slide-indicators {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 6px 12px;
-  padding: 12px;
-  background-color: var(--light-color);
+  gap: 8px;
+  padding: 10px 0 0;
+  background: transparent;
   line-height: 0;
 }
 
 .carousel-quote .carousel-quote-slide-indicator button {
-  width: 24px;
-  height: 24px;
+  width: 10px;
+  height: 10px;
   margin: 0;
   padding: 0;
+  border: 1px solid var(--cq-accent);
   border-radius: 50%;
-  background-color: #dadada;
+  background-color: #fff;
   transition: background-color 0.2s;
 }
 
 .carousel-quote .carousel-quote-slide-indicator button:disabled,
 .carousel-quote .carousel-quote-slide-indicator button:hover,
 .carousel-quote .carousel-quote-slide-indicator button:focus-visible {
-  background-color: var(--text-color);
+  background-color: var(--cq-accent);
 }
 
 .carousel-quote .carousel-quote-navigation-buttons {
   position: absolute;
-  top: 50%;
+  inset: 50% 14px auto;
   transform: translateY(-50%);
-  left: 12px;
-  right: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 1;
+  z-index: 2;
+  pointer-events: none;
 }
 
-/* stylelint-disable-next-line no-descending-specificity */
 .carousel-quote .carousel-quote-navigation-buttons button {
+  pointer-events: auto;
   position: relative;
-  width: 44px;
-  height: 44px;
+  width: 30px;
+  height: 30px;
   margin: 0;
-  border-radius: 50%;
   padding: 0;
-  background-color: rgb(19 19 19 / 25%);
-  transition: background-color 0.2s;
+  border: 1px solid rgb(0 0 0 / 14%);
+  border-radius: 50%;
+  background-color: var(--cq-arrow-bg);
+  transition: background-color 0.2s ease;
 }
 
 .carousel-quote .carousel-quote-navigation-buttons button:hover,
 .carousel-quote .carousel-quote-navigation-buttons button:focus-visible {
-  background-color: rgb(19 19 19 / 75%);
+  background-color: #fff;
 }
 
 .carousel-quote .carousel-quote-navigation-buttons button::after {
+  content: "";
   display: block;
-  content: '';
-  border: 2px solid;
+  width: 9px;
+  height: 9px;
+  border: 2px solid #ef5a87;
   border-bottom: 0;
   border-left: 0;
-  height: 12px;
-  width: 12px;
   position: absolute;
   top: 50%;
-  left: calc(50% + 2px);
+  left: calc(50% + 1px);
   transform: translate(-50%, -50%) rotate(-135deg);
 }
 
 .carousel-quote .carousel-quote-navigation-buttons button.slide-next::after {
+  left: calc(50% - 1px);
   transform: translate(-50%, -50%) rotate(45deg);
-  left: calc(50% - 2px);
 }
 
-@media (width >= 600px) {
-  .carousel-quote .carousel-quote-navigation-buttons {
-    left: 24px;
-    right: 24px;
+@media (width <= 767px) {
+  .carousel-quote .carousel-quote-slide {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .carousel-quote .carousel-quote-slide .carousel-quote-slide-image {
+    order: 1;
+    min-height: 280px;
+  }
+
+  .carousel-quote .carousel-quote-slide .carousel-quote-slide-image picture > img {
+    right: 0;
+    width: 100%;
+    height: 100%;
   }
 
   .carousel-quote .carousel-quote-slide .carousel-quote-slide-content {
-    --slide-content-width: calc((100% - 184px) / 2);
-
-    margin: 92px;
+    order: 2;
+    padding: 28px 24px 32px;
   }
 
-  .carousel-quote .carousel-quote-slide .carousel-quote-slide-content[data-align='justify'] {
-    --slide-content-width: auto;
+  .carousel-quote .carousel-quote-navigation-buttons {
+    inset: 40% 10px auto;
   }
 }
