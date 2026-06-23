@@ -12,7 +12,7 @@
   --isi-heading-color: #41748d;
   --isi-text-color: #484848;
   --isi-border-color: #d1d1d1;
-  --isi-panel-bg: #f4f4f4;
+  --isi-panel-bg: var(--background-color);
   --isi-band-max-height: 70vh;
 }
 
@@ -67,8 +67,7 @@
   padding: 24px 16px;
   overflow-y: auto;
   background: var(--isi-panel-bg);
-  border: 1px solid var(--isi-border-color);
-  border-radius: 4px;
+  border-top: 1px solid var(--isi-border-color);
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
 }

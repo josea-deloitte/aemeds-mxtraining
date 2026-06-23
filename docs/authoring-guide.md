@@ -352,6 +352,32 @@ side effects, FDA MedWatch reporting). The block renders both an inline panel an
 sticky bottom band that expands/collapses and docks when the inline panel scrolls into
 view. PDF links inside open in a new tab automatically.
 
+**Match vyepti.com's emphasis:** the source ISI **bolds the lead-in** of each item — the
+opening phrase of every safety statement and bullet, and the full FDA-reporting and
+"For more information…" paragraphs. Keep that bolding so the block matches the live site:
+
+```
+##### IMPORTANT SAFETY INFORMATION
+
+**Do not receive VYEPTI** if you have a known allergy to eptinezumab-jjmr or its ingredients.
+
+**VYEPTI may cause serious side effects such as:**
+
+- **Allergic reactions.** Call your healthcare provider …
+- **High blood pressure.** High blood pressure or worsening …
+- **Raynaud's phenomenon.** A type of circulation problem …
+
+**Before starting VYEPTI,** tell your healthcare provider …
+**Tell your healthcare provider** about all the medicines you take …
+**The most common side effects** of VYEPTI include …
+**You are encouraged to report negative side effects … Visit [www.fda.gov/medwatch](https://www.fda.gov/medwatch) or call 1-800-FDA-1088.**
+**For more information, please see the [Prescribing Information](…pi.pdf) and [Patient Information](…ppi.pdf).**
+```
+
+The canonical content lives in one shared fragment (e.g. `/fragments/isi`) — see
+[drafts/fragments/isi.plain.html](../drafts/fragments/isi.plain.html) for the exact,
+fully-bolded reference markup.
+
 Because the ISI is identical site-wide, maintain it **once as a shared fragment** (e.g.
 `/fragments/isi`) and include it with the `Fragment` block, rather than re-authoring it
 per page.
