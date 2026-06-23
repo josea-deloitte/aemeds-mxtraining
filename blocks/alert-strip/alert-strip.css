@@ -4,6 +4,11 @@ main .section > .alert-strip-wrapper {
   padding: 0;
 }
 
+/* remove default section gap to sit flush below the hero */
+.alert-strip-container {
+  margin-top: 0;
+}
+
 .alert-strip {
   background-color: var(--light-color);
 }

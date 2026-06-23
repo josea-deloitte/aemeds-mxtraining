@@ -12,11 +12,16 @@
   --isi-heading-color: #41748d;
   --isi-text-color: #484848;
   --isi-border-color: #d1d1d1;
-  --isi-panel-bg: #f4f4f4;
+  --isi-panel-bg: var(--background-color);
   --isi-band-max-height: 70vh;
 }
 
 /* Shared typography for both the inline panel and the condensed band */
+
+.isi-container{
+  border-top: 1px solid var(--isi-border-color);
+}
+
 .isi-panel,
 .isi-band-inner {
   color: var(--isi-text-color);
@@ -63,14 +68,9 @@
  * legal/safety text reads as a self-contained disclaimer box.
  */
 .isi-panel {
-  max-height: 40vh;
   padding: 24px 16px;
-  overflow-y: auto;
   background: var(--isi-panel-bg);
-  border: 1px solid var(--isi-border-color);
-  border-radius: 4px;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
+  
 }
 
 /*
@@ -84,7 +84,6 @@
   max-height: 50vh;
   overflow: hidden auto;
   background: #fff;
-  border-top: 1px solid var(--isi-border-color);
   color: var(--isi-text-color);
   font-family: var(--body-font-family);
   font-size: 16px;
