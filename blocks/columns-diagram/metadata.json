@@ -1,0 +1,39 @@
+{
+  "variantName": "columns-diagram",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-06-23T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.vyepti.com/how-vyepti-works",
+    "originPage": "How VYEPTI works",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "powder-blue",
+    "density": "spacious",
+    "purpose": "diagram-explainer",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "text panel (heading + paragraphs + list + disclaimer) + diagram image with inline legend",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "mid-page mechanism-of-action / diagram explainer sections",
+      "side-by-side text + illustrative diagram layouts",
+      "informational content paired with a labeled legend image"
+    ],
+    "notSuitableFor": [
+      "top-of-page split hero banners (use columns-hero)",
+      "repeating distinct item grids (use cards-feature / cards-callout)",
+      "rotating testimonial content (use carousel-quote)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/how-vyepti-works"],
+    "reuseCount": 1,
+    "lastUsed": "2026-06-23T00:00:00.000Z"
+  }
+}

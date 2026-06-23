@@ -20,9 +20,16 @@
  */
 export default function parse(element, { document }) {
   // Each .col-* in the row becomes one column of the block.
-  const columns = Array.from(element.querySelectorAll(':scope .row > [class*="col-"]'));
+  let columns = Array.from(element.querySelectorAll(':scope .row > [class*="col-"]'));
 
-  // Empty-block guard: no columns found means nothing to build.
+  // Single-teaser fallback: some pages (e.g. the content-page sub-banner hero)
+  // render one .cmp-teaser directly, with no .row/.col-* split layout. Treat each
+  // .cmp-teaser as a column so the hero still becomes a block.
+  if (!columns.length) {
+    columns = Array.from(element.querySelectorAll(':scope .cmp-teaser'));
+  }
+
+  // Empty-block guard: nothing teaser-like found means nothing to build.
   if (!columns.length) {
     element.replaceWith(...element.childNodes);
     return;
