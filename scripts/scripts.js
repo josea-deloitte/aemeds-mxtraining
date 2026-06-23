@@ -202,9 +202,13 @@ function loadBackToTop() {
   btn.type = 'button';
   btn.className = 'back-to-top';
   btn.setAttribute('aria-label', 'Back to top');
-  btn.innerHTML = `<span class="back-to-top-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 14l6-6 6 6"/></svg>
-    </span><span class="back-to-top-label">Top</span>`;
+  // the SVG already contains the teal button, chevron, and "TOP" label;
+  // serve the desktop artwork at >=900px, the mobile one below
+  const base = window.hlx.codeBasePath;
+  btn.innerHTML = `<picture>
+      <source media="(min-width: 900px)" srcset="${base}/icons/back-to-top-desktop.svg">
+      <img src="${base}/icons/back-to-top-mobile.svg" alt="" loading="lazy" width="35" height="55">
+    </picture>`;
   btn.addEventListener('click', () => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
