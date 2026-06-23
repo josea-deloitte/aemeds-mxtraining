@@ -76,6 +76,17 @@ function createSlide(row, slideIndex, carouselId) {
 
   row.querySelectorAll(':scope > div').forEach((column, colIdx) => {
     column.classList.add(`carousel-quote-slide-${colIdx === 0 ? 'image' : 'content'}`);
+    if (colIdx !== 0) {
+      const iconInPara = column.querySelector('p .icon');
+      if (iconInPara) iconInPara.closest('p').classList.add('quotation');
+
+      const heading = column.querySelector('h1, h2, h3, h4, h5, h6');
+      if (heading) {
+        const hr = document.createElement('hr');
+        hr.classList.add('red-short-line');
+        heading.after(hr);
+      }
+    }
     slide.append(column);
   });
 
