@@ -37,6 +37,7 @@ footer .footer .footer-legal a:any-link {
   font-size: 14px;
   line-height: 22px;
   font-weight: 600;
+  letter-spacing: -0.1px;
 }
 
 footer .footer .footer-legal a:hover {
@@ -53,13 +54,14 @@ footer .footer .footer-info > div {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding-top: 32px;
+  padding-top: 24px;
   padding-bottom: 16px;
 }
 
 footer .footer .footer-info p {
   font-size: 14px;
   line-height: 1.5;
+  padding-bottom: 8px;
 }
 
 footer .footer .footer-info a:any-link:not(.button) {
@@ -90,7 +92,7 @@ footer .footer .footer-cta .button-wrapper {
 footer .footer a.footer-call {
   position: relative;
   border-radius: 30px;
-  padding: 18px 22px 18px 45px;
+  padding: 20px 21px 20px 45px;
   background-color: var(--accent-color);
   border-color: var(--accent-color);
   color: var(--background-color);
@@ -161,6 +163,7 @@ footer .footer .footer-brand .icon-lundbeck {
 
   footer .footer .footer-legal a:any-link {
     font-size: 16px;
+    letter-spacing: 0;
   }
 
   /* copy on the left, call-to-action on the right */

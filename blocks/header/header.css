@@ -468,8 +468,8 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
   header nav .nav-utility p {
     flex: none;
     white-space: nowrap;
-    color: var(--light-color);
-    padding-bottom: 10px 
+    color: var(--background-color);
+    padding-bottom: 10px;
   }
 
   header nav .nav-utility > .default-content-wrapper > ul {
@@ -545,9 +545,9 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     padding: 8px 20px;
-    font-weight: 600;
-    font-size: 13px;
-    line-height: 18px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
     text-align: center;
     text-transform: none;
     white-space: normal;
@@ -621,5 +621,9 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
   header nav .nav-brand .icon {
     width: 130px;
     height: auto;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul {
+    font-size: 20px;
   }
 }
