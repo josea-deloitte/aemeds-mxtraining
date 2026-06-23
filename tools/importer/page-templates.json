@@ -43,6 +43,48 @@
           ]
         }
       ]
+    },
+    {
+      "name": "content-page",
+      "urls": [
+        "https://www.vyepti.com/how-vyepti-works"
+      ],
+      "representativeUrl": "https://www.vyepti.com/how-vyepti-works",
+      "coverageGaps": [],
+      "description": "VYEPTI content page (requested as about-vyepti, which redirects to how-vyepti-works on the live site): sub-banner teaser hero, 3-up icon feature columns, content section with CGRP diagram, narrow CTA card, patient-quotes carousel, and a 2-up CTA card row. Global header, footer, and ISI handled separately.",
+      "blocks": [
+        {
+          "name": "columns-hero",
+          "instances": [
+            "body > div.root.responsivegrid > div.aem-Grid.aem-Grid--12.aem-Grid--default--12 > div.teaser.sub-banner-teaser.aem-GridColumn.aem-GridColumn--default--12"
+          ]
+        },
+        {
+          "name": "cards-feature",
+          "instances": [
+            "body > div.root.responsivegrid > div.aem-Grid.aem-Grid--12.aem-Grid--default--12 > div.columncontainer.what-vyepti-section.aem-GridColumn.aem-GridColumn--default--12"
+          ]
+        },
+        {
+          "name": "columns-diagram",
+          "instances": [
+            "body > div.root.responsivegrid > div.aem-Grid.aem-Grid--12.aem-Grid--default--12 > div.columncontainer.section-powder-blue-bg-desktop.how-vyepti-section.aem-GridColumn.aem-GridColumn--default--12"
+          ]
+        },
+        {
+          "name": "cards-callout",
+          "instances": [
+            "body > div.root.responsivegrid > div.aem-Grid.aem-Grid--12.aem-Grid--default--12 > div.narrowCardCta.aem-GridColumn.aem-GridColumn--default--12",
+            "body > div.root.responsivegrid > div.aem-Grid.aem-Grid--12.aem-Grid--default--12 > div.columncontainer.aem-GridColumn.aem-GridColumn--default--12:nth-of-type(6)"
+          ]
+        },
+        {
+          "name": "carousel-quote",
+          "instances": [
+            "body > div.root.responsivegrid > div.aem-Grid.aem-Grid--12.aem-Grid--default--12 > div.quotescardcarousel.aem-GridColumn.aem-GridColumn--default--12"
+          ]
+        }
+      ]
     }
   ]
 }

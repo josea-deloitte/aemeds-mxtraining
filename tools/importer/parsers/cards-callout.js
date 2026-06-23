@@ -18,25 +18,30 @@
  *       .boxed-link a.button-primary -> CTA (arrow img inside link is decorative)
  */
 export default function parse(element, { document }) {
-  // Each .col-* in the row is one card.
-  const cards = Array.from(element.querySelectorAll(':scope .row > [class*="col-"]'));
+  // Each .col-* in the row is one card (homepage 2-up shadow-box layout).
+  let cards = Array.from(element.querySelectorAll(':scope .row > [class*="col-"]'));
 
-  // Empty-block guard.
-  if (!cards.length) {
-    element.replaceWith(...element.childNodes);
-    return;
+  // Narrow-card fallback: the content-page "narrow CTA" renders a single card as
+  // .narrow-card .row whose .col-* children split text vs. CTA rather than being
+  // separate cards. Detect that shape (a .rteComponent text panel beside a
+  // .cta-component) and treat the whole element as ONE card so the heading text
+  // (eyebrow/headline/description) is not dropped.
+  const isNarrowCard = element.querySelector('.narrow-card') && element.querySelector('.cta-component');
+  if (isNarrowCard || !cards.length) {
+    cards = [element];
   }
 
   const cells = cards.map((card) => {
     const scope = card.querySelector('.bgcard-parsys') || card;
     const cardContent = [];
 
-    // Eyebrow + headline + description live in .description-after.
-    const description = scope.querySelector('.description-after');
+    // Eyebrow + headline + description: homepage uses .description-after; the
+    // narrow card uses .rte .rteComponent. Take whichever text panel exists.
+    const description = scope.querySelector('.description-after, .rteComponent');
     if (description) cardContent.push(description);
 
-    // CTA link.
-    const cta = scope.querySelector('.boxed-link a, a.button-primary');
+    // CTA link: homepage .boxed-link a / a.button-primary; narrow card .cta-component a.
+    const cta = scope.querySelector('.boxed-link a, .cta-component a, a.button-primary');
     if (cta) cardContent.push(cta);
 
     // 1 column: one cell per card holding all the card's content.

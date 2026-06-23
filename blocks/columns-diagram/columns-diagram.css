@@ -1,0 +1,42 @@
+/* Powder-blue section background (source: .section-powder-blue-bg-desktop).
+   This project's aem.js does not consume the Section Metadata block, so the
+   section color is carried by the block itself. */
+.columns-diagram {
+  background-color: rgb(239 246 249);
+  padding: 32px 24px;
+  border-radius: 8px;
+}
+
+.columns-diagram > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.columns-diagram img {
+  width: 100%;
+}
+
+.columns-diagram > div > div {
+  order: 1;
+}
+
+.columns-diagram > div > .columns-diagram-img-col {
+  order: 0;
+}
+
+.columns-diagram > div > .columns-diagram-img-col img {
+  display: block;
+}
+
+@media (width >= 900px) {
+  .columns-diagram > div {
+    align-items: center;
+    flex-direction: unset;
+    gap: 24px;
+  }
+
+  .columns-diagram > div > div {
+    flex: 1;
+    order: unset;
+  }
+}

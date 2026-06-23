@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "https://www.vyepti.com/how-vyepti-works",
+  "path": "how-vyepti-works",
+  "timestamp": "2026-06-23T01:10:19.538Z",
+  "title": "How VYEPTI® Works: Designed to Help Prevent Migraine Attacks",
+  "template": "content-page",
+  "blocks": [
+    "columns-hero",
+    "cards-feature",
+    "columns-diagram",
+    "cards-callout",
+    "cards-callout",
+    "carousel-quote"
+  ]
+}
