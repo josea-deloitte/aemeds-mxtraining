@@ -1,7 +1,8 @@
 # Content Authoring Guide (da.live)
 
-How to author the **header**, **footer**, and **alert-strip** blocks for this project
-in the [da.live](https://da.live) editor.
+How to author the **header**, **footer**, the **homepage** (split hero, alert strip,
+feature cards, patient-quote carousel, callout cards), and the other reusable content
+blocks for this project in the [da.live](https://da.live) editor.
 
 This guide assumes you are editing documents in da.live (Document Authoring), where:
 
@@ -160,6 +161,21 @@ A bulleted list of social icon links, then the linked Lundbeck logo paragraph. U
 [:lundbeck: Lundbeck](https://www.lundbeck.com/us)
 ```
 
+> **Known content fixes for the live `/footer` document** (compared against
+> vyepti.com — these are authoring corrections, the block code is already correct):
+>
+> 1. **TikTok link typo.** The TikTok link currently renders as
+>    `ttps://www.tiktok.com/@vyepti` (missing the leading `h`). Re-paste the link as
+>    `https://www.tiktok.com/@vyepti`.
+> 2. **Missing "Cookie Settings" link.** The live legal strip reads
+>    *Site Map · Terms of Use · Privacy Policy · **Cookie Settings** · Contact Us*.
+>    "Cookie Settings" re-opens the **Usercentrics** consent manager (`uc.js`), which
+>    is not navigation — it must call the consent SDK. Add the list item where shown,
+>    but it needs a small JS hook **and** the consent SDK wired in `scripts/delayed.js`
+>    first (today that's only a placeholder comment). Ask a developer before authoring
+>    it, otherwise the link will 404. Suggested authored form once wired:
+>    `- [Cookie Settings](#cookie-settings)` between Privacy Policy and Contact Us.
+
 ---
 
 ## 3. Alert strip — a per-page block
@@ -180,7 +196,187 @@ renders text-only and still works.
 
 ---
 
-## 4. Pointing pages at the fragments (optional)
+## 4. Homepage — assembling the page
+
+The homepage (`/`, the **index** document) is built from **five blocks**, each in its
+own section (separated by `---`), in this exact order. Header, footer, and the ISI are
+**global** and must **not** be authored on the page.
+
+| # | Section block | What it is |
+| --- | --- | --- |
+| 1 | `Columns Hero` | Split two-panel hero banner (image + headline + CTA per panel) |
+| 2 | `Alert Strip` | Teal call-out strip ("Need help getting started…") |
+| 3 | `Cards Feature` | 3-up text-and-image feature grid |
+| 4 | `Carousel Quote` | Patient-quotes carousel (one slide per patient) |
+| 5 | `Cards Callout` | 2-up text-only call-out cards with CTAs |
+
+> **Current gap:** the live authored homepage still uses the generic `Hero` and
+> `Columns` blocks and is **missing the carousel and the callout cards**. To match
+> vyepti.com, re-author the page using the five blocks above (the purpose-built blocks
+> and their importer parsers already exist). The sections below give each block's table.
+
+---
+
+### 4.1 Columns Hero (split hero) — base block: `columns`
+
+Two side-by-side teaser panels. **One row, two cells** (one cell per panel). Within a
+cell, stack: image, then a heading + subtext, then an **optional CTA** (make the link
+**bold** to render it as a button), then an optional *Actor portrayal* disclaimer
+(italic). The left panel typically has no CTA; the right panel does.
+
+| Columns Hero ||
+| --- | --- |
+| ![left panel image](./media_left.png)<br>## Does migraine keep stealing the spotlight?<br>Learn about possible signs it may be time to ask about a preventive option. | ![right panel image](./media_right.png)<br>## Say yep to a preventive treatment<br>VYEPTI is given by IV infusion every 3 months.<br>**[See if VYEPTI is right for you](/could-vyepti-be-right-for-you)**<br>*Actor portrayal* |
+
+- A column whose **only** content is an image is reordered above the text on mobile.
+- The block auto-adds a `columns-hero-2-cols` class based on the number of cells.
+
+---
+
+### 4.2 Alert Strip — base block: `alert-strip`
+
+A one-row strip on the light-teal band. **One row, up to two cells**: an optional icon
+cell and the message cell.
+
+| Alert Strip ||
+| --- | --- |
+| `:information:` | **Need help getting started on VYEPTI? Call [833-4-VYEPTI](tel:8334893784) (833-489-3784).** |
+
+- Left cell: a single icon (decorative, hidden from screen readers automatically).
+- Right cell: rich text; the `tel:` link stays an inline link (it is **not** turned
+  into a button because it is mixed with other text).
+- The icon cell is optional — a single-cell row renders text-only.
+
+> The project also ships an equivalent block named **`Vyepti Homepage Call Cta`**
+> (`call-cta`) with identical authoring. Prefer **`Alert Strip`** for new content — it
+> is the homepage importer's target and keeps naming consistent.
+
+---
+
+### 4.3 Cards Feature (3-up grid) — base block: `cards`
+
+A row of feature cards. **Two columns, one row per card.** Cell 1 is the image/icon;
+cell 2 is the text (heading, one or more description paragraphs, optional CTA).
+Author **three rows** for the 3-up homepage grid.
+
+| Cards Feature ||
+| --- | --- |
+| ![icon](./media_1.png) | ### Say yep to more migraine-free days<br>Migraine prevention proven to last 3 months in clinical studies.<br>**[Learn more](/how-vyepti-works)** |
+| ![icon](./media_2.png) | ### Understanding VYEPTI side effects<br>See the most common side effects.<br>**[See side effects](/vyepti-side-effects)** |
+| ![icon](./media_3.png) | ### Ask your doctor if VYEPTI could be a yep for you<br>Start the conversation.<br>**[Create a discussion guide](/doctor-discussion-guide)** |
+
+- Cells holding only an image become the card image; the rest become the card body.
+- Card images are auto-optimized to 750px wide.
+
+---
+
+### 4.4 Carousel Quote (patient testimonials) — base block: `carousel`
+
+A rotating set of patient quotes. **Two columns, one row per slide.** Cell 1 is the
+patient portrait (image only); cell 2 is the quote (as a heading), then the
+attribution, an individual-results disclaimer, and an optional CTA.
+
+| Carousel Quote ||
+| --- | --- |
+| ![patient portrait](./media_p1.png) | ## "VYEPTI gave me back my mornings."<br>Tara, real VYEPTI patient<br>*Individual results may vary.*<br>**[Watch Tara's story](/real-patient-stories)** |
+| ![patient portrait](./media_p2.png) | ## "I have more good days now."<br>Marcus, real VYEPTI patient<br>*Individual results may vary.*<br>**[Watch Marcus's story](/real-patient-stories)** |
+
+- Add one row per patient. With a single row the carousel renders as a static slide
+  (no arrows/indicators).
+- Prev/next arrows, slide indicators, and keyboard/ARIA wiring are added by code.
+
+---
+
+### 4.5 Cards Callout (2-up text cards) — base block: `cards`
+
+Two text-only call-out cards (no card image). **One column, one row per card.** Each
+cell stacks an eyebrow (h4), a headline (h2), a description, and a CTA (**bold** link).
+Author **two rows**.
+
+| Cards Callout |
+| --- |
+| #### Savings & Support<br>## See if you could pay as little as $0*<br>Eligible, commercially insured patients may save on VYEPTI.<br>**[Explore savings](/financial-assistance)** |
+| #### Stay connected<br>## Sign up for VYEPTI updates<br>Get helpful information and support sent to your inbox.<br>**[Sign up](/stay-connected)** |
+
+- These cards carry no image (only the CTA), so author a single content cell per row.
+
+---
+
+## 5. Other content blocks
+
+These blocks are available for interior pages (and some power the homepage's generic
+fallbacks). All are authored as block tables unless noted.
+
+### Hero (full-width banner)
+
+**Auto-blocked** — you usually don't author a `Hero` table. If the **first section** of
+a page starts with a picture immediately followed (or preceded) by an `# H1`, EDS builds
+a hero automatically (full-width background image with the heading overlaid). To force
+one, author a single-cell `Hero` block containing the image and the `# H1`.
+
+### Columns (generic multi-column) — variant: `(cards)`
+
+General N-column layout. **One row per visual row; one cell per column.** The block
+auto-adds `columns-{n}-cols`. An image-only column is reordered above text on mobile.
+
+| Columns ||
+| --- | --- |
+| ## Left heading<br>Body copy. | ![image](./media.png) |
+
+Add the **`cards`** variant — `Columns (cards)` — to style each column as a bordered,
+shadowed card with centered brand-colored text.
+
+### Cards (generic grid)
+
+Responsive card grid. **One row per card.** A cell containing only an image becomes the
+card image; other cells become the card body (heading, text, links).
+
+| Cards ||
+| --- | --- |
+| ![image](./media.png) | ### Title<br>Description text and an optional [link](/path). |
+
+### Quote (single testimonial)
+
+A static pull-quote with portrait. **One row, two cells.** Cell 1: three paragraphs —
+the quote, the author, and a disclaimer (in that order). Cell 2: the portrait image.
+
+| Quote ||
+| --- | --- |
+| "This treatment changed my routine."<br>— Jordan, real patient<br>*Individual results may vary.* | ![portrait](./media.png) |
+
+### ISI (Important Safety Information)
+
+Regulated safety content. **One cell of rich text**: `##### H5` sub-headings, paragraphs,
+and bulleted lists (Approved Use, Important Safety Information, contraindications, common
+side effects, FDA MedWatch reporting). The block renders both an inline panel and a
+sticky bottom band that expands/collapses and docks when the inline panel scrolls into
+view. PDF links inside open in a new tab automatically.
+
+Because the ISI is identical site-wide, maintain it **once as a shared fragment** (e.g.
+`/fragments/isi`) and include it with the `Fragment` block, rather than re-authoring it
+per page.
+
+### Fragment (reusable content include)
+
+**One cell** containing a single link to another document's path. That document's
+content is fetched and rendered in place. Use for shared content (ISI, promo blocks).
+
+| Fragment |
+| --- |
+| [/fragments/isi](/fragments/isi) |
+
+### Widget (external embed) — developer-assisted
+
+**One cell** with a link to a widget entry file under `/widgets/…/name.html`. The block
+lazy-loads that widget's HTML/CSS/JS. Requires a developer to add the widget assets.
+
+| Widget |
+| --- |
+| [/widgets/locator/locator.html](/widgets/locator/locator.html) |
+
+---
+
+## 6. Pointing pages at the fragments (optional)
 
 By default the header reads from `/nav` and the footer from `/footer`. To use a different
 location for a specific page (e.g. a localized `/es/nav`), add a **Metadata** block to that
@@ -221,4 +417,8 @@ Need a new icon? Ask a developer to add an optimized SVG to `/icons` — then `:
 - [ ] Header social icons use `-white`; footer social icons do not.
 - [ ] Logo links wrap real text (becomes the accessible label).
 - [ ] Tel/phone links: **bold** in the footer (button), plain inside the alert strip.
+- [ ] Footer `/footer` TikTok link starts with `https://` (not `ttps://`).
+- [ ] Homepage has the 5 sections in order: Columns Hero, Alert Strip, Cards Feature,
+      Carousel Quote, Cards Callout — and does **not** author the header, footer, or ISI.
+- [ ] CTAs you want as buttons are **bold** links; secondary buttons are *italic*.
 - [ ] Preview the page and tab through the nav to confirm dropdowns open via keyboard.
