@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Cards Masonry - Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script src="/scripts/aem.js" type="module"></script>
+    <script src="/scripts/scripts.js" type="module"></script>
+    <link rel="stylesheet" href="/styles/styles.css"/>
+    <style>
+      .placeholder { width: 100%; background: #ddd; display: block; }
+    </style>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <div>
+        <h1>Cards Masonry - Variable Height Test</h1>
+      </div>
+      <div>
+        <div class="cards-masonry">
+          <div>
+            <div><picture><img class="placeholder" style="height:280px;background:#6200ea;" alt="tall" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></picture></div>
+            <div><h3>Tall card - Portrait</h3><p>This card has a tall portrait image. Height 280px. Short body text.</p><p><strong>- Patient A</strong></p></div>
+          </div>
+          <div>
+            <div><picture><img class="placeholder" style="height:160px;background:#0066cc;" alt="wide" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></picture></div>
+            <div><h3>Wide card - Landscape</h3><p>This card has a shorter landscape image. Height 160px. This card also has a longer description to show how text affects the overall card height in the masonry layout.</p><p><strong>- Patient B</strong></p></div>
+          </div>
+          <div>
+            <div><picture><img class="placeholder" style="height:220px;background:#00b4a0;" alt="medium" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></picture></div>
+            <div><h3>Medium card</h3><p>Medium height 220px. Medium text length to balance the layout.</p><p><strong>- Patient C</strong></p></div>
+          </div>
+          <div>
+            <div><picture><img class="placeholder" style="height:320px;background:#ff6d00;" alt="extra tall" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></picture></div>
+            <div><h3>Extra tall card</h3><p>Tallest image at 320px. Very short text.</p><p><strong>- Patient D</strong></p></div>
+          </div>
+          <div>
+            <div><picture><img class="placeholder" style="height:180px;background:#d32f2f;" alt="short" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></picture></div>
+            <div><h3>Short card with long text</h3><p>Short image at 180px but with a very long description. This patient has been living with migraine for over 20 years and tried many medications before finding VYEPTI. The long text pushes this card taller than its image would suggest.</p><p><strong>- Patient E</strong></p></div>
+          </div>
+          <div>
+            <div><picture><img class="placeholder" style="height:240px;background:#1565c0;" alt="medium tall" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></picture></div>
+            <div><h3>Medium-tall card</h3><p>Image at 240px with moderate text.</p><p><strong>- Patient F</strong></p></div>
+          </div>
+          <div>
+            <div><picture><img class="placeholder" style="height:150px;background:#558b2f;" alt="small" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></picture></div>
+            <div><h3>Small card</h3><p>Smallest image 150px. Compact text.</p><p><strong>- Patient G</strong></p></div>
+          </div>
+          <div>
+            <div><picture><img class="placeholder" style="height:300px;background:#6d4c41;" alt="tall 2" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></picture></div>
+            <div><h3>Second tall card</h3><p>300px tall image. Medium body copy to fill the card nicely in the masonry flow.</p><p><strong>- Patient H</strong></p></div>
+          </div>
+          <div>
+            <div><picture><img class="placeholder" style="height:200px;background:#ad1457;" alt="medium 2" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></picture></div>
+            <div><h3>Card with video badge</h3><p>200px image. Represents a video card variant in the original VYEPTI layout where duration and play button overlay the image.</p><p><strong>- Patient I</strong></p></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer></footer>
+  </body>
+</html>
