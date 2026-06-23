@@ -40,6 +40,6 @@
 
 @media (width >= 900px) {
   .back-to-top {
-    right: 0px;
+    right: 0;
   }
 }
