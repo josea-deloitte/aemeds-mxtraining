@@ -314,4 +314,30 @@ export default async function decorate(block) {
   if (document.fonts?.ready) document.fonts.ready.then(syncNavHeight);
   window.addEventListener('load', syncNavHeight);
   window.addEventListener('resize', syncNavHeight);
+
+  // auto-hide the sticky-top header on scroll down, reveal on scroll up.
+  // The reserved space (--nav-height on <header>) stays, so page content
+  // never jumps when the wrapper slides away.
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+  const onScroll = () => {
+    const y = Math.max(0, window.scrollY);
+    // never hide while the mobile menu is open (it fills the viewport)
+    const menuOpen = nav.getAttribute('aria-expanded') === 'true' && !isDesktop.matches;
+    if (!menuOpen) {
+      if (y > lastScrollY && y > navWrapper.offsetHeight) {
+        navWrapper.classList.add('nav-hidden');
+      } else if (y < lastScrollY) {
+        navWrapper.classList.remove('nav-hidden');
+      }
+    }
+    lastScrollY = y;
+    ticking = false;
+  };
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(onScroll);
+      ticking = true;
+    }
+  }, { passive: true });
 }

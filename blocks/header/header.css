@@ -5,6 +5,20 @@ header .nav-wrapper {
   z-index: 2;
   position: fixed;
   top: 0;
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+/* auto-hide: slide the sticky-top header out of view when scrolling down,
+   reveal it when scrolling back up (toggled by header.js) */
+header .nav-wrapper.nav-hidden {
+  transform: translateY(-100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header .nav-wrapper {
+    transition: none;
+  }
 }
 
 header nav {
