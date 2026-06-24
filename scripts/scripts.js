@@ -134,11 +134,28 @@ function decorateExternalLinks(main) {
 }
 
 /**
+ * Normalizes authored icon tokens that resolve as `icon-icon-*` classes
+ * to the expected `icon-*` form used by decorateIcons().
+ * @param {Element} main The main element
+ */
+function normalizeIconClasses(main) {
+  main.querySelectorAll('span[class*="icon-icon-"]').forEach((span) => {
+    [...span.classList]
+      .filter((className) => className.startsWith('icon-icon-'))
+      .forEach((className) => {
+        span.classList.remove(className);
+        span.classList.add(className.replace('icon-icon-', 'icon-'));
+      });
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
 // eslint-disable-next-line import/prefer-default-export
 export function decorateMain(main) {
+  normalizeIconClasses(main);
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);

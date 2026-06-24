@@ -36,7 +36,7 @@ How callout placement works:
 
 Icon behavior (optional):
 
-1. If the first callout item contains an icon token (for example `:icon-phone:` or `:icon-call:`), the callout renders with an icon column.
+1. If the first callout item contains an icon token (for example `:mobile:` or `:call:`), the callout renders with an icon column.
 2. If no icon is authored, the callout renders as text-only (no icon column).
 
 Common mistakes:

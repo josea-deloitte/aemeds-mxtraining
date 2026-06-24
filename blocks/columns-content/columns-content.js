@@ -17,6 +17,24 @@ function getCalloutStartIndex(columnChildren) {
   return columnChildren.length > 2 ? 2 : -1;
 }
 
+function normalizeAuthoredIcon(iconElement) {
+  if (!iconElement) return;
+
+  [...iconElement.classList]
+    .filter((className) => className.startsWith('icon-icon-'))
+    .forEach((className) => {
+      iconElement.classList.remove(className);
+      iconElement.classList.add(className.replace('icon-icon-', 'icon-'));
+    });
+
+  const iconImage = iconElement.querySelector('img[data-icon-name^="icon-"]');
+  if (!iconImage) return;
+
+  const normalizedIconName = iconImage.dataset.iconName.replace(/^icon-/, '');
+  iconImage.dataset.iconName = normalizedIconName;
+  iconImage.src = iconImage.src.replace(/\/icons\/icon-([a-z0-9-]+)\.svg$/i, '/icons/$1.svg');
+}
+
 function buildCallout(column) {
   const directChildren = [...column.children];
   const startIndex = getCalloutStartIndex(directChildren);
@@ -33,6 +51,8 @@ function buildCallout(column) {
   const calloutChildren = directChildren.slice(startIndex);
   const firstChild = calloutChildren[0];
   const authoredIcon = firstChild?.querySelector('span[class*="icon"]') || (firstChild?.classList.contains('icon') ? firstChild : null);
+
+  normalizeAuthoredIcon(authoredIcon);
 
   if (authoredIcon) {
     const iconWrapper = document.createElement('span');
