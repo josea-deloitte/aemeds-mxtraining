@@ -23,6 +23,18 @@ export default function decorate(block) {
     if (ctaWrapper) ctaWrapper.classList.add('hero-cta-container');
   }
 
+  const secondaryDisclaimer = content.querySelector(
+    '.cmp-teaser__description__secondary, .actor-portrayl-text-shadow, .actor-portrayal-text-shadow',
+  );
+
+  if (secondaryDisclaimer) {
+    const disclaimerEl = secondaryDisclaimer.classList.contains('cmp-teaser__description__secondary')
+      ? secondaryDisclaimer
+      : secondaryDisclaimer.closest('.cmp-teaser__description__secondary') || secondaryDisclaimer;
+    disclaimerEl.classList.add('hero-disclaimer');
+    return;
+  }
+
   const paragraphs = Array.from(content.children).filter((el) => el.tagName === 'P');
   const lastParagraph = paragraphs[paragraphs.length - 1];
 

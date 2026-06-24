@@ -314,6 +314,32 @@ a page starts with a picture immediately followed (or preceded) by an `# H1`, ED
 a hero automatically (full-width background image with the heading overlaid). To force
 one, author a single-cell `Hero` block containing the image and the `# H1`.
 
+For this project's branded hero treatment (headline + body + CTA + optional actor text),
+author two cells in one row so the first cell is media and the second is text:
+
+| Hero ||
+| --- | --- |
+| ![hero image](./media_hero.png) | # Does migraine keep stealing the spotlight?<br>Learn about possible signs that it may be time to ask a doctor about VYEPTI.<br>**[Explore your options](/could-vyepti-be-right-for-you)**<br>*Actor portrayal* |
+
+- Cell 1: image only (prefer a landscape image where subjects are in the right half).
+- Cell 2: `#` heading, body paragraph, optional bold CTA link, optional italic
+  disclaimer.
+- Imported AEM teaser secondary text is also supported when authored as
+  `.cmp-teaser__description__secondary`.
+
+Supported hero variants (author in the block name):
+
+| Variant name | Author as | Effect |
+| --- | --- | --- |
+| Default | `Hero` | Mobile uses text-first composition with the image anchored to the lower half. |
+| Left focal point | `Hero (focus-left)` | Shifts image framing left. |
+| Center focal point | `Hero (focus-center)` | Centers subject framing. |
+| Right focal point | `Hero (focus-right)` | Shifts image framing right (default-like for VYEPTI imagery). |
+| Legacy mobile overlay | `Hero (mobile-overlay)` | Restores full-height mobile image with stronger overlay behind text. |
+
+You can combine focal-point and overlay variants in one block name, for example:
+`Hero (focus-right, mobile-overlay)`.
+
 ### Columns (generic multi-column) — variant: `(cards)`
 
 General N-column layout. **One row per visual row; one cell per column.** The block
