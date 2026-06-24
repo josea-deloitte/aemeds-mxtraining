@@ -1,5 +1,5 @@
 .quote-block {
-  background-color: #eef4f7;
+  background-color: #eff6f9;
   border-radius: 12px;
   padding: 0;
   margin: 40px auto;
@@ -16,11 +16,17 @@
 
 .quote-block > div > div:first-child {
   flex: 2;
-  padding: 20px 40px;
+  padding: 40px 48px;
+  align-self: center;
 }
 
 .quote-block > div > div:last-child {
   flex: 1;
+  align-self: stretch;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  overflow: hidden;
 }
 
 .quote-block img {
@@ -61,4 +67,52 @@
   font-size: 0.85rem;
   font-weight: 400;
   color: #555;
+}
+
+@media (width < 900px) {
+  .quote-block {
+    margin: 16px -80px;
+    border-radius: 0;
+  }
+
+  .quote-block > div {
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+  }
+
+  .quote-block > div > div:first-child {
+    padding: 24px 80px 0;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .quote-block > div > div:first-child p {
+    text-align: center;
+  }
+
+  .quote-block > div > div:first-child p:nth-child(1) {
+    font-size: 1.1rem;
+  }
+
+  .quote-block > div > div:first-child p:nth-child(1)::after {
+    margin: 16px auto 0;
+  }
+
+  .quote-block > div > div:last-child {
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    align-self: unset;
+    justify-content: unset;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .quote-block > div > div:last-child img {
+    border-radius: 0;
+    width: 100%;
+  }
 }
