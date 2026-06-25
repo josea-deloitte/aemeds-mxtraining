@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Columns Content - Safety & Approved Use Demo</title>
+    <meta name="description" content="Test columns-content block with dual callouts (safety information pattern)" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="nav" content="/drafts/nav" />
+    <meta name="footer" content="/drafts/footer" />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <script src="/scripts/aem.js" type="module"></script>
+    <script src="/scripts/scripts.js" type="module"></script>
+    <link rel="stylesheet" href="/styles/styles.css" />
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <!-- Hero Section Banner (Scrollable) -->
+      <div>
+        <div style="background: linear-gradient(135deg, #006b99 0%, #c91f4f 100%); padding: 3rem 1rem; color: white; position: relative; overflow: hidden">
+          <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: center">
+            <div style="font-size: 4rem">💊</div>
+            <div>
+              <h1 style="margin: 0 0 0.5rem; font-size: 2rem">IMPORTANT SAFETY INFORMATION</h1>
+              <p style="margin: 0; font-size: 1.1rem">Read before using VYEPTI. For complete information, see the full Prescribing Information.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columns Content: Safety Info & Approved Use with Callouts -->
+      <div>
+        <div class="columns-content callout-both">
+          <div>
+            <!-- Left Column: Important Safety Info -->
+            <div>
+              <h3>IMPORTANT SAFETY INFORMATION</h3>
+              <p>Do not receive VYEPTI if you have a known allergy to eptinezumab-jjmr or its ingredients.</p>
+              <p>Common side effects may include:</p>
+              <ul>
+                <li>Nasopharyngitis (common cold)</li>
+                <li>Sinusitis</li>
+                <li>Upper respiratory tract infection</li>
+              </ul>
+              <p>[callout]</p>
+              <p><strong>Serious Side Effects:</strong> If you experience difficulty breathing, severe allergic reactions, or chest pain, seek immediate medical attention.</p>
+              <p>Tell your healthcare provider if you are pregnant, planning to become pregnant, or breastfeeding.</p>
+            </div>
+            <!-- Right Column: Approved Use -->
+            <div>
+              <h3>APPROVED USE</h3>
+              <p>VYEPTI is a prescription medicine used for the preventive treatment of migraine in adults.</p>
+              <p><strong>How it works:</strong> VYEPTI is a monoclonal antibody that binds to calcitonin gene-related peptide (CGRP) in the body.</p>
+              <p>[callout]</p>
+              <p><span class="icon icon-information"></span></p>
+              <p><strong>Dosing:</strong> VYEPTI is administered as an intravenous (IV) infusion. Your healthcare provider will determine the appropriate dose for your condition.</p>
+              <p><strong>Frequency:</strong> Typically administered every 12 weeks.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alternative: Left Callout Only -->
+      <div>
+        <div class="columns-content callout-left">
+          <div>
+            <!-- Left Column: With Callout -->
+            <div>
+              <h3>Contraindications</h3>
+              <p>VYEPTI should not be used in patients with:</p>
+              <ul>
+                <li>Known hypersensitivity to the drug or components</li>
+                <li>Active infections requiring treatment</li>
+              </ul>
+              <p>[callout]</p>
+              <p><strong>Critical Warning:</strong> Do not use without consulting your physician if you have immunosuppression or recent vaccinations.</p>
+            </div>
+            <!-- Right Column: No Callout -->
+            <div>
+              <h3>Drug Interactions</h3>
+              <p>VYEPTI may interact with other medications. Always inform your healthcare provider about all medications you are taking, including:</p>
+              <ul>
+                <li>Other migraine treatments</li>
+                <li>Immunosuppressants</li>
+                <li>Live vaccines</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer></footer>
+  </body>
+</html>
