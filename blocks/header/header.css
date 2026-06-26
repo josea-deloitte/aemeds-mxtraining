@@ -54,6 +54,19 @@ header nav a:hover {
   text-decoration: none;
 }
 
+/* Mobile-only tagline — sits inline between logo and Menu button */
+header nav .nav-tagline {
+  order: 2;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0 4px;
+  color: var(--link-color);
+  font-size: 11px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.35;
+}
+
 /* brand bar: hamburger + logo + tools */
 header nav .nav-bar {
   display: flex;
@@ -68,12 +81,13 @@ header nav .nav-bar {
 }
 
 header nav .nav-hamburger {
-  order: 2;
-  margin-left: auto;
+  order: 3;
 }
 
 header nav .nav-hamburger button {
-  height: 22px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   margin: 0;
   border: 0;
   padding: 0;
@@ -83,6 +97,27 @@ header nav .nav-hamburger button {
   text-overflow: initial;
   white-space: initial;
   cursor: pointer;
+}
+
+header nav .nav-hamburger-label {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Hide "Menu" text when the menu is open (only the ✕ icon remains) */
+header nav[aria-expanded="true"] .nav-hamburger-label {
+  display: none;
+}
+
+/* Mobile open menu: hide logo and tagline so only the ✕ close button shows */
+header nav[aria-expanded="true"] .nav-brand,
+header nav[aria-expanded="true"] .nav-tagline {
+  display: none;
+}
+
+header nav[aria-expanded="true"] .nav-bar {
+  justify-content: flex-end;
 }
 
 header nav .nav-hamburger-icon,
@@ -139,6 +174,7 @@ header nav[aria-expanded="true"] .nav-hamburger-icon::after {
 }
 
 /* brand */
+/* stylelint-disable-next-line no-descending-specificity */
 header nav .nav-brand {
   order: 1;
 }
@@ -160,41 +196,51 @@ header nav .nav-tools {
 }
 
 header nav[aria-expanded="true"] .nav-tools {
-  display: block;
-}
-
-header nav .nav-tools ul {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 12px 0;
+}
+
+/* Search appears above the pill buttons in the open mobile menu */
+header nav[aria-expanded="true"] .nav-search {
+  order: -1;
+}
+
+/* Mobile: horizontal rose pill buttons */
+header nav .nav-tools ul {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 8px;
+  padding: 12px 16px;
   border-top: 1px solid var(--light-color);
 }
 
 header nav .nav-tools ul li {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  display: block;
 }
 
+/* Hide the large circle icons on mobile */
 header nav .nav-tools li .icon {
-  width: 38px;
-  height: 38px;
+  display: none;
 }
 
 header nav .nav-tools ul li a {
-  color: var(--link-color);
-  font-size: 20px;
-  text-transform: uppercase;
-  font-weight: 800;
-  line-height: 24px;
+  display: block;
+  padding: 8px 18px;
+  background-color: var(--nav-accent-color);
+  border-radius: 20px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 header nav .nav-tools ul li a:hover {
-  color: var(--link-hover-color);
+  background-color: var(--accent-hover-color);
+  color: #fff;
 }
 
 /* search box */
+/* stylelint-disable-next-line no-descending-specificity */
 header nav .nav-search {
   display: flex;
   align-items: center;
@@ -295,6 +341,7 @@ header nav .nav-social a:hover .icon {
 }
 
 /* utility strip */
+
 header nav .nav-utility {
   background-color: var(--link-color);
   color: var(--background-color);
@@ -312,10 +359,22 @@ header nav .nav-utility .default-content-wrapper {
   padding: 10px 16px;
 }
 
-header nav .nav-utility p {
+/* Hide only the direct-child tagline paragraph in the utility strip on mobile.
+   Scoped to > p so it does NOT hide <p> nodes inside button labels. */
+header nav .nav-utility .default-content-wrapper > p {
+  display: none;
   color: var(--background-color);
   font-weight: 800;
   flex: 1 1 100%;
+}
+
+header nav .nav-utility .nav-social {
+  display: none;
+}
+
+/* Hide non-dropdown utility items (HCP Site, etc.) on mobile */
+header nav .nav-utility .default-content-wrapper > ul > li:not(.nav-drop, .nav-social) {
+  display: none;
 }
 
 header nav .nav-utility > .default-content-wrapper > ul {
@@ -428,12 +487,57 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
   transform: rotate(-45deg);
 }
 
+/* ── Mobile footer: HCP Site + social icons at bottom of open mobile menu ── */
+
+header nav .nav-mobile-footer {
+  display: none;
+}
+
+header nav[aria-expanded="true"] .nav-mobile-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-top: 1px solid var(--light-color);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+header nav .nav-mobile-footer a {
+  color: var(--link-color);
+}
+
+header nav .nav-mobile-footer .nav-social {
+  display: flex;
+}
+
 @media (width >= 900px) {
   header nav[aria-expanded="true"] {
     min-height: 0;
     overflow: visible;
   }
 
+  /* Restore logo, bar alignment, and nav-tools direction on desktop */
+  header nav[aria-expanded="true"] .nav-brand {
+    display: block;
+  }
+
+  header nav[aria-expanded="true"] .nav-bar {
+    justify-content: flex-start;
+  }
+
+  /* Never show mobile footer on desktop — content is in the utility strip */
+  header nav[aria-expanded="true"] .nav-mobile-footer {
+    display: none;
+  }
+
+  /* Reset search order (it was moved to top for mobile open menu) */
+  header nav[aria-expanded="true"] .nav-search {
+    order: 0;
+  }
+
+  /* stylelint-disable-next-line no-descending-specificity */
   header nav .nav-bar {
     flex-wrap: nowrap;
     padding: 12px 24px;
@@ -443,15 +547,25 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
     display: none;
   }
 
+  /* Hide mobile-only nav-bar tagline and "Menu" label on desktop */
+  header nav .nav-tagline {
+    display: none;
+  }
+
+  header nav .nav-hamburger-label {
+    display: none;
+  }
+
   header nav .nav-brand .icon {
     width: 112px;
     height: auto;
   }
 
   /* attribute selector needed: nav is aria-expanded="true" on desktop, so the
-     mobile "display:block" rule would otherwise win on specificity */
+     mobile "display:flex; flex-direction:column" rules would otherwise win */
   header nav[aria-expanded] .nav-tools {
     display: flex;
+    flex-direction: row;
     align-items: center;
     gap: 32px;
     order: 3;
@@ -460,12 +574,48 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
   }
 
   header nav .nav-tools ul {
-    flex-direction: row;
+    flex-flow: row nowrap;
     gap: 24px;
     padding: 0;
     border-top: 0;
   }
 
+  /* Restore icon + text layout for desktop tools */
+  header nav .nav-tools ul li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  header nav .nav-tools li .icon {
+    display: flex;
+    width: 38px;
+    height: 38px;
+  }
+
+  header nav .nav-tools ul li a {
+    display: inline;
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    color: var(--link-color);
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 24px;
+    text-transform: uppercase;
+  }
+
+  header nav .nav-tools ul li a:hover {
+    background-color: transparent;
+    color: var(--link-hover-color);
+  }
+
+  /* Show HCP Site and other utility items on desktop */
+  header nav .nav-utility .default-content-wrapper > ul > li:not(.nav-drop, .nav-social) {
+    display: list-item;
+  }
+
+  /* stylelint-disable-next-line no-descending-specificity */
   header nav .nav-search {
     width: 259px;
     margin-top: 0;
@@ -476,16 +626,22 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
     line-height: 22px;
   }
 
-  header nav .nav-utility .default-content-wrapper {
-    flex-wrap: nowrap;
-    padding: 14px 15px 0;
-  }
-
-  header nav .nav-utility p {
+  /* Restore tagline and social icons in the utility strip on desktop */
+  header nav .nav-utility .default-content-wrapper > p {
+    display: block;
     flex: none;
     white-space: nowrap;
     color: var(--background-color);
     padding-bottom: 10px;
+  }
+
+  header nav .nav-utility .nav-social {
+    display: flex;
+  }
+
+  header nav .nav-utility .default-content-wrapper {
+    flex-wrap: nowrap;
+    padding: 14px 15px 0;
   }
 
   header nav .nav-utility > .default-content-wrapper > ul {
@@ -535,6 +691,7 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
     text-transform: none;
   }
 
+  /* stylelint-disable-next-line no-descending-specificity */
   header nav .nav-sections .default-content-wrapper > ul > li {
     display: flex;
     align-items: center;
@@ -566,6 +723,7 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
     box-shadow: 0 2px 8px rgb(46 50 51 / 20%);
   }
 
+  /* stylelint-disable-next-line no-descending-specificity */
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     padding: 8px 20px;
     font-weight: 500;
@@ -584,6 +742,7 @@ header nav .nav-sections .nav-drop[aria-expanded="true"]::after {
     color: var(--link-hover-color);
   }
 
+  /* stylelint-disable-next-line no-descending-specificity */
   header nav .nav-sections .default-content-wrapper > ul > li:hover {
     color: var(--link-hover-color);
   }
