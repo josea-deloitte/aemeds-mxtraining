@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ISI Block Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="nav" content="/drafts/nav">
+    <meta name="footer" content="/drafts/footer">
+    <script src="/scripts/aem.js" type="module"></script>
+    <script src="/scripts/scripts.js" type="module"></script>
+    <link rel="stylesheet" href="/styles/styles.css"/>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <!-- Page body: long enough that the ISI inline panel starts below the fold,
+           so the sticky tray is visible before the user scrolls down. -->
+      <div>
+        <div>
+          <h1>ISI Block Test Page</h1>
+          <p>
+            The sticky tray at the bottom of the screen shows a two-column preview of the
+            safety information (desktop). Click the <strong>+</strong> button to expand the
+            full detail. Scroll down until the inline ISI panel comes into view — the tray
+            will slide away automatically.
+          </p>
+
+          <h2>How the ISI block works</h2>
+          <p>
+            The ISI block renders two coordinated components from a single authored table:
+          </p>
+          <ol>
+            <li>
+              <strong>Sticky bottom tray</strong> — fixed to the viewport bottom.
+              Desktop shows IMPORTANT SAFETY INFORMATION on the left and APPROVED USE on the right.
+              Mobile collapses both into a single column with an "AND APPROVED USE" subtitle.
+              Clicking anywhere on the header (or the +/− button) expands the full ISI detail.
+            </li>
+            <li>
+              <strong>Inline panel</strong> — anchored at <code>#SafetyPanelInfo</code> in the
+              page flow, usually placed just above the footer. Shows all content in a single column
+              (APPROVED USE → ISI heading → full detail) with a sticky back-to-top button.
+              When the panel scrolls into view the sticky tray docks (slides out).
+            </li>
+          </ol>
+
+          <h2>What is VYEPTI?</h2>
+          <p>
+            VYEPTI® (eptinezumab-jjmr) 100 mg/mL Injection for IV is a prescription medicine
+            used for the preventive treatment of migraine in adults. It is given as an intravenous
+            (IV) infusion by a healthcare provider every 3 months. VYEPTI works by blocking a
+            protein called calcitonin gene-related peptide (CGRP), which is believed to play a
+            role in migraine attacks.
+          </p>
+          <p>
+            Clinical trials showed that VYEPTI significantly reduced the number of migraine days
+            per month compared with placebo. Patients receiving 100 mg or 300 mg doses experienced
+            meaningful reductions in monthly migraine days starting from the first week after the
+            first infusion.
+          </p>
+          <p>
+            VYEPTI is administered by a healthcare provider in a clinical setting as a 30-minute
+            IV infusion. The recommended dose is 100 mg administered once every 3 months.
+            A 300 mg dose, administered once every 3 months, may be warranted for some patients.
+          </p>
+          <p>
+            As with all prescription medicines, patients should discuss the risks and benefits of
+            VYEPTI with their healthcare provider. See full Prescribing Information and Patient
+            Information below.
+          </p>
+
+          <h2>Clinical Trial Results</h2>
+          <p>
+            VYEPTI was studied in two pivotal clinical trials: PROMISE 1 (episodic migraine) and
+            PROMISE 2 (chronic migraine). Both trials demonstrated statistically significant
+            reductions in monthly migraine days compared to placebo.
+          </p>
+          <p>
+            In PROMISE 1, patients with episodic migraine (4–14 migraine days/month) receiving
+            VYEPTI 100 mg had a mean reduction of 3.9 migraine days per month, compared with 3.2
+            days for placebo — a statistically significant difference. Patients on 300 mg had a
+            mean reduction of 4.3 migraine days.
+          </p>
+          <p>
+            In PROMISE 2, patients with chronic migraine (≥15 headache days/month, ≥8 of which
+            were migraine days) receiving VYEPTI 100 mg had a mean reduction of 7.7 migraine days
+            per month, compared with 5.6 for placebo. The 300 mg arm showed a mean reduction of
+            8.2 migraine days per month.
+          </p>
+          <p>
+            In both studies, VYEPTI demonstrated a rapid onset of action, with differences
+            from placebo apparent during the first week following the first infusion. The most
+            common side effects were nasopharyngitis (stuffy nose and scratchy throat) and
+            hypersensitivity reactions.
+          </p>
+          <p>
+            These results highlight the value of VYEPTI as a preventive treatment option for
+            patients who experience frequent migraines and may not have responded well to other
+            preventive therapies.
+          </p>
+        </div>
+      </div>
+
+      <!-- ISI Block — authored content. See blocks/isi/README.md for authoring guide. -->
+      <div>
+        <div class="isi">
+          <div>
+            <div>
+              <h5>APPROVED USE</h5>
+              <p>VYEPTI is a prescription medicine used for the preventive treatment of migraine in adults.</p>
+              <h5>IMPORTANT SAFETY INFORMATION</h5>
+              <p><strong>Do not receive VYEPTI</strong> if you have a known allergy to eptinezumab-jjmr or its ingredients.</p>
+              <p><strong>VYEPTI may cause serious side effects such as:</strong></p>
+              <ul>
+                <li>
+                  <strong>Allergic reactions.</strong> Call your healthcare provider or get emergency
+                  medical help right away if you have any symptoms of an allergic reaction: rash;
+                  swelling of your face, lips, tongue, or throat; if you have trouble breathing;
+                  hives; or redness in your face.
+                </li>
+                <li>
+                  <strong>High blood pressure.</strong> High blood pressure or worsening of high
+                  blood pressure can happen after receiving VYEPTI. Contact your healthcare provider
+                  if you have an increase in blood pressure.
+                </li>
+                <li>
+                  <strong>Raynaud&rsquo;s phenomenon.</strong> A type of circulation problem
+                  (Raynaud&rsquo;s phenomenon) can worsen or happen after receiving VYEPTI. Contact
+                  your healthcare provider if you have symptoms such as your fingers or toes feeling
+                  numb, cool, or painful, or changing color from pale to blue to red.
+                </li>
+              </ul>
+              <p>
+                <strong>Before starting VYEPTI,</strong> tell your healthcare provider about all your
+                medical conditions, including if you have high blood pressure; circulation problems in
+                your fingers and toes; are pregnant or plan to become pregnant; or are breastfeeding
+                or plan to breastfeed.
+              </p>
+              <p>
+                <strong>Tell your healthcare provider</strong> about all the medicines you take,
+                including any prescription and over-the-counter medicines, vitamins, or herbal
+                supplements.
+              </p>
+              <p>
+                <strong>The most common side effects</strong> of VYEPTI include stuffy nose and
+                scratchy throat, and allergic reactions. These are not all the possible side effects
+                of VYEPTI. Tell your healthcare provider if you have any side effect that bothers you
+                or that does not go away.
+              </p>
+              <p>
+                <strong>You are encouraged to report negative side effects of prescription drugs to
+                the FDA. Visit <a href="https://www.fda.gov/medwatch">www.fda.gov/medwatch</a> or
+                call 1-800-FDA-1088.</strong>
+              </p>
+              <p>
+                <strong>For more information, please see the
+                <a href="https://www.lundbeck.com/content/dam/lundbeck-com/americas/united-states/products/neurology/vyepti_pi_us_en.pdf">Prescribing Information</a>
+                and
+                <a href="https://www.lundbeck.com/content/dam/lundbeck-com/americas/united-states/products/neurology/vyepti_ppi_us_en.pdf">Patient Information</a>.</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer></footer>
+  </body>
+</html>
