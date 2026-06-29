@@ -16,18 +16,22 @@
 
 .columns-content h2 {
   color: #005f84;
-  font-size: clamp(2rem, 5.2vw, 3rem);
+  font-size: 24px;
+  line-height: 29px;
+  font-weight: 800;
 }
 
 .columns-content h3 {
-  font-size: clamp(1.65rem, 2.7vw, 2.1rem);
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 700;
 }
 
 .columns-content p {
   margin-top: 0;
   margin-bottom: 1em;
-  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
-  line-height: 1.35;
+  font-size: 16px;
+  line-height: 22px;
 }
 
 .columns-content > div {
