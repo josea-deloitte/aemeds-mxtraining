@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Columns Content - Nurse Support Demo</title>
+    <meta name="description" content="Test columns-content block with callout on right column" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="nav" content="/drafts/nav" />
+    <meta name="footer" content="/drafts/footer" />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <script src="/scripts/aem.js" type="module"></script>
+    <script src="/scripts/scripts.js" type="module"></script>
+    <link rel="stylesheet" href="/styles/styles.css" />
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <!-- Columns Content Block: Right Column Callout (Default) -->
+      <div>
+        <div class="columns-content">
+          <div>
+            <!-- Left Column -->
+            <div>
+              <h2>Talk to a registered nurse</h2>
+              <p>Registered nurses are accessible by phone—whether you have a VYEPTI prescription or are considering it as a treatment option. Get answers to your questions and help ease concerns by talking to a real nurse.</p>
+              <p>For any questions that are specific to you and your situation, ask your healthcare provider.</p>
+            </div>
+            <!-- Right Column -->
+            <div>
+              <h3>Nurse availability</h3>
+              <p>Live registered nurses are available Monday through Friday, 8 AM-8 PM (ET).</p>
+              <!-- Marker for callout start -->
+              <p>[callout]</p>
+              <p><span class="icon icon-mobile"></span></p>
+              <p>
+                <strong>Call <a href="tel:8334893784">833-4-VYEPTI (833-489-3784)</a></strong> Option 2 to connect live with a registered nurse.
+              </p>
+              <p>Not yet prescribed VYEPTI? No problem. A nurse is happy to answer your questions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columns Content Block: Both Columns with Callouts (Variant Pattern) -->
+      <div>
+        <div class="columns-content callout-both">
+          <div>
+            <!-- Left Column -->
+            <div>
+              <h3>IMPORTANT SAFETY INFORMATION</h3>
+              <p>[callout]</p>
+              <p><strong>Do not receive VYEPTI</strong> if you have a known allergy to eptinezumab-jjmr or its ingredients.</p>
+            </div>
+            <!-- Right Column -->
+            <div>
+              <h3>APPROVED USE</h3>
+              <p>[callout]</p>
+              <p><span class="icon icon-information"></span></p>
+              <p><strong>VYEPTI</strong> is a prescription medicine used for the preventive treatment of migraine in adults.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columns Content Block: No Callout (No Marker Authored) -->
+      <div>
+        <div class="columns-content">
+          <div>
+            <!-- Left Column -->
+            <div>
+              <h3>Feature One</h3>
+              <p>This is a simple two-column layout without any callout boxes.</p>
+              <ul>
+                <li>Item A</li>
+                <li>Item B</li>
+                <li>Item C</li>
+              </ul>
+            </div>
+            <!-- Right Column -->
+            <div>
+              <h3>Feature Two</h3>
+              <p>Both columns display as regular content with the default grid layout.</p>
+              <p>Perfect for comparison or side-by-side information display.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer></footer>
+  </body>
+</html>

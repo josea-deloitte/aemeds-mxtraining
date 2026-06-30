@@ -313,6 +313,21 @@ main > .section:first-of-type {
   margin-top: 0;
 }
 
+main > .section.hero-container {
+  margin-bottom: 0;
+}
+
+main > .section.alert-strip-container {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+main > .section.alert-strip-container > div {
+  padding-top: 0;
+}
+
 @media (width >= 900px) {
   main > .section > div {
     padding: 0 32px;

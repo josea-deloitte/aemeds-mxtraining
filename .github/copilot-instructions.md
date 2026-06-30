@@ -73,11 +73,11 @@ Constants → Helper functions → Main `decorate()` → Event listeners
 const IMAGE_CONFIG = { EAGER_INDEX: 0 };
 function setImageLoading(imgs) {
   imgs.forEach((img, i) => {
-    img.loading = i === 0 ? "eager" : "lazy";
+    img.loading = i === 0 ? 'eager' : 'lazy';
   });
 }
 export default async function decorate(block) {
-  setImageLoading(block.querySelectorAll("img"));
+  setImageLoading(block.querySelectorAll('img'));
 }
 ```
 
@@ -90,14 +90,14 @@ export default async function decorate(block) {
 ```javascript
 // ❌ BAD: Too many jobs
 function processCard(card) {
-  const title = card.querySelector("h3")?.textContent;
-  card.classList.add("processed");
-  track("card_rendered");
+  const title = card.querySelector('h3')?.textContent;
+  card.classList.add('processed');
+  track('card_rendered');
 }
 
 // ✅ Extract concerns
-const getTitle = (card) => card.querySelector("h3")?.textContent || "";
-const markProcessed = (card) => card.classList.add("processed");
+const getTitle = (card) => card.querySelector('h3')?.textContent || '';
+const markProcessed = (card) => card.classList.add('processed');
 ```
 
 **OCP (Open/Closed):** Use strategy objects for variations
@@ -199,9 +199,9 @@ refactor(scripts): extract intersection observer
 
 ```javascript
 export default async function decorate(block) {
-  console.log("Before:", block.innerHTML);
-  block.querySelector("h2").classList.add("primary");
-  console.log("After:", block.innerHTML);
+  console.log('Before:', block.innerHTML);
+  block.querySelector('h2').classList.add('primary');
+  console.log('After:', block.innerHTML);
 }
 ```
 

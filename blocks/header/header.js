@@ -270,6 +270,20 @@ export default async function decorate(block) {
 
   decorateSocialLinks(nav);
 
+  // Clone HCP Site link and social icons to the bottom of the open mobile menu.
+  // On desktop these items live in the utility strip; on mobile they are hidden
+  // there and appear here instead.
+  const navUtilityList = nav.querySelector('.nav-utility .default-content-wrapper > ul');
+  if (navUtilityList) {
+    const mobileFooter = document.createElement('div');
+    mobileFooter.className = 'nav-mobile-footer';
+    const hcpItem = navUtilityList.querySelector('li:not(.nav-drop, .nav-social)');
+    const socialItem = navUtilityList.querySelector('li.nav-social');
+    if (hcpItem) mobileFooter.append(hcpItem.cloneNode(true));
+    if (socialItem) mobileFooter.append(socialItem.cloneNode(true));
+    if (mobileFooter.children.length) nav.append(mobileFooter);
+  }
+
   // group hamburger, brand, and tools into a single bar for layout
   const navBar = document.createElement('div');
   navBar.className = 'nav-bar';
@@ -277,12 +291,22 @@ export default async function decorate(block) {
   hamburger.classList.add('nav-hamburger');
   hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
       <span class="nav-hamburger-icon"></span>
+      <span class="nav-hamburger-label" aria-hidden="true">Menu</span>
     </button>`;
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
   navBar.append(hamburger);
   if (navBrand) navBar.append(navBrand);
   const navTools = nav.querySelector('.nav-tools');
   if (navTools) navBar.append(navTools);
+
+  // Clone the utility tagline into the bar for the mobile layout
+  // (real site shows it below logo on mobile, hidden on desktop)
+  const utilityTagline = nav.querySelector('.nav-utility p');
+  if (utilityTagline) {
+    const mobileTagline = utilityTagline.cloneNode(true);
+    mobileTagline.className = 'nav-tagline';
+    navBar.append(mobileTagline);
+  }
   decorateSearch(navTools);
   markActiveNavItem(navSections);
   if (navSections) nav.insertBefore(navBar, navSections);
@@ -299,11 +323,45 @@ export default async function decorate(block) {
   block.append(navWrapper);
 
   // keep the space reserved for the fixed header in sync with its
-  // rendered height (the utility strip wraps at narrow widths)
-  const syncNavHeight = new ResizeObserver(() => {
-    if (nav.getAttribute('aria-expanded') !== 'true' || isDesktop.matches) {
-      document.documentElement.style.setProperty('--nav-height', `${navWrapper.offsetHeight}px`);
+  // rendered height (the utility strip wraps to 2-3 rows at narrow widths,
+  // so a static --nav-height would let the header overlap page content)
+  const syncNavHeight = () => {
+    // when the mobile menu is open the nav fills the viewport (100dvh); don't
+    // reserve that height for the page flow
+    if (nav.getAttribute('aria-expanded') === 'true' && !isDesktop.matches) return;
+    document.documentElement.style.setProperty('--nav-height', `${navWrapper.offsetHeight}px`);
+  };
+  const navHeightObserver = new ResizeObserver(syncNavHeight);
+  navHeightObserver.observe(navWrapper);
+  // the ResizeObserver's first callback can fire before web fonts/icons load
+  // and under-measure the strip, so re-sync once they settle and on resize
+  if (document.fonts?.ready) document.fonts.ready.then(syncNavHeight);
+  window.addEventListener('load', syncNavHeight);
+  window.addEventListener('resize', syncNavHeight);
+
+  // auto-hide the sticky-top header on scroll down, reveal on scroll up.
+  // The reserved space (--nav-height on <header>) stays, so page content
+  // never jumps when the wrapper slides away.
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+  const onScroll = () => {
+    const y = Math.max(0, window.scrollY);
+    // never hide while the mobile menu is open (it fills the viewport)
+    const menuOpen = nav.getAttribute('aria-expanded') === 'true' && !isDesktop.matches;
+    if (!menuOpen) {
+      if (y > lastScrollY && y > navWrapper.offsetHeight) {
+        navWrapper.classList.add('nav-hidden');
+      } else if (y < lastScrollY) {
+        navWrapper.classList.remove('nav-hidden');
+      }
     }
-  });
-  syncNavHeight.observe(navWrapper);
+    lastScrollY = y;
+    ticking = false;
+  };
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(onScroll);
+      ticking = true;
+    }
+  }, { passive: true });
 }
