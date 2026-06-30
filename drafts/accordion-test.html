@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Accordion Block Test</title>
+    <meta
+      name="description"
+      content="Draft page to validate the accordion block with nested blocks."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="nav" content="/drafts/nav" />
+    <meta name="footer" content="/drafts/footer" />
+    <script src="/scripts/aem.js" type="module"></script>
+    <script src="/scripts/scripts.js" type="module"></script>
+    <link rel="stylesheet" href="/styles/styles.css" />
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <div>
+        <h2>1. Basic text-only accordion</h2>
+        <div class="accordion">
+          <div>
+            <div><p>Eligibility and Insurance</p></div>
+            <div>
+              <p>
+                Review insurance support options and eligibility details before
+                your first infusion.
+              </p>
+            </div>
+          </div>
+          <div>
+            <div><p>How To Prepare</p></div>
+            <div>
+              <p>
+                Bring your treatment notes, hydration plan, and questions for
+                your care team.
+              </p>
+            </div>
+          </div>
+          <div>
+            <div><p>After Your Visit</p></div>
+            <div>
+              <p>
+                Track symptoms and follow up with your provider to review
+                response over time.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <h2>2. Accordion with nested columns block</h2>
+        <div class="accordion">
+          <div>
+            <div><p>Getting Started With VYEPTI</p></div>
+            <div>
+              <div class="columns">
+                <div>
+                  <div>
+                    <h3>VYEPTI Brochure</h3>
+                    <p>
+                      Everybody has to start somewhere. Download a quick guide
+                      about treatment benefits and what to expect from an IV
+                      infusion.
+                    </p>
+                    <p><a href="#">Download</a></p>
+                  </div>
+                  <div>
+                    <h3>Doctor Discussion Guide</h3>
+                    <p>
+                      Create your own doctor discussion guide with personalized
+                      responses before your next appointment.
+                    </p>
+                    <p><a href="#">Open guide</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div><p>Setting Up Your Treatment</p></div>
+            <div>
+              <p>
+                Use this section for setup resources, enrollment documents, and
+                links to care support options.
+              </p>
+            </div>
+          </div>
+          <div>
+            <div><p>Ongoing Support</p></div>
+            <div>
+              <p>
+                Keep this panel for maintenance reminders and support resources
+                after treatment begins.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <h2>3. Mixed accordion (multi-cell content + nested cards block)</h2>
+        <div class="accordion">
+          <div>
+            <div><p>Treatment Resources</p></div>
+            <div>
+              <p>Downloadable files:</p>
+              <p><a href="#">Treatment checklist</a></p>
+              <p><a href="#">Visit planner</a></p>
+            </div>
+            <div>
+              <div class="cards">
+                <div>
+                  <div>
+                    <h3>Financial Support</h3>
+                    <p>
+                      Explore available support and reimbursement information.
+                    </p>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <h3>Patient Education</h3>
+                    <p>
+                      Read key details about what to expect before and after
+                      infusion.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div><p>Doctor Conversation Prep</p></div>
+            <div>
+              <p>
+                Write down your questions and goals to make your next
+                appointment more effective.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <h2>4. Multi-open accordion (all can be open at once)</h2>
+        <div class="accordion multi-open">
+          <div>
+            <div><p>Before Your Infusion</p></div>
+            <div>
+              <p>
+                Schedule your appointment, review medication list, and plan
+                transportation.
+              </p>
+            </div>
+          </div>
+          <div>
+            <div><p>During Your Infusion</p></div>
+            <div>
+              <p>
+                Expect the infusion to take about 30 minutes. Bring
+                entertainment and stay hydrated.
+              </p>
+            </div>
+          </div>
+          <div>
+            <div><p>After Your Infusion</p></div>
+            <div>
+              <p>
+                You can typically return to normal activities. Monitor for any
+                side effects over next 48 hours.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <h2>5. Multi-open with nested columns</h2>
+        <div class="accordion multi-open">
+          <div>
+            <div><p>Insurance & Costs</p></div>
+            <div>
+              <div class="columns">
+                <div>
+                  <div>
+                    <h3>Coverage Info</h3>
+                    <p>
+                      Most insurance plans cover VYEPTI treatment. Check your
+                      coverage details.
+                    </p>
+                    <p><a href="#">Verify coverage</a></p>
+                  </div>
+                  <div>
+                    <h3>Co-Pay Assistance</h3>
+                    <p>
+                      Eligible patients may receive co-pay support up to $0 per
+                      treatment.
+                    </p>
+                    <p><a href="#">Learn more</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div><p>Patient Support Services</p></div>
+            <div>
+              <p>
+                Dedicated support coordinator to help schedule appointments and
+                manage logistics.
+              </p>
+              <p><a href="#">Contact support</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer></footer>
+  </body>
+</html>

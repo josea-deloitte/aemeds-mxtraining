@@ -134,11 +134,28 @@ function decorateExternalLinks(main) {
 }
 
 /**
+ * Normalizes authored icon tokens that resolve as `icon-icon-*` classes
+ * to the expected `icon-*` form used by decorateIcons().
+ * @param {Element} main The main element
+ */
+function normalizeIconClasses(main) {
+  main.querySelectorAll('span[class*="icon-icon-"]').forEach((span) => {
+    [...span.classList]
+      .filter((className) => className.startsWith('icon-icon-'))
+      .forEach((className) => {
+        span.classList.remove(className);
+        span.classList.add(className.replace('icon-icon-', 'icon-'));
+      });
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
 // eslint-disable-next-line import/prefer-default-export
 export function decorateMain(main) {
+  normalizeIconClasses(main);
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
@@ -192,6 +209,35 @@ async function loadISI(main) {
 }
 
 /**
+ * Adds a global "back to top" control that appears once the user scrolls down
+ * and smooth-scrolls to the top of the page. Matches the source site's teal
+ * circle + up-chevron + "TOP" label affordance.
+ */
+function loadBackToTop() {
+  if (document.querySelector('.back-to-top')) return;
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'back-to-top';
+  btn.setAttribute('aria-label', 'Back to top');
+  // the SVG already contains the teal button, chevron, and "TOP" label;
+  // serve the desktop artwork at >=900px, the mobile one below
+  const base = window.hlx.codeBasePath;
+  btn.innerHTML = `<picture>
+      <source media="(min-width: 900px)" srcset="${base}/icons/back-to-top-desktop.svg">
+      <img src="${base}/icons/back-to-top-mobile.svg" alt="" loading="lazy" width="35" height="55">
+    </picture>`;
+  btn.addEventListener('click', () => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  });
+  document.body.append(btn);
+
+  const toggle = () => btn.classList.toggle('is-visible', window.scrollY > 600);
+  toggle();
+  window.addEventListener('scroll', toggle, { passive: true });
+}
+
+/**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
  */
@@ -208,6 +254,8 @@ async function loadLazy(doc) {
   if (hash && element) element.scrollIntoView();
 
   loadFooter(doc.querySelector('footer'));
+
+  loadBackToTop();
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
