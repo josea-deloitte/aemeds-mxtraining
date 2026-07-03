@@ -270,6 +270,20 @@ export default async function decorate(block) {
 
   decorateSocialLinks(nav);
 
+  // Clone HCP Site link and social icons to the bottom of the open mobile menu.
+  // On desktop these items live in the utility strip; on mobile they are hidden
+  // there and appear here instead.
+  const navUtilityList = nav.querySelector('.nav-utility .default-content-wrapper > ul');
+  if (navUtilityList) {
+    const mobileFooter = document.createElement('div');
+    mobileFooter.className = 'nav-mobile-footer';
+    const hcpItem = navUtilityList.querySelector('li:not(.nav-drop, .nav-social)');
+    const socialItem = navUtilityList.querySelector('li.nav-social');
+    if (hcpItem) mobileFooter.append(hcpItem.cloneNode(true));
+    if (socialItem) mobileFooter.append(socialItem.cloneNode(true));
+    if (mobileFooter.children.length) nav.append(mobileFooter);
+  }
+
   // group hamburger, brand, and tools into a single bar for layout
   const navBar = document.createElement('div');
   navBar.className = 'nav-bar';
@@ -277,12 +291,22 @@ export default async function decorate(block) {
   hamburger.classList.add('nav-hamburger');
   hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
       <span class="nav-hamburger-icon"></span>
+      <span class="nav-hamburger-label" aria-hidden="true">Menu</span>
     </button>`;
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
   navBar.append(hamburger);
   if (navBrand) navBar.append(navBrand);
   const navTools = nav.querySelector('.nav-tools');
   if (navTools) navBar.append(navTools);
+
+  // Clone the utility tagline into the bar for the mobile layout
+  // (real site shows it below logo on mobile, hidden on desktop)
+  const utilityTagline = nav.querySelector('.nav-utility p');
+  if (utilityTagline) {
+    const mobileTagline = utilityTagline.cloneNode(true);
+    mobileTagline.className = 'nav-tagline';
+    navBar.append(mobileTagline);
+  }
   decorateSearch(navTools);
   markActiveNavItem(navSections);
   if (navSections) nav.insertBefore(navBar, navSections);

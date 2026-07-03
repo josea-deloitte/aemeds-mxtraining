@@ -1,0 +1,178 @@
+.columns-content {
+  color: #233648;
+}
+
+.columns-content h1,
+.columns-content h2,
+.columns-content h3,
+.columns-content h4,
+.columns-content h5,
+.columns-content h6 {
+  margin-top: 0;
+  margin-bottom: 0.7em;
+  color: #2b3f52;
+  line-height: 1.1;
+}
+
+.columns-content h2 {
+  color: #005f84;
+  font-size: 24px;
+  line-height: 29px;
+  font-weight: 800;
+}
+
+.columns-content h3 {
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 700;
+}
+
+.columns-content p {
+  margin-top: 0;
+  margin-bottom: 1em;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.columns-content > div {
+  display: grid;
+  gap: 28px;
+}
+
+.columns-content-callout {
+  display: block;
+  margin-top: 18px;
+  border-radius: 16px;
+  background-color: #d9e1e7;
+  padding: 24px;
+}
+
+.columns-content-callout.has-icon {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+}
+
+.columns-content-callout-icon {
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+  min-width: 24px;
+  height: 24px;
+  padding-top: 20px;
+}
+
+.columns-content-callout-icon img,
+.columns-content-callout-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.columns-content-callout-content p {
+  margin-bottom: 0.75em;
+}
+
+.columns-content a:any-link {
+  color: #005f84;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+@media (width >= 900px) {
+  .columns-content > div {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 56px;
+    align-items: start;
+  }
+
+  .columns-content-left {
+    border-right: 1px solid #d0d5db;
+    padding-right: 56px;
+  }
+}
+
+/* ==========================================================================
+   Variant: dot-list (e.g. real-life-impact)
+   Bulleted columns with magenta markers and no divider.
+   Scoped to .dot-list so the base columns-content block is unaffected.
+   ========================================================================== */
+
+.columns-content.dot-list ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.columns-content.dot-list li {
+  margin-bottom: 0.5em;
+  color: #333;
+  font-size: 24px;
+  line-height: 27px;
+  padding-right: 14px;
+}
+
+.columns-content.dot-list li::marker {
+  color: #c02c57;
+}
+
+.columns-content.dot-list li strong {
+  font-weight: 700;
+}
+
+@media (width >= 900px) {
+  /* no divider between the bulleted columns */
+  .columns-content.dot-list .columns-content-left {
+    border-right: 0;
+    padding-right: 0;
+  }
+}
+
+/* Constrain the real-life-impact section wrappers to 1140px, edge-to-edge. */
+main > .section.real-life-impact > div {
+  max-width: 1140px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
+
+/* Full-width default content around a dot-list block (heading + intro + footer).
+   Scoped to the real-life-impact section class (Section Metadata Style). */
+.section.real-life-impact .default-content-wrapper h2 {
+  margin: 0 0 0.5em;
+  color: #046183;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 29px;
+}
+
+.section.real-life-impact .default-content-wrapper p {
+  font-size: 16px;;
+}
+
+.section.real-life-impact .default-content-wrapper a:any-link {
+  color: #046183;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+@media (width >= 600px) {
+  .section.real-life-impact .default-content-wrapper h2 {
+    text-align: left;
+  }
+
+  .section.real-life-impact {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media (width < 450px) {
+  .section.real-life-impact .default-content-wrapper h2 {
+    text-align: center;
+  }
+
+  .section.real-life-impact {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}

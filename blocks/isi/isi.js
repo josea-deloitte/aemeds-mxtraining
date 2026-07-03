@@ -1,119 +1,295 @@
-/*
+/**
  * ISI (Important Safety Information) Block
  *
- * Renders the regulated safety content in two synchronized views from a single
- * authored source:
- *   1. The full ISI panel, inline where the block is authored (above the footer).
- *   2. A fixed, condensed band docked to the bottom of the viewport that expands
- *      on click and hides once the full panel scrolls into view.
+ * Replicates the two-section AEM pattern from the live Vyepti.com source:
  *
- * Authoring contract (single cell, rich text):
- * | isi |
- * | ##### APPROVED USE                                |
- * | VYEPTI is a prescription medicine...              |
- * | ##### IMPORTANT SAFETY INFORMATION                |
- * | Do not receive VYEPTI...                          |
- * | - Allergic reactions...                           |
- * | ...                                               |
- * | For more information, please see the              |
- * | [Prescribing Information](…pi.pdf) and            |
- * | [Patient Information](…ppi.pdf).                  |
+ *   1. Sticky tray (#isiFixedBottom equivalent) — fixed to the viewport bottom.
+ *      - COLLAPSED: two-column header (ISI left, Approved Use right on desktop;
+ *        single column with "AND APPROVED USE" subtitle on mobile).
+ *      - EXPANDED: same header + full ISI body slides in below.
+ *      - Auto-docks (slides out) when the inline panel enters view.
  *
- * The Prescribing/Patient Information (PI) links live inside the authored
- * content so they travel with the ISI everywhere it is reused.
+ *   2. Inline panel (#SafetyPanelInfo equivalent) — in document flow above the
+ *      footer. Single-column: Approved Use → ISI summary → full ISI detail.
+ *
+ * Authoring contract — single table cell, rich text:
+ * ┌─────────────────────────────────────────────────────────┐
+ * │ isi                                                     │
+ * ├─────────────────────────────────────────────────────────┤
+ * │ ##### APPROVED USE                                      │
+ * │ VYEPTI is a prescription medicine…                      │
+ * │ ##### IMPORTANT SAFETY INFORMATION                      │
+ * │ **Do not receive VYEPTI** if you have…      ← summary  │
+ * │ **VYEPTI may cause serious side effects…**  ← detail   │
+ * │ - Allergic reactions…                        ← detail  │
+ * │ …                                                       │
+ * └─────────────────────────────────────────────────────────┘
+ *
+ * Parsed result:
+ *   sections[0] = Approved Use  { heading, summary: [p], detail: [] }
+ *   sections[1] = ISI           { heading, summary: [p], detail: [p, ul, …] }
  */
 
-const EXPANDED_CLASS = 'isi-band-expanded';
-const DOCKED_CLASS = 'isi-band-docked';
+const CLS_EXPANDED = 'isi-tray-expanded';
+const CLS_DOCKED = 'isi-tray-docked';
+
+/* ─── Content parsing ────────────────────────────────────────────────────── */
 
 /**
- * Builds the condensed band as a clone of the authored ISI content.
- * @param {Element} content The decorated ISI content element
- * @returns {HTMLElement} The band element
+ * Split the authored content into sections by H5 heading.
+ * Each section's body is further split into:
+ *   summary — the first child element (shown in the collapsed tray header)
+ *   detail  — remaining children (shown only when the tray is expanded)
+ * @param {Element} root
+ * @returns {{ heading: Element, summary: Element[], detail: Element[] }[]}
  */
-function buildBand(content) {
-  const band = document.createElement('aside');
-  band.className = 'isi-band';
-  band.setAttribute('aria-label', 'Important Safety Information');
-
-  const inner = document.createElement('div');
-  inner.className = 'isi-band-inner';
-  inner.append(content.cloneNode(true));
-
-  const toggle = document.createElement('button');
-  toggle.type = 'button';
-  toggle.className = 'isi-band-toggle';
-  toggle.setAttribute('aria-expanded', 'false');
-  toggle.setAttribute('aria-label', 'Expand Important Safety Information');
-
-  band.append(toggle, inner);
-  return { band, toggle };
+function parseSections(root) {
+  const sections = [];
+  let current = null;
+  [...root.children].forEach((el) => {
+    if (el.tagName === 'H5') {
+      current = { heading: el, summary: [], detail: [] };
+      sections.push(current);
+    } else if (current) {
+      if (current.summary.length === 0) {
+        current.summary.push(el); // first child → visible in collapsed tray
+      } else {
+        current.detail.push(el); // rest → only shown when expanded
+      }
+    }
+  });
+  return sections;
 }
 
+/** Deep-clone a section's node list. */
+function cloneNodes(nodes) {
+  return nodes.map((n) => n.cloneNode(true));
+}
+
+/* ─── Shared toggle button ───────────────────────────────────────────────── */
+
 /**
- * Wires the expand/collapse behavior for the band.
- * @param {HTMLElement} band
- * @param {HTMLButtonElement} toggle
+ * Create an accessible +/− circular toggle button.
+ * @param {string} controlsId  id of the controlled region
+ * @param {string} closedLabel  aria-label when collapsed
+ * @param {string} openLabel    aria-label when expanded
  */
-function wireToggle(band, toggle) {
+function makeToggle(controlsId, closedLabel, openLabel) {
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'isi-toggle';
+  btn.setAttribute('aria-expanded', 'false');
+  btn.setAttribute('aria-controls', controlsId);
+  btn.setAttribute('aria-label', closedLabel);
+  btn.dataset.closed = closedLabel;
+  btn.dataset.open = openLabel;
+  return btn;
+}
+
+function syncToggle(btn, expanded) {
+  btn.setAttribute('aria-expanded', String(expanded));
+  btn.setAttribute('aria-label', expanded ? btn.dataset.open : btn.dataset.closed);
+}
+
+/* ─── Sticky tray (#isiFixedBottom) ─────────────────────────────────────── */
+
+/**
+ * Build the sticky fixed-bottom tray.
+ *
+ * Collapsed header layout (mirrors the live Vyepti.com isiFixedBottom):
+ *   Desktop: [ISI heading + summary | AU heading + para | toggle btn]
+ *   Mobile:  [ISI heading (with "AND APPROVED USE" subtitle) + summary | toggle]
+ *
+ * Expanded: header stays visible, full ISI detail body slides in beneath.
+ *
+ * @param {{ heading, summary, detail }[]} sections  [0]=AU, [1]=ISI
+ * @returns {{ tray: HTMLElement }}
+ */
+function buildTray(sections) {
+  const [au, isi] = sections.length >= 2 ? sections : [null, sections[0]];
+
+  const tray = document.createElement('aside');
+  tray.className = 'isi-tray';
+  tray.setAttribute('role', 'complementary');
+  tray.setAttribute('aria-label', 'Important Safety Information');
+
+  /* ── Two-column header ─────────────────────────────────────────────────── */
+  const header = document.createElement('div');
+  header.className = 'isi-tray-header';
+
+  // Left column — ISI summary (always visible on all breakpoints)
+  const isiCol = document.createElement('div');
+  isiCol.className = 'isi-tray-col isi-tray-col-isi';
+
+  if (isi) {
+    const isiHeading = isi.heading.cloneNode(true);
+    // Mobile subtitle "AND APPROVED USE" inside the ISI heading
+    const subtitle = document.createElement('span');
+    subtitle.className = 'isi-tray-subtitle';
+    subtitle.textContent = 'AND APPROVED USE';
+    isiHeading.append(subtitle);
+    isiCol.append(isiHeading, ...cloneNodes(isi.summary));
+  }
+
+  // Right column — Approved Use (hidden on mobile via CSS)
+  const auCol = document.createElement('div');
+  auCol.className = 'isi-tray-col isi-tray-col-au';
+
+  if (au) {
+    auCol.append(au.heading.cloneNode(true), ...cloneNodes(au.summary));
+  }
+
+  // Single toggle button
+  const bodyId = 'isi-tray-body';
+  const toggle = makeToggle(
+    bodyId,
+    'Expand Important Safety Information',
+    'Collapse Important Safety Information',
+  );
+
+  header.append(isiCol, auCol, toggle);
+
+  /* ── Expandable detail body ────────────────────────────────────────────── */
+  const body = document.createElement('div');
+  body.className = 'isi-tray-body';
+  body.id = bodyId;
+  body.setAttribute('role', 'region');
+  body.setAttribute('aria-label', 'Full Important Safety Information');
+
+  const bodyInner = document.createElement('div');
+  bodyInner.className = 'isi-tray-body-inner';
+
+  if (isi) bodyInner.append(...cloneNodes(isi.detail));
+  body.append(bodyInner);
+
+  tray.append(header, body);
+
+  /* ── Interaction ────────────────────────────────────────────────────────── */
   const setExpanded = (expanded) => {
-    band.classList.toggle(EXPANDED_CLASS, expanded);
-    toggle.setAttribute('aria-expanded', String(expanded));
-    toggle.setAttribute('aria-label', expanded
-      ? 'Collapse Important Safety Information'
-      : 'Expand Important Safety Information');
+    tray.classList.toggle(CLS_EXPANDED, expanded);
+    syncToggle(toggle, expanded);
   };
 
-  toggle.addEventListener('click', () => {
-    setExpanded(!band.classList.contains(EXPANDED_CLASS));
+  // Clicking header (or the toggle button within it) toggles the tray
+  header.addEventListener('click', (e) => {
+    if (e.target.closest('a')) return;
+    setExpanded(!tray.classList.contains(CLS_EXPANDED));
   });
 
-  // Allow links inside the expanded band to work without toggling.
-  band.querySelector('.isi-band-inner').addEventListener('click', (e) => {
+  // Links inside the expanded body navigate without collapsing
+  body.addEventListener('click', (e) => {
     if (e.target.closest('a')) e.stopPropagation();
   });
+
+  // Escape key collapses
+  tray.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && tray.classList.contains(CLS_EXPANDED)) {
+      setExpanded(false);
+      toggle.focus();
+    }
+  });
+
+  return { tray };
 }
 
+/* ─── Inline panel (#SafetyPanelInfo) ───────────────────────────────────── */
+
 /**
- * Hides the band once the full ISI panel is visible, restores it otherwise.
- * @param {HTMLElement} band
- * @param {Element} panel The full inline ISI panel
+ * Build the full inline ISI panel.
+ *
+ * @param {{ heading, summary, detail }[]} sections  [0]=AU, [1]=ISI
+ * @returns {HTMLElement}
  */
-function wireDocking(band, panel) {
+function buildInlinePanel(sections) {
+  const [au, isi] = sections.length >= 2 ? sections : [null, sections[0]];
+
+  const panel = document.createElement('section');
+  panel.className = 'isi-panel';
+  panel.id = 'SafetyPanelInfo';
+  panel.setAttribute('aria-label', 'Important Safety Information');
+
+  // Approved Use section
+  const auSection = document.createElement('div');
+  auSection.className = 'isi-section';
+  if (au) {
+    auSection.append(au.heading.cloneNode(true), ...cloneNodes(au.summary));
+  }
+
+  // ISI section — heading + summary + full detail (always visible)
+  const isiSection = document.createElement('div');
+  isiSection.className = 'isi-section';
+  if (isi) {
+    isiSection.append(
+      isi.heading.cloneNode(true),
+      ...cloneNodes(isi.summary),
+    );
+  }
+
+  // ISI detail body (always visible in the inline panel)
+  const isiDetail = document.createElement('div');
+  isiDetail.className = 'isi-section-detail';
+  if (isi) isiDetail.append(...cloneNodes(isi.detail));
+
+  panel.append(auSection, isiSection, isiDetail);
+  return panel;
+}
+
+/* ─── Docking + body offset ─────────────────────────────────────────────── */
+
+/**
+ * Use IntersectionObserver to dock the tray when the inline panel is visible,
+ * and undock it when the user scrolls back up.
+ */
+function wireDocking(tray, panel) {
   if (!('IntersectionObserver' in window)) return;
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      band.classList.toggle(DOCKED_CLASS, entry.isIntersecting);
-    });
-  }, { threshold: 0 });
-  observer.observe(panel);
+  new IntersectionObserver(
+    (entries) => entries.forEach(({ isIntersecting }) => {
+      tray.classList.toggle(CLS_DOCKED, isIntersecting);
+    }),
+    { threshold: 0 },
+  ).observe(panel);
 }
 
 /**
- * loads and decorates the block
- * @param {Element} block The block element
+ * Keep --isi-tray-offset on :root equal to the tray header height so the
+ * page's body padding-bottom reserves space — declared in CSS (no CLS).
+ */
+function syncTrayOffset(tray) {
+  const header = tray.querySelector('.isi-tray-header');
+  const update = () => {
+    const h = tray.classList.contains(CLS_DOCKED) ? 0 : header.offsetHeight;
+    document.documentElement.style.setProperty('--isi-tray-offset', `${h}px`);
+  };
+  new ResizeObserver(update).observe(header);
+  tray.addEventListener('transitionend', update);
+  update();
+}
+
+/* ─── Block entry point ──────────────────────────────────────────────────── */
+
+/**
+ * @param {Element} block
  */
 export default async function decorate(block) {
   const content = block.querySelector(':scope > div > div') || block.firstElementChild;
   if (!content) return;
 
-  // PI links are external PDFs: open in a new tab.
+  // External PDFs → new tab
   content.querySelectorAll('a[href$=".pdf"]').forEach((a) => {
     a.target = '_blank';
     a.rel = 'noopener noreferrer';
   });
 
-  // Full inline panel.
-  const panel = document.createElement('section');
-  panel.className = 'isi-panel';
-  panel.setAttribute('aria-label', 'Important Safety Information');
-  panel.append(content);
+  const sections = parseSections(content);
+
+  // 1. Inline panel (in document flow)
+  const panel = buildInlinePanel(sections);
   block.replaceChildren(panel);
 
-  // Condensed sticky band (separate from document flow, appended to body).
-  const { band, toggle } = buildBand(content);
-  wireToggle(band, toggle);
-  document.body.append(band);
+  // 2. Sticky tray (outside document flow — no CLS)
+  const { tray } = buildTray(sections);
+  document.body.append(tray);
 
-  wireDocking(band, panel);
+  wireDocking(tray, panel);
+  syncTrayOffset(tray);
 }

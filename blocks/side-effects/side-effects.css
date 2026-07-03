@@ -1,0 +1,196 @@
+.side-effects-container .side-effects-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.side-effects {
+  background-color: #eff6f9;
+  background-image: linear-gradient(135deg, #d6eef7 0%, #e8f4fa 60%, #f2f9fc 100%);
+}
+
+@media (width >= 1200px) {
+  .side-effects {
+    padding-top: 26px;
+    background-image: var(--side-effects-bg, linear-gradient(135deg, #d6eef7 0%, #e8f4fa 60%, #f2f9fc 100%));
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
+
+.side-effects > div {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.side-effects .side-effects-image {
+  position: relative;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.side-effects .side-effects-image picture {
+  display: block;
+  max-width: 335px;
+  margin: 0 auto;
+}
+
+.side-effects .side-effects-image img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 205px;
+}
+
+/* shrink-wrapped figure so the caption anchors to the image, not the column */
+.side-effects .side-effects-figure {
+  position: relative;
+  display: inline-block;
+}
+
+/* "Actor portrayal" caption sits to the right of the woman, below image */
+.side-effects .side-effects-image .side-effects-caption {
+  position: absolute;
+  right: -15px;
+  bottom: 20px;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 400;
+  text-shadow: 1px 1px 0 #fff;
+}
+
+.side-effects .side-effects-content {
+  padding: 32px 24px;
+  text-align: center;
+  color: #333;
+}
+
+/* flatten authored blockquote so it reads like a normal paragraph */
+.side-effects .side-effects-content blockquote {
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  font-style: normal;
+}
+
+/* teal headings: intro h2, and h3 sub-heads */
+.side-effects .side-effects-content h2,
+.side-effects .side-effects-content h3 {
+  color: #046183;
+  font-weight: 700;
+}
+
+/* study intro heading (first h2) */
+.side-effects .side-effects-content h2:first-of-type {
+  font-size: 20px;
+  line-height: 1.2;
+  margin: 0 auto 16px;
+}
+
+/* "up to 40% saw" / "for a month or more" sub-heads (h3 or later h2) */
+.side-effects .side-effects-content h3,
+.side-effects .side-effects-content h2:first-of-type ~ h2 {
+  font-size: 26px;
+  line-height: 1.1;
+  max-width: 255px;
+  text-align: center;
+  margin: 0 auto 20px;
+}
+
+.side-effects .side-effects-content h3 em {
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* "up to 40% saw" sits tight above the headline */
+.side-effects .side-effects-content h3:has(+ h1) {
+  margin-bottom: 3px;
+}
+
+/* trailing parenthetical, e.g. "(any 28 days in a row)" renders normal weight.
+   Use the body font because the heading font (roboto-condensed) only ships a
+   700 weight, so font-weight:400 alone would still render bold. */
+.side-effects .side-effects-content .side-effects-light {
+  font-family: var(--body-font-family);
+  font-weight: 400;
+}
+
+/* "zero migraine days" headline */
+.side-effects .side-effects-content h1 {
+  color: #c02c57;
+  font-size: 39px;
+  font-weight: 700;
+  line-height: 1;
+  margin: 0 0 8px;
+}
+
+.side-effects .side-effects-content p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 0 0 16px;
+}
+
+.side-effects .side-effects-content > p:first-of-type {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 0 0 16px;
+  max-width: 419px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.side-effects .side-effects-content > *:last-child {
+  margin: 0 auto;
+  width: 78%;
+}
+
+.side-effects .side-effects-content strong {
+  color: #333;
+  font-weight: 700;
+}
+
+@media (width >= 900px) {
+  .side-effects > div {
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    gap: 0;
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  .side-effects .side-effects-image {
+    flex: 0 0 50%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .side-effects .side-effects-image img {
+    max-width: 100%;
+  }
+
+  .side-effects .side-effects-content {
+    flex: 0 0 50%;
+    max-width: 50%;
+    margin: 0 auto;
+    padding: 18px 15px 48px;
+  }
+
+  .side-effects .side-effects-content h1 {
+    font-size: 48px;
+  }
+
+  .side-effects .side-effects-content h3,
+  .side-effects .side-effects-content h2:first-of-type ~ h2 {
+    max-width: none;
+    margin: 0 0 24px;
+  }
+}

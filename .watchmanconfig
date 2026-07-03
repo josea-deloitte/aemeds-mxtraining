@@ -1,0 +1,4 @@
+{
+  "ignore_dirs": [".git", "node_modules", ".aem", "dist", ".vscode"],
+  "settle": 100
+}

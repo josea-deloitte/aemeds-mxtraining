@@ -1,0 +1,137 @@
+.hero-two-columns-container .hero-two-columns-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+/* mobile-first: text overlaid on the top (light) area of the background image.
+   bg and content share one grid cell so they stack. */
+.hero-two-columns {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-areas: "stack";
+  background-image: linear-gradient(120deg, #cdeef7 0%, #e8f6fb 60%, #f3fafd 100%);
+  font-family: proxima-nova, arial, sans-serif;
+}
+
+.hero-two-columns .hero-two-columns-bg {
+  grid-area: stack;
+  z-index: 0;
+  display: block;
+  width: 100%;
+}
+
+.hero-two-columns .hero-two-columns-bg img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hero-two-columns .hero-two-columns-content {
+  grid-area: stack;
+  z-index: 1;
+  align-self: start;
+  padding: 24px 15px 8px;
+  text-align: center;
+}
+
+.hero-two-columns .hero-two-columns-content h3 {
+  color: #333;
+  font-family: proxima-nova, arial, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0 0 4px;
+}
+
+.hero-two-columns .hero-two-columns-content h1 {
+  color: #046183;
+  font-family: proxima-nova, arial, sans-serif;
+  font-size: 27px;
+  font-weight: 800;
+  line-height: 36px;
+  margin: 0 auto;
+  max-width: 320px;
+}
+
+/* "Actor portrayal" caption bottom-right over the image */
+.hero-two-columns .hero-two-columns-caption {
+  position: absolute;
+  right: 7%;
+  bottom: 12px;
+  z-index: 3;
+  margin: 0;
+  color: #fff;
+  font-size: 12px;
+}
+
+.hero-two-columns .hero-two-columns-caption em {
+  font-style: italic;
+}
+
+/* tablet+ : full-bleed background image, text overlaid and centered */
+@media (width >= 768px) {
+  .hero-two-columns .hero-two-columns-caption {
+    right: 2%;
+  }
+  
+  .hero-two-columns {
+    background-image: none;
+  }
+
+  .hero-two-columns .hero-two-columns-bg img {
+    height: 100%;
+    object-fit: cover;
+    object-position: 70% center;
+  }
+
+  .hero-two-columns .hero-two-columns-content {
+    place-self: center;
+    width: 100%;
+    max-width: 1140px;
+    min-height: 220px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-two-columns .hero-two-columns-content h3 {
+    font-size: 18px;
+    line-height: 1.4;
+    margin: 0 0 4px 50px;
+  }
+
+  .hero-two-columns .hero-two-columns-content h1 {
+    font-size: 32px;
+    line-height: 36px;
+    margin-left: 50px;
+    max-width: 420px;
+  }
+}
+
+@media (width >= 1200px) {
+  .hero-two-columns .hero-two-columns-caption {
+    right: 2%;
+  }
+
+ 
+  .hero-two-columns .hero-two-columns-content h3 {
+    font-size: 24px;
+    line-height: 32px;
+    margin: 0 0 8px 30px;
+  }
+
+  .hero-two-columns .hero-two-columns-content h1 {
+    font-size: 46px;
+    line-height: 60px;
+    max-width: 540px;
+    margin-left: 30px;
+  }
+}
+
+@media (width >= 1900px) {
+  .hero-two-columns .hero-two-columns-caption {
+    right: 20%;
+  }
+}
