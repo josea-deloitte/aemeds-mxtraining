@@ -5,7 +5,7 @@
 
 .study-results {
   background-color: #fff;
-  background-image: linear-gradient(#e8f3f5 20%, #fff 100%);
+  background-image: linear-gradient(#e8f3f5 20%, #fff 40%);
   background-repeat: no-repeat;
   background-size: 100% 520px;
   border-radius: 23px 23px 0 0;
@@ -14,6 +14,7 @@
   padding: 32px 15px;
   color: #333;
   font-family: var(--body-font-family);
+  border-bottom: 1px solid #e0e0e0;
 }
 
 @media (width >= 900px) {
@@ -45,16 +46,8 @@
 .study-results .study-results-stat {
   flex: 1;
   text-align: center;
-  padding: 0 30px;
 }
 
-.study-results .study-results-stat p {
-  color: #333;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 22px;
-  margin: 0;
-}
 
 .study-results .study-results-stat strong {
   font-weight: 700;
@@ -110,7 +103,7 @@
   flex-direction: column;
   align-items: center;
   gap: 24px;
-  margin: 32px auto 0;
+  margin: 55px auto 0;
 }
 
 .study-results .study-results-impact-image {
@@ -155,10 +148,30 @@
   margin-bottom: 0;
 }
 
-@media (width >= 900px) {
+.study-results-odd .study-results .study-results-impact-text h2 {
+  color: #333;
+}
+
+.study-results-odd .study-results .study-results-impact-text h2 strong {
+  color: #046183;
+}
+
+
+@media (width >= 700px) {
   .study-results {
     padding: 48px 0 32px;
     background-size: 100% 100%;
+  }
+
+  .study-results .study-results-stat {
+    padding: 0;
+  }
+  
+  .study-results .study-results-stat p {
+    margin: 0 auto;
+    width: 82%;
+    font-size: 16px;
+    line-height: 22px;
   }
 
   .study-results-title h2,
@@ -185,5 +198,30 @@
 
   .study-results .study-results-impact-text {
     text-align: left;
+  }
+}
+
+
+
+
+@media (width < 900px) {
+  .study-results {
+    background-image: linear-gradient(#e8f3f5 20%, #fff 100%);
+  }
+
+   .study-results .study-results-stat p {
+    line-height: 24px;
+    margin-top: 5px;
+  }
+  
+}
+
+@media (width < 450px) {
+  .study-results {
+    background-image: linear-gradient(#e8f3f5 20%, #fff 100%);
+  }
+  
+  .study-results .study-results-stat .study-results-stat-label {
+    font-size: 18px;
   }
 }
