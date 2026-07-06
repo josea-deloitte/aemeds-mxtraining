@@ -16,18 +16,18 @@
       <div>
         <div>
           <h1>Teaser Block — Test Page</h1>
-          <p>Two variants are shown below. Resize the browser to test responsive behaviour.</p>
+          <p>All three variants plus a legacy-name block are shown below. Resize the browser to test responsive behaviour.</p>
         </div>
       </div>
 
-      <!-- ─── Variant 1: Image Right Align First ─────────────────────── -->
+      <!-- ─── Variant 1: Image Right ─────────────────────────────────── -->
       <div>
-        <div class="teaser teaser-image-right-align-first">
+        <div class="teaser image-right">
           <div>
             <div>
               <picture>
-                <source type="image/webp" srcset="https://main--aemeds-mxtraining--josea-deloitte.aem.page/media_130e62cfecc9f09e5e9efba1e1ff0e42e3f33e4f.webp?width=750&format=webply&optimize=medium">
-                <img loading="lazy" alt="Woman holding her head in relief from migraine" src="https://main--aemeds-mxtraining--josea-deloitte.aem.page/media_130e62cfecc9f09e5e9efba1e1ff0e42e3f33e4f.png?width=750&format=png&optimize=medium">
+                <source type="image/webp" srcset="/media_165cf1628eb6572e2e51469a3421f202d0f9afad7.png?width=750&format=webply&optimize=medium">
+                <img loading="lazy" alt="Woman holding her head in relief from migraine" src="/media_165cf1628eb6572e2e51469a3421f202d0f9afad7.png?width=750&format=png&optimize=medium">
               </picture>
             </div>
             <div>
@@ -40,14 +40,39 @@
         </div>
       </div>
 
-      <!-- ─── Variant 2: Image Center Align ──────────────────────────── -->
+      <!-- ─── Variant 2: Image Left (content authored FIRST — tests image-cell detection) ── -->
       <div>
-        <div class="teaser teaser-image-center-align">
+        <div class="teaser image-left">
+          <div>
+            <div>
+              <p><strong>PEOPLE WITH MIGRAINE DESERVE BETTER</strong></p>
+              <h2>67% say control feels impossible.</h2>
+              <p>Because of insurance coverage rules, people with migraine often need to try certain types of treatments before others.</p>
+              <ul>
+                <li>Pushing through pain again and again</li>
+                <li>Unable to make or stick to plans</li>
+                <li>Struggling to keep up with daily responsibilities</li>
+              </ul>
+              <p><a href="#" class="button primary">See The Data</a></p>
+            </div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="/media_165cf1628eb6572e2e51469a3421f202d0f9afad7.png?width=750&format=webply&optimize=medium">
+                <img loading="lazy" alt="Patient discussing treatment options with doctor" src="/media_165cf1628eb6572e2e51469a3421f202d0f9afad7.png?width=750&format=png&optimize=medium">
+              </picture>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── Variant 3: Image Center ────────────────────────────────── -->
+      <div>
+        <div class="teaser image-center">
           <div>
             <div>
               <picture>
-                <source type="image/webp" srcset="https://main--aemeds-mxtraining--josea-deloitte.aem.page/media_130e62cfecc9f09e5e9efba1e1ff0e42e3f33e4f.webp?width=750&format=webply&optimize=medium">
-                <img loading="lazy" alt="VYEPTI treatment illustration" src="https://main--aemeds-mxtraining--josea-deloitte.aem.page/media_130e62cfecc9f09e5e9efba1e1ff0e42e3f33e4f.png?width=750&format=png&optimize=medium">
+                <source type="image/webp" srcset="/media_165cf1628eb6572e2e51469a3421f202d0f9afad7.png?width=750&format=webply&optimize=medium">
+                <img loading="lazy" alt="VYEPTI treatment illustration" src="/media_165cf1628eb6572e2e51469a3421f202d0f9afad7.png?width=750&format=png&optimize=medium">
               </picture>
             </div>
             <div>
@@ -55,6 +80,24 @@
               <h2>Say yep to more migraine-free days.</h2>
               <p>VYEPTI is a prescription IV infusion for preventive treatment, given once every 3 months by a healthcare provider.</p>
               <p><a href="#" class="button primary">See If You Qualify</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── Legacy variant name (published content back-compat) ────── -->
+      <div>
+        <div class="teaser teaser-image-right-align-first">
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="/media_165cf1628eb6572e2e51469a3421f202d0f9afad7.png?width=750&format=webply&optimize=medium">
+                <img loading="lazy" alt="Legacy variant test image" src="/media_165cf1628eb6572e2e51469a3421f202d0f9afad7.png?width=750&format=png&optimize=medium">
+              </picture>
+            </div>
+            <div>
+              <h3><strong>Legacy header name still works</strong></h3>
+              <p>This block was authored with the old "Teaser (Teaser Image Right Align First)" header and is auto-mapped to the Image Right layout.</p>
             </div>
           </div>
         </div>
