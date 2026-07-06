@@ -1,0 +1,140 @@
+.quote-single {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 1140px;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #046183;
+  color: #fff;
+  font-family: var(--body-font-family);
+}
+
+.quote-single .quote-single-text {
+  padding: 40px 32px;
+  text-align: center;
+}
+
+/* decorative quote mark */
+.quote-single .quote-single-text::before {
+  content: "\201C";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background-color: #e8635a;
+  color: #fff;
+  font-family: georgia, serif;
+  font-size: 52px;
+  line-height: 1;
+  padding-top: 22px;
+}
+
+.quote-single .quote-single-quote {
+  margin: 0 auto;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 33px;
+  width: 85%;
+}
+
+.quote-single .quote-single-author {
+  position: relative;
+  margin: 24px 0 4px;
+  padding-top: 20px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* coral accent line above the author */
+.quote-single .quote-single-author::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 4px;
+  background-color: #e8635a;
+}
+
+.quote-single .quote-single-disclaimer {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.29;
+}
+
+.quote-single .quote-single-image {
+  position: relative;
+}
+
+.quote-single .quote-single-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* no-image variant: text spans the full panel */
+.quote-single.quote-single-no-image .quote-single-text {
+  max-width: 760px;
+}
+
+@media (width >= 600px) {
+  .quote-single {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .quote-single .quote-single-text {
+    flex: 1 1 60%;
+    padding: 28px 48px;
+    align-self: center;
+    text-align: left;
+  }
+
+  .quote-single .quote-single-text::before {
+    margin: 0 0 16px;
+  }
+
+  .quote-single .quote-single-quote {
+    margin: 0;
+    font-size: 24px;
+    width: 85%;
+  }
+
+  .quote-single .quote-single-author::before {
+    left: 0;
+    transform: none;
+  }
+
+  .quote-single.quote-single-no-image .quote-single-text {
+    flex: 1 1 100%;
+  }
+
+  /* diagonal background is baked into the source image */
+  .quote-single .quote-single-image {
+    flex: 0 0 40%;
+    overflow: hidden;
+  }
+
+  /* picture must fill the column so height:100% on img resolves correctly */
+  .quote-single .quote-single-image picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* both dimensions must be explicit for object-fit: cover to crop */
+  .quote-single .quote-single-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+  }
+}
+
