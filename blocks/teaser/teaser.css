@@ -1,0 +1,170 @@
+/*
+ * Teaser block
+ *
+ * Variants:
+ *   .teaser-image-right-align-first — two-column split (content left / image right
+ *                                     on desktop; image stacked first on mobile)
+ *   .teaser-image-center-align      — stacked, centered (image above content)
+ *
+ * Design tokens consumed:
+ *   --accent-color:        #bf2c58  (rose — eyebrow label)
+ *   --link-color:          #046183  (teal — headings)
+ *   --text-color:          #333     (body copy)
+ *   --background-color:    white
+ *   --light-color:         #e1f0f6  (soft blue — available for section backgrounds)
+ */
+
+/* ── Shared base ─────────────────────────────────────────────────────── */
+
+.teaser {
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.teaser .teaser-image {
+  overflow: hidden;
+}
+
+.teaser .teaser-image picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.teaser .teaser-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Eyebrow label — first bold/italic-only paragraph.
+   Scoped to .teaser-content to beat the .teaser .teaser-content p rule (0-3-0 > 0-2-1). */
+.teaser .teaser-content .teaser-eyebrow {
+  margin: 0 0 10px;
+  color: var(--accent-color, #bf2c58);
+  font-size: var(--body-font-size-xs, 12px);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+/* Suppress the semantic weight — colour alone carries the label style */
+.teaser .teaser-content .teaser-eyebrow strong,
+.teaser .teaser-content .teaser-eyebrow em {
+  font-weight: inherit;
+  font-style: normal;
+}
+
+.teaser .teaser-content h1,
+.teaser .teaser-content h2,
+.teaser .teaser-content h3,
+.teaser .teaser-content h4 {
+  margin-top: 0;
+  color: var(--link-color, #046183);
+  line-height: 1.2;
+}
+
+.teaser .teaser-content p {
+  color: var(--text-color, #333);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   VARIANT: teaser-image-right-align-first
+   Mobile:  vertical stack — image first, content below
+   Desktop: two equal columns — content left, image right
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.teaser.teaser-image-right-align-first {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 16:9 crop on mobile to prevent a very tall image */
+.teaser.teaser-image-right-align-first .teaser-image {
+  aspect-ratio: 16 / 9;
+}
+
+.teaser.teaser-image-right-align-first .teaser-content {
+  padding: 32px 24px;
+}
+
+@media (width >= 900px) {
+  .teaser.teaser-image-right-align-first {
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 480px;
+  }
+
+  /* Image fills its column completely */
+  .teaser.teaser-image-right-align-first .teaser-image {
+    order: 2;
+    flex: 0 0 50%;
+    max-width: 50%;
+    aspect-ratio: auto;
+  }
+
+  /* Content vertically centred in its column */
+  .teaser.teaser-image-right-align-first .teaser-content {
+    order: 1;
+    flex: 0 0 50%;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 48px;
+  }
+}
+
+@media (width >= 1200px) {
+  .teaser.teaser-image-right-align-first .teaser-content {
+    padding: 64px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   VARIANT: teaser-image-center-align
+   All sizes: stacked, centered — image above, content below
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.teaser.teaser-image-center-align {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.teaser.teaser-image-center-align .teaser-image {
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 4 / 3;
+  border-radius: 6px;
+  margin-bottom: 32px;
+  overflow: hidden;
+}
+
+.teaser.teaser-image-center-align .teaser-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 640px;
+}
+
+/* Centre the rose pill CTA */
+.teaser.teaser-image-center-align .teaser-content .button-container {
+  display: flex;
+  justify-content: center;
+}
+
+@media (width >= 900px) {
+  .teaser.teaser-image-center-align {
+    padding: 64px 48px;
+  }
+
+  .teaser.teaser-image-center-align .teaser-image {
+    max-width: 720px;
+  }
+}
