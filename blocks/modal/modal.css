@@ -51,20 +51,29 @@ body.modal-is-open {
 .modal-overlay .modal-header {
   display: flex;
   justify-content: flex-end;
-  padding: 8px 8px 0 0;
+  padding: 12px 12px 0 0;
 }
 
 .modal-overlay .modal-close {
+  display: grid;
+  place-items: center;
   width: 38px;
   height: 38px;
+  padding: 0;
   border: 0;
   border-radius: 999px;
   background: transparent;
   color: var(--modal-close);
-  font-size: 40px;
+  font-size: 34px;
   line-height: 1;
   font-weight: 400;
   cursor: pointer;
+}
+
+.modal-overlay .modal-close span {
+  display: block;
+  line-height: 1;
+  transform: translateY(-1px);
 }
 
 .modal-overlay .modal-close:hover,
@@ -145,6 +154,9 @@ body.modal-is-open {
 
 .modal-overlay .modal-row-actions {
   margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
 }
 
 .modal-overlay .modal-row-actions .modal-cell {
@@ -195,11 +207,6 @@ body.modal-is-open {
     padding-right: 56px;
     padding-left: 56px;
     padding-bottom: 40px;
-  }
-
-  .modal-overlay .modal-row-actions {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
   }
 }
 
