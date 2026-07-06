@@ -54,7 +54,7 @@ async function loadNestedBlocks(container) {
     candidates.map(async (candidate) => {
       if (!candidate.classList.contains('block')) decorateBlock(candidate);
       await loadBlock(candidate);
-    })
+    }),
   );
 }
 
@@ -69,10 +69,9 @@ function buildBodyContent(block, body) {
     const rowWrapper = document.createElement('div');
     rowWrapper.className = hasMultipleCells ? 'modal-row modal-row-multi' : 'modal-row';
 
-    const isActionsRow =
-      hasMultipleCells &&
-      cells.every((cell) => cell.querySelector('a[href]')) &&
-      cells.every((cell) => !cell.querySelector('.block, table, ul, ol'));
+    const isActionsRow = hasMultipleCells
+      && cells.every((cell) => cell.querySelector('a[href]'))
+      && cells.every((cell) => !cell.querySelector('.block, table, ul, ol'));
     if (isActionsRow) rowWrapper.classList.add('modal-row-actions');
     if (rowIndex === 0) rowWrapper.classList.add('modal-row-intro');
 
@@ -90,9 +89,9 @@ function buildBodyContent(block, body) {
         if (link) {
           link.classList.add('button');
           if (
-            !link.classList.contains('primary') &&
-            !link.classList.contains('secondary') &&
-            !link.classList.contains('accent')
+            !link.classList.contains('primary')
+            && !link.classList.contains('secondary')
+            && !link.classList.contains('accent')
           ) {
             link.classList.add(index === 0 ? 'secondary' : 'primary');
           }
@@ -188,7 +187,9 @@ function shouldCloseOnOverlayClick(block) {
  */
 export default async function decorate(block) {
   const modalId = getModalId(block);
-  const { overlay, dialog, closeButton, body } = createModalShell(modalId, block);
+  const {
+    overlay, dialog, closeButton, body,
+  } = createModalShell(modalId, block);
 
   document.body.append(overlay);
   block.textContent = '';
