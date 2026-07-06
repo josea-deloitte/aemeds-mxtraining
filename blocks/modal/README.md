@@ -34,16 +34,32 @@ Se abre desde cualquier trigger externo con:
 ### Auto Open (interstitial)
 
 ```text
-| modal auto-open | |
+| modal (auto-open) | |
 | ...contenido... | |
 ```
 
 Se abre automáticamente al cargar la página.
 
+Si tu flujo de EDS no propaga variantes como clases del bloque, puedes usar configuración por filas:
+
+```text
+| modal | |
+| behavior | auto-open |
+| ...contenido... | |
+```
+
 ### No cerrar al hacer click fuera
 
 ```text
-| modal no-overlay-close | |
+| modal (no-overlay-close) | |
+| ...contenido... | |
+```
+
+Alternativa por configuración:
+
+```text
+| modal | |
+| behavior | no-overlay-close |
 | ...contenido... | |
 ```
 
@@ -53,9 +69,32 @@ Por defecto el bloque usa stack para evitar saltos visuales y simplificar author
 Si una experiencia necesita dos columnas en desktop, usar la variante explícita:
 
 ```text
-| modal split-desktop | |
+| modal (split-desktop) | |
 | ...contenido... | |
 ```
+
+Alternativa por configuración:
+
+```text
+| modal | |
+| behavior | split-desktop |
+| ...contenido... | |
+```
+
+### ID explícito (recomendado para triggers manuales)
+
+Puedes fijar un id estable sin depender de atributos manuales en HTML:
+
+```text
+| modal | |
+| id | hcp-modal |
+| ...contenido... | |
+```
+
+Después abre con un link o trigger externo:
+
+- Link: `#hcp-modal`
+- Atributo: `data-modal-target="hcp-modal"`
 
 Esta variante mantiene stack en mobile/tablet y habilita 2 columnas en `>= 900px`.
 

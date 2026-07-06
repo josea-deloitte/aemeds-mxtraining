@@ -28,6 +28,81 @@ function getFocusableElements(container) {
   return [...container.querySelectorAll(FOCUSABLE_SELECTOR)].filter(isVisibleFocusable);
 }
 
+function normalizeOptionValue(value) {
+  return value.trim().toLowerCase();
+}
+
+function parseOptionTokens(value) {
+  const normalizedValue = normalizeOptionValue(value);
+  const commaTokens = normalizedValue
+    .split(/[|,]/)
+    .map((token) => token.trim())
+    .filter(Boolean);
+
+  if (commaTokens.length > 1) return commaTokens;
+  return normalizedValue.split(/\s+/).filter(Boolean);
+}
+
+function sanitizeId(value) {
+  const sanitized = normalizeOptionValue(value)
+    .replace(/[^a-z0-9-]/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+  return sanitized || null;
+}
+
+function applyOptionToken(token, options) {
+  if (token === 'auto-open') options.autoOpen = true;
+  if (token === 'no-overlay-close') options.noOverlayClose = true;
+  if (token === 'split-desktop') options.splitDesktop = true;
+}
+
+function isTruthyValue(value) {
+  return ['1', 'true', 'yes', 'on'].includes(normalizeOptionValue(value));
+}
+
+function parseModalOptions(block) {
+  const options = {
+    autoOpen: block.classList.contains('auto-open'),
+    noOverlayClose: block.classList.contains('no-overlay-close'),
+    splitDesktop: block.classList.contains('split-desktop'),
+    modalId: null,
+    configRows: new Set(),
+  };
+
+  const rows = [...block.children].filter((row) => row.tagName === 'DIV');
+  rows.forEach((row) => {
+    const cells = [...row.children].filter((cell) => cell.tagName === 'DIV');
+    if (cells.length < 2) return;
+
+    const key = normalizeOptionValue(cells[0].textContent || '');
+    const value = (cells[1].textContent || '').trim();
+    if (!key || !value) return;
+
+    if (key === 'id') {
+      const parsedId = sanitizeId(value);
+      if (parsedId) {
+        options.modalId = parsedId;
+        options.configRows.add(row);
+      }
+      return;
+    }
+
+    if (['behavior', 'behaviour', 'variant', 'variants', 'options'].includes(key)) {
+      parseOptionTokens(value).forEach((token) => applyOptionToken(token, options));
+      options.configRows.add(row);
+      return;
+    }
+
+    if (['auto-open', 'no-overlay-close', 'split-desktop'].includes(key) && isTruthyValue(value)) {
+      applyOptionToken(key, options);
+      options.configRows.add(row);
+    }
+  });
+
+  return options;
+}
+
 function isLikelyBlockElement(candidate) {
   if (candidate.tagName !== 'DIV') return false;
   if (candidate.classList.contains('block')) return true;
@@ -58,8 +133,10 @@ async function loadNestedBlocks(container) {
   );
 }
 
-function buildBodyContent(block, body) {
-  const rows = [...block.children].filter((row) => row.tagName === 'DIV');
+function buildBodyContent(block, body, configRows = new Set()) {
+  const rows = [...block.children]
+    .filter((row) => row.tagName === 'DIV')
+    .filter((row) => !configRows.has(row));
 
   rows.forEach((row, rowIndex) => {
     const cells = [...row.children].filter((cell) => cell.tagName === 'DIV');
@@ -131,10 +208,10 @@ function ensureDialogLabel(dialog, modalId) {
   dialog.setAttribute('aria-label', 'Dialog');
 }
 
-function createModalShell(modalId, block) {
+function createModalShell(modalId, block, options) {
   const overlay = document.createElement('div');
   overlay.className = 'modal-overlay';
-  if (block.classList.contains('split-desktop')) {
+  if (options.splitDesktop) {
     overlay.classList.add('modal-overlay-split-desktop');
   }
   overlay.setAttribute('aria-hidden', 'true');
@@ -158,7 +235,7 @@ function createModalShell(modalId, block) {
   const body = document.createElement('div');
   body.className = 'modal-body';
 
-  buildBodyContent(block, body);
+  buildBodyContent(block, body, options.configRows);
 
   header.append(closeButton);
   dialog.append(header, body);
@@ -173,12 +250,12 @@ function createModalShell(modalId, block) {
   };
 }
 
-function shouldAutoOpen(block) {
-  return block.classList.contains('auto-open');
+function shouldAutoOpen(options) {
+  return options.autoOpen;
 }
 
-function shouldCloseOnOverlayClick(block) {
-  return !block.classList.contains('no-overlay-close');
+function shouldCloseOnOverlayClick(options) {
+  return !options.noOverlayClose;
 }
 
 /**
@@ -186,10 +263,13 @@ function shouldCloseOnOverlayClick(block) {
  * @param {Element} block The block element
  */
 export default async function decorate(block) {
+  const options = parseModalOptions(block);
+  if (options.modalId && !block.id) block.id = options.modalId;
+
   const modalId = getModalId(block);
   const {
     overlay, dialog, closeButton, body,
-  } = createModalShell(modalId, block);
+  } = createModalShell(modalId, block, options);
 
   document.body.append(overlay);
   block.textContent = '';
@@ -291,7 +371,7 @@ export default async function decorate(block) {
       return;
     }
 
-    if (event.target === overlay && shouldCloseOnOverlayClick(block)) {
+    if (event.target === overlay && shouldCloseOnOverlayClick(options)) {
       closeModal();
     }
   });
@@ -303,7 +383,7 @@ export default async function decorate(block) {
     return;
   }
 
-  if (shouldAutoOpen(block) && !document.querySelector('.modal-overlay.is-open')) {
+  if (shouldAutoOpen(options) && !document.querySelector('.modal-overlay.is-open')) {
     openModal();
   }
 }
