@@ -219,10 +219,7 @@ function buildInlinePanel(sections) {
   const isiSection = document.createElement('div');
   isiSection.className = 'isi-section';
   if (isi) {
-    isiSection.append(
-      isi.heading.cloneNode(true),
-      ...cloneNodes(isi.summary),
-    );
+    isiSection.append(isi.heading.cloneNode(true), ...cloneNodes(isi.summary));
   }
 
   // ISI detail body (always visible in the inline panel)
@@ -265,6 +262,16 @@ function syncTrayOffset(tray) {
   update();
 }
 
+/**
+ * Keep only one sticky ISI tray in the document.
+ * Re-decoration can happen in authoring or preview flows; this prevents
+ * duplicated `.isi-tray` nodes.
+ */
+function cleanupExistingTray() {
+  document.querySelectorAll('.isi-tray').forEach((existingTray) => existingTray.remove());
+  document.documentElement.style.removeProperty('--isi-tray-offset');
+}
+
 /* ─── Block entry point ──────────────────────────────────────────────────── */
 
 /**
@@ -287,6 +294,7 @@ export default async function decorate(block) {
   block.replaceChildren(panel);
 
   // 2. Sticky tray (outside document flow — no CLS)
+  cleanupExistingTray();
   const { tray } = buildTray(sections);
   document.body.append(tray);
 
