@@ -56,6 +56,10 @@ A 3-section nav (no utility strip) is also supported — sections then map to br
 | logo width | 105px / 112px (≥900) / 130px (≥1200) | `.vyepti-logo img` |
 | desktop CTA links | 20px/24px, weight 800, uppercase, teal | `.center-nav li a` |
 | main nav links | 16px/22px, weight 600 (18px ≥1200) | `.nav-full-width li a` |
+| mobile strip links | 14px, weight 600, white, centered with `\|` divider | `.header-strip-mobile .navbar-nav` |
+| mobile strip dropdown | full-width panel, `border-bottom: 5px #c02c57`, items 16px/500 `#484848` centered | `.header-strip-mobile .dropdown-menu` |
+| mobile tagline | 14px/18px, weight 700, 1px×35px `#979797` divider after logo | `.vyepti-logo + p` |
+| hamburger | 29×3px bars 10px apart, "Menu" 14px/700 stacked below | `.navbar-toggler-icon`, `.menu-text` |
 
 ---
 
@@ -112,6 +116,8 @@ One bulleted list of icon + link pairs (e.g. `:mail:` **Sign Up**, `:locator:` *
 - [ ] Logo — 105px wide mobile, 112px ≥900px, 130px ≥1200px
 - [ ] Desktop CTA links — `20px/24px`, weight 800, uppercase, teal `#046183`, 38px circle icons
 - [ ] Main nav — 16px/600 (18px ≥1200px), red `#c02c57` active underline, dropdowns with red bottom border on hover
-- [ ] Mobile — hamburger with "Menu" label; open menu fills viewport, page scroll locked, CTA links as rose `#c02c57` pills
+- [ ] Mobile — teal strip shows the two PI/PPI dropdowns centered with a 1px white `|` divider; tapping one opens a full-width white panel with a 5px rose `#c02c57` bottom border and centered 16px items
+- [ ] Mobile — bold 14px/18px tagline sits after the logo behind a 1px×35px gray `#979797` divider, wrapping to ~3 lines (max-width 167px)
+- [ ] Mobile — hamburger is three 29×3px teal bars 10px apart with "Menu" (14px/700) stacked below; open menu fills viewport, page scroll locked, CTA links as rose `#c02c57` pills
 - [ ] `aria-expanded` flips on `<nav>` (menu), `.nav-drop` items (accordion), and utility dropdown buttons
 - [ ] No layout jump when the header loads — `<header>` height reservation matches the rendered wrapper
