@@ -10,7 +10,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  border-radius: 8px 8px 0 0;
+  border-radius: 8px;
   background-color: #fff;
   box-shadow: 0 2px 8px 0 rgb(46 50 51 / 20%);
   padding: 40px 32px;
@@ -23,7 +23,7 @@
   content: "";
   position: absolute;
   inset: auto 0 0;
-  height: 8px;
+  height: 10px;
   background-image: linear-gradient(to right, #046183 0%, #7ec9c9 25%, #f2705a 60%, #c02c57 100%);
 }
 
@@ -47,7 +47,7 @@
 }
 
 .cta-gradient-2-cols .cta-card p {
-  margin: 16px 0 0;
+  margin: 16px 50px 0;
   color: #333;
   font-size: 16px;
   font-weight: 400;
@@ -60,6 +60,9 @@
 }
 
 .cta-gradient-2-cols .cta-card a.button:any-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
   border: 0;
   border-radius: 30px;
   background-color: #046183;
@@ -67,6 +70,16 @@
   color: #fff;
   font-size: 18px;
   font-weight: 700;
+}
+
+.cta-gradient-2-cols .cta-card a.button:any-link::after {
+  content: "";
+  width: 22px;
+  height: 10px;
+  background-image: url("/icons/cta-button-arrow-20-global-white.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 .cta-gradient-2-cols .cta-card a.button:hover,
