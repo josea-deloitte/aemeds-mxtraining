@@ -199,35 +199,30 @@ async function loadEager(doc) {
 }
 
 /**
- * Loads the global Important Safety Information (ISI) block on every page.
- * The ISI content lives in a shared fragment so it is authored in one place;
- * the isi block renders both the inline panel and the fixed condensed band.
+ * Injects the global Important Safety Information (ISI) block on every page.
+ *
+ * The isi block fetches its own content from the shared `/fragments/isi`
+ * fragment (see blocks/isi/isi.js); this only appends an empty block and
+ * runs it through the standard decorateBlock()/loadSection() pipeline. The
+ * appended section is never pre-hidden, so no section can be left stuck in
+ * `data-section-status="initialized"` if anything downstream fails.
+ *
  * @param {Element} main The main container element
  */
 async function loadISI(main) {
+  // Skip when an author already placed an isi block, or when viewing the
+  // ISI source fragment itself (its content would render twice).
   if (!main || main.querySelector('.isi')) return;
+  if (window.location.pathname === '/fragments/isi') return;
   try {
-    // eslint-disable-next-line import/no-cycle
-    const { loadFragment } = await import('../blocks/fragment/fragment.js');
-    const fragment = await loadFragment('/fragments/isi');
-    if (!fragment) return;
-
-    const fragmentNodes = [...fragment.childNodes];
-    if (!fragmentNodes.length) return;
-
-    const isiBlock = buildBlock('isi', { elems: fragmentNodes });
-    const section = document.createElement('div');
+    const block = buildBlock('isi', '');
     const wrapper = document.createElement('div');
-    wrapper.append(isiBlock);
+    wrapper.append(block);
+    const section = document.createElement('div');
+    section.classList.add('section');
     section.append(wrapper);
     main.append(section);
-
-    // Only initialize/load the newly appended ISI section; re-running
-    // decorateSections(main) would reset existing sections back to hidden.
-    section.classList.add('section');
-    section.dataset.sectionStatus = 'initialized';
-    section.style.display = 'none';
-    decorateBlock(isiBlock);
+    decorateBlock(block);
     await loadSection(section);
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -274,13 +269,16 @@ async function loadLazy(doc) {
   const main = doc.querySelector('main');
   await loadSections(main);
 
-  await loadISI(main);
-
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
 
   loadFooter(doc.querySelector('footer'));
+
+  // Fire-and-forget: the isi block time-boxes its own fragment fetch and
+  // always resolves, so it must never delay the footer or lazy assets.
+  // Deep links to #SafetyPanelInfo are handled inside the block itself.
+  loadISI(main);
 
   loadBackToTop();
 
