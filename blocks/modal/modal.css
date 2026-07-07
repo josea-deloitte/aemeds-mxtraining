@@ -154,6 +154,9 @@ body.modal-is-open {
 
 .modal-overlay .modal-row-actions {
   margin-top: 20px;
+}
+
+.modal-overlay .modal-row.modal-row-actions {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
@@ -196,6 +199,12 @@ body.modal-is-open {
 
 .modal-overlay .modal-cell .block {
   margin-top: 0;
+}
+
+@media (width < 480px) {
+  .modal-overlay .modal-row.modal-row-actions {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 @media (width >= 600px) {
