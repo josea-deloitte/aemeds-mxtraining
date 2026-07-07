@@ -3,6 +3,7 @@ import {
   loadFooter,
   decorateIcons,
   decorateSections,
+  decorateBlock,
   decorateBlocks,
   decorateTemplateAndTheme,
   waitForFirstImage,
@@ -18,7 +19,8 @@ import {
 async function loadFonts() {
   await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
   try {
-    if (!window.location.hostname.includes('localhost')) sessionStorage.setItem('fonts-loaded', 'true');
+    if (!window.location.hostname.includes('localhost'))
+      sessionStorage.setItem('fonts-loaded', 'true');
   } catch (e) {
     // do nothing
   }
@@ -36,10 +38,10 @@ function buildWidgetAutoBlocks(main) {
     const widgetBlock = buildBlock('widget', { elems: [newLink] });
     const p = link.closest('p');
     if (
-      p
-      && p.querySelectorAll('a').length === 1
-      && p.querySelector('a') === link
-      && p.textContent.trim() === link.textContent.trim()
+      p &&
+      p.querySelectorAll('a').length === 1 &&
+      p.querySelector('a') === link &&
+      p.textContent.trim() === link.textContent.trim()
     ) {
       p.replaceWith(widgetBlock);
     } else {
@@ -55,7 +57,9 @@ function buildWidgetAutoBlocks(main) {
 function buildAutoBlocks(main) {
   try {
     // auto load `*/fragments/*` references
-    const fragments = [...main.querySelectorAll('a[href*="/fragments/"]')].filter((f) => !f.closest('.fragment'));
+    const fragments = [...main.querySelectorAll('a[href*="/fragments/"]')].filter(
+      (f) => !f.closest('.fragment')
+    );
     if (fragments.length > 0) {
       // eslint-disable-next-line import/no-cycle
       import('../blocks/fragment/fragment.js').then(({ loadFragment }) => {
@@ -63,7 +67,9 @@ function buildAutoBlocks(main) {
           try {
             const { pathname } = new URL(fragment.href);
             const frag = await loadFragment(pathname);
-            fragment.parentElement.replaceWith(...frag.children);
+            if (frag && fragment.parentElement) {
+              fragment.parentElement.replaceWith(...frag.children);
+            }
           } catch (error) {
             // eslint-disable-next-line no-console
             console.error('Fragment loading failed', error);
@@ -94,7 +100,9 @@ function decorateButtons(main) {
     // skip URL display links
     try {
       if (new URL(a.href).href === new URL(text, window.location).href) return;
-    } catch { /* continue */ }
+    } catch {
+      /* continue */
+    }
 
     // require authored formatting for buttonization
     const strong = a.closest('strong');
@@ -103,7 +111,8 @@ function decorateButtons(main) {
 
     p.className = 'button-wrapper';
     a.className = 'button';
-    if (strong && em) { // high-impact call-to-action
+    if (strong && em) {
+      // high-impact call-to-action
       a.classList.add('accent');
       const outer = strong.contains(em) ? strong : em;
       outer.replaceWith(a);
@@ -129,7 +138,9 @@ function decorateExternalLinks(main) {
         a.target = '_blank';
         a.rel = 'noopener noreferrer';
       }
-    } catch { /* leave malformed links untouched */ }
+    } catch {
+      /* leave malformed links untouched */
+    }
   });
 }
 
@@ -196,16 +207,33 @@ async function loadEager(doc) {
  */
 async function loadISI(main) {
   if (!main || main.querySelector('.isi')) return;
-  // eslint-disable-next-line import/no-cycle
-  const { loadFragment } = await import('../blocks/fragment/fragment.js');
-  const fragment = await loadFragment('/fragments/isi');
-  if (!fragment) return;
-  const isiBlock = buildBlock('isi', { elems: [...fragment.childNodes] });
-  const section = document.createElement('div');
-  section.append(isiBlock);
-  main.append(section);
-  decorateSections(main);
-  await loadSection(section);
+  try {
+    // eslint-disable-next-line import/no-cycle
+    const { loadFragment } = await import('../blocks/fragment/fragment.js');
+    const fragment = await loadFragment('/fragments/isi');
+    if (!fragment) return;
+
+    const fragmentNodes = [...fragment.childNodes];
+    if (!fragmentNodes.length) return;
+
+    const isiBlock = buildBlock('isi', { elems: fragmentNodes });
+    const section = document.createElement('div');
+    const wrapper = document.createElement('div');
+    wrapper.append(isiBlock);
+    section.append(wrapper);
+    main.append(section);
+
+    // Only initialize/load the newly appended ISI section; re-running
+    // decorateSections(main) would reset existing sections back to hidden.
+    section.classList.add('section');
+    section.dataset.sectionStatus = 'initialized';
+    section.style.display = 'none';
+    decorateBlock(isiBlock);
+    await loadSection(section);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Global ISI loading failed', error);
+  }
 }
 
 /**
