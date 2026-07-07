@@ -19,8 +19,7 @@ import {
 async function loadFonts() {
   await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
   try {
-    if (!window.location.hostname.includes('localhost'))
-      sessionStorage.setItem('fonts-loaded', 'true');
+    if (!window.location.hostname.includes('localhost')) sessionStorage.setItem('fonts-loaded', 'true');
   } catch (e) {
     // do nothing
   }
@@ -38,10 +37,10 @@ function buildWidgetAutoBlocks(main) {
     const widgetBlock = buildBlock('widget', { elems: [newLink] });
     const p = link.closest('p');
     if (
-      p &&
-      p.querySelectorAll('a').length === 1 &&
-      p.querySelector('a') === link &&
-      p.textContent.trim() === link.textContent.trim()
+      p
+      && p.querySelectorAll('a').length === 1
+      && p.querySelector('a') === link
+      && p.textContent.trim() === link.textContent.trim()
     ) {
       p.replaceWith(widgetBlock);
     } else {
@@ -58,7 +57,7 @@ function buildAutoBlocks(main) {
   try {
     // auto load `*/fragments/*` references
     const fragments = [...main.querySelectorAll('a[href*="/fragments/"]')].filter(
-      (f) => !f.closest('.fragment')
+      (f) => !f.closest('.fragment'),
     );
     if (fragments.length > 0) {
       // eslint-disable-next-line import/no-cycle
