@@ -38,6 +38,10 @@ body {
 
 /* ── Shared typography ─────────────────────────────────────────────────── */
 
+.isi-container{
+  border-top: 1px solid var(--isi-color-border);
+}
+
 .isi-panel,
 .isi-tray {
   color: var(--isi-color-text);
@@ -255,7 +259,6 @@ body {
   position: relative;
   box-sizing: border-box;
   padding: 48px 16px 32px;
-  border-top: 1px solid var(--isi-color-border);
   background: var(--isi-color-bg);
   scroll-margin-top: 24px; /* breathing room for #SafetyPanelInfo deep links */
 }
