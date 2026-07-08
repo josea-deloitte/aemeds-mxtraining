@@ -1,3 +1,30 @@
+/*
+ * Hero block — default single-panel hero + `split` variant replicating the
+ * vyepti.com homepage banner (.teaser.homeBanner).
+ *
+ * Split-variant values extracted from the production vyepti.com clientlib:
+ *   overlay        — .cmp-teaser__content { position:absolute; inset:0;
+ *                    padding:30px } (panel 2: 20px)
+ *   display text   — .split-large-text 38px/36px → 48px/40px (≥768)
+ *                    → 64px/70px (≥1440), font-family "nunito", 700
+ *   panel 1 copy   — #fff 18px → 22px; panel 2 copy — #046183 20px → 28px
+ *   red accent     — .split-color-chronic-red { color:#c02c57 }
+ *   sub-text       — 16px/19px → 18px/22px, 80% width
+ *   CTA            — #c02c57 pill, radius 100px, padding 19px 23px 19px 32px,
+ *                    18px/22px 700 #fff, transition all .2s ease-in-out
+ *   disclaimer     — 12px → 16px italic #fff, text-shadow 0 2px 4px #000,
+ *                    pinned bottom right
+ */
+
+:root {
+  --hero-accent: #c02c57;
+  --hero-accent-hover: var(--accent-hover-color, #9a2346);
+  --hero-teal: var(--link-color, #046183);
+  --hero-display-font: nunito, var(--heading-font-family, sans-serif);
+  --hero-overlay-pad: 30px;
+  --hero-transition: 0.2s ease-in-out;
+}
+
 .hero-container {
   padding: 0;
   margin: 40px 0 0;
@@ -216,6 +243,222 @@
 
 .hero.focus-right .hero-media img {
   object-position: 78% center;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SPLIT VARIANT  (.teaser.homeBanner equivalent) — mobile-first
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* the split hero manages its own colors/height — neutralize base hero chrome */
+.hero.split {
+  min-height: 0;
+  color: inherit;
+  background: none;
+}
+
+.hero.split .hero-panels {
+  display: grid;
+  grid-template-columns: 1fr; /* mobile: panels stack */
+}
+
+/* the image defines the panel height; content overlays it */
+.hero.split .hero-panel {
+  position: relative;
+  line-height: 0;
+}
+
+.hero.split .hero-panel-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.hero.split .hero-panel-content {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: var(--hero-overlay-pad);
+  font-family: var(--hero-display-font);
+  line-height: normal;
+  text-align: center;
+}
+
+.hero.split .hero-panel-content p {
+  margin: 0 0 8px;
+  font-weight: 700;
+}
+
+/* ── Panel 1 — white copy over the dark photo ─────────────────────────── */
+
+.hero.split .hero-panel-1 .hero-panel-content {
+  padding-top: 24px;
+  color: #fff;
+}
+
+.hero.split .hero-panel-1 .hero-panel-content p {
+  font-size: 18px;
+  line-height: 26px;
+}
+
+/* ── Panel 2 — teal copy, red accents, CTA ────────────────────────────── */
+
+.hero.split .hero-panel-2 .hero-panel-content {
+  padding: 20px 20px 10px;
+  color: var(--hero-teal);
+}
+
+.hero.split .hero-panel-2 .hero-panel-content p {
+  margin-bottom: 4px;
+  font-size: 20px;
+  line-height: 26px;
+}
+
+/* ── Display text (.split-large-text) ─────────────────────────────────── */
+
+.hero.split .hero-display {
+  margin: 0 0 16px;
+  color: inherit;
+  font-family: inherit;
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 36px;
+}
+
+/* bold words inside the display line → brand red (.split-color-chronic-red) */
+.hero.split .hero-display strong {
+  color: var(--hero-accent);
+  font-weight: inherit;
+}
+
+/* ── Sub-text (.split-sub-text) ───────────────────────────────────────── */
+
+.hero.split .hero-panel-content p.hero-subtext {
+  width: 80%;
+  margin: 0 auto;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+/* ── CTA — rose pill (.cmp-teaser__action-link) ───────────────────────── */
+
+.hero.split .hero-cta-container {
+  margin: 24px 0 0;
+}
+
+.hero.split a.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  border: 1px solid var(--hero-accent);
+  border-radius: 100px;
+  padding: 19px 23px 19px 32px;
+  background: var(--hero-accent);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22px;
+  text-decoration: none;
+  transition: all var(--hero-transition);
+}
+
+.hero.split a.hero-cta::after {
+  content: "";
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  border: solid currentcolor;
+  border-width: 2.5px 2.5px 0 0;
+  transform: rotate(45deg);
+}
+
+.hero.split a.hero-cta:hover,
+.hero.split a.hero-cta:focus-visible {
+  border-color: var(--hero-accent-hover);
+  background: var(--hero-accent-hover);
+  transform: none;
+}
+
+/* ── "Actor portrayal" disclaimer ─────────────────────────────────────── */
+
+.hero.split .hero-panel-content p.hero-disclaimer {
+  position: absolute;
+  right: 21px;
+  bottom: 6px;
+  margin: 0;
+  color: #fff;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 18px;
+  text-shadow: 0 2px 4px #000;
+}
+
+/* ── Split variant: desktop (≥ 900px) ─────────────────────────────────── */
+
+@media (width >= 900px) {
+  .hero.split .hero-panels {
+    grid-template-columns: 1fr 1fr; /* side-by-side panels */
+  }
+
+  .hero.split .hero-panel-1 .hero-panel-content p {
+    font-size: 22px;
+  }
+
+  .hero.split .hero-panel-2 .hero-panel-content {
+    padding-top: 40px;
+  }
+
+  .hero.split .hero-panel-2 .hero-panel-content p {
+    margin-bottom: 8px;
+    font-size: 28px;
+    line-height: 34px;
+  }
+
+  .hero.split .hero-display {
+    font-size: 48px;
+    line-height: 40px;
+  }
+
+  /* re-stated after the panel-2 paragraph rule, which ties on specificity */
+  .hero.split .hero-panel-content p.hero-subtext {
+    width: 60%;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  .hero.split .hero-panel-content p.hero-disclaimer {
+    right: 50px;
+    bottom: 30px;
+    font-size: 16px;
+  }
+}
+
+/* ── Split variant: large desktop (≥ 1440px) ──────────────────────────── */
+
+@media (width >= 1440px) {
+  .hero.split .hero-display {
+    margin-bottom: 15px;
+    font-size: 64px;
+    line-height: 70px;
+  }
+
+  .hero.split .hero-panel-content p.hero-subtext {
+    width: 80%;
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero.split a.hero-cta {
+    transition: none;
+  }
 }
 
 @media (width <= 767px) {
