@@ -39,10 +39,22 @@
 function decoratePanelContent(content) {
   content.classList.add('hero-panel-content');
 
+  // classify the disclaimer first so it is never mistaken for sub-text
+  const paragraphs = [...content.children].filter((el) => el.tagName === 'P');
+  const last = paragraphs[paragraphs.length - 1];
+  if (last && !last.querySelector('a') && last.querySelector('em, i')) {
+    last.classList.add('hero-disclaimer');
+  }
+
   content.querySelectorAll('h1, h2, h3').forEach((heading) => {
     heading.classList.add('hero-display');
     const next = heading.nextElementSibling;
-    if (next && next.tagName === 'P' && !next.querySelector('a')) {
+    if (
+      next
+      && next.tagName === 'P'
+      && !next.querySelector('a')
+      && !next.classList.contains('hero-disclaimer')
+    ) {
       next.classList.add('hero-subtext');
     }
   });
@@ -58,12 +70,6 @@ function decoratePanelContent(content) {
       ctaWrapper.classList.add('hero-cta-container');
       ctaWrapper.classList.remove('hero-subtext');
     }
-  }
-
-  const paragraphs = [...content.children].filter((el) => el.tagName === 'P');
-  const last = paragraphs[paragraphs.length - 1];
-  if (last && !last.querySelector('a') && last.querySelector('em, i')) {
-    last.classList.add('hero-disclaimer');
   }
 }
 
