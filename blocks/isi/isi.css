@@ -1,24 +1,3 @@
-/*
- * ISI (Important Safety Information) block
- *
- * Replicates the two-section Vyepti.com AEM pattern:
- *   .isi-tray   — fixed bottom sticky tray (mirrors #isiFixedBottom)
- *   .isi-panel  — inline panel in document flow (mirrors #SafetyPanelInfo)
- *
- * Design tokens below were extracted from the production vyepti.com
- * clientlib (clientlib-base.min.css):
- *   #isiFixedBottom  — bg #fff, border-top 1px solid #d1d1d1, text #484848,
- *                      h5 #41748d 18px/22px 700, transition .3s ease-in-out
- *   #SafetyPanelInfo — h5 #046183 18px/22px 700, p 16px/24px,
- *                      border-top 1px solid #d1d1d1
- *   controls         — icon #41748d, hover #7ebcc6
- *
- * All selectors are scoped to .isi / .isi-tray — no global style leaks.
- * Responsive: mobile-first; 900 px breakpoint for the desktop layout.
- */
-
-/* ── Design tokens ─────────────────────────────────────────────────────── */
-
 :root {
   /* brand colors (source: vyepti.com clientlib) */
   --isi-color-heading: #41748d; /* tray headings */
@@ -308,7 +287,8 @@ body {
     grid-template-columns: 1fr 1fr auto;
     grid-template-areas: 'isi au toggle';
     gap: 0 24px;
-    padding: 14px max(32px, calc((100% - 1200px) / 2)) 10px;
+    max-width: 1140px;
+    margin: 0 auto;
   }
 
   /* Show Approved Use column on desktop */
