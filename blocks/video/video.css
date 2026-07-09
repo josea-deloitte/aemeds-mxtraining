@@ -33,6 +33,12 @@
 }
 
 /* ── Player frame — fluid 16:9 ─────────────────────────────────────────── */
+.section.video-container{
+  background-color: #eff6f9;
+  padding-top: 54px;
+  padding-bottom: 58px;
+  margin: auto;
+}
 
 .video .video-frame {
   position: relative;
@@ -108,6 +114,8 @@
   border-radius: var(--video-radius);
   background: var(--background-color, #fff);
   color: var(--video-text);
+  overflow: auto;
+  max-height: 228px;
 }
 
 .video .video-transcript-toggle {
