@@ -1,0 +1,146 @@
+/* full-bleed tinted background */
+main > .section > .columns-hero-3-legend-wrapper {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background-color: #eff6f9;
+}
+
+/* mobile/tablet: narrow centered content, centered text */
+.columns-hero-3-legend {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.columns-hero-3-legend h2 {
+  color: #046183;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.columns-hero-3-legend p {
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.columns-hero-3-legend h6 {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+/* disclaimer lifted to row level: on mobile it is the last stacked item */
+.columns-hero-3-legend .columns-hero-3-legend-disclaimer {
+  margin-top: 24px;
+}
+
+.columns-hero-3-legend > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.columns-hero-3-legend > div > .columns-hero-3-legend-img-col img {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Legend: mobile/tablet -> single centered horizontal row */
+.columns-hero-3-legend .columns-hero-3-legend-legend-col ul {
+  list-style: none;
+  margin-top: 25px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 20px;
+}
+
+.columns-hero-3-legend .columns-hero-3-legend-legend-col li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+/* DA wraps the icon and label in separate <p> tags inside each <li> */
+.columns-hero-3-legend .columns-hero-3-legend-legend-col li p {
+  margin: 0;
+}
+
+.columns-hero-3-legend .columns-hero-3-legend-legend-col li picture {
+  flex: 0 0 auto;
+  width: 24px;
+  line-height: 0;
+}
+
+.columns-hero-3-legend .columns-hero-3-legend-legend-col li img {
+  width: 24px;
+  height: auto;
+}
+
+/* text column bullet list (exclude the legend list) */
+.columns-hero-3-legend > div > div:not(.columns-hero-3-legend-legend-col) ul {
+  padding-left: 0;
+}
+
+.columns-hero-3-legend > div > div:not(.columns-hero-3-legend-legend-col) ul li {
+  font-size: 16px;
+  line-height: 22px;
+  padding-left: 15px;
+}
+
+.columns-hero-3-legend > div > div:not(.columns-hero-3-legend-legend-col) ul li::marker {
+  content: "\2022";
+  color: #c02c57;
+  font-size: 30px;
+}
+
+@media (width >= 900px) {
+  /* desktop: wide centered content, left-aligned, 3 columns */
+  .columns-hero-3-legend {
+    max-width: 1140px;
+    padding: 0;
+    text-align: left;
+  }
+
+  .columns-hero-3-legend-3-cols > div {
+    align-items: center;
+    flex-flow: row nowrap;
+    gap: 24px;
+  }
+
+  /* disclaimer stays inside the text column, spaced below the bullets */
+  .columns-hero-3-legend-3-cols .columns-hero-3-legend-disclaimer {
+    margin-top: 24px;
+  }
+
+  /* Asymmetric widths: wide text / wide graphic / narrow legend (~5 / 5 / 2) */
+  .columns-hero-3-legend-3-cols > div > div {
+    flex: 5;
+  }
+
+  .columns-hero-3-legend-3-cols > div > .columns-hero-3-legend-img-col {
+    flex: 5;
+  }
+
+  .columns-hero-3-legend-3-cols > div > .columns-hero-3-legend-legend-col {
+    flex: 2;
+  }
+
+  /* desktop legend -> back to vertical stacked rows */
+  .columns-hero-3-legend .columns-hero-3-legend-legend-col ul {
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .columns-hero-3-legend .columns-hero-3-legend-legend-col li {
+    margin: 8px 0;
+  }
+}
