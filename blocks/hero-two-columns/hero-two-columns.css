@@ -35,6 +35,11 @@
   text-align: center;
 }
 
+/* financial-assistance mobile: adjust content padding */
+.hero-banner-financial-assistance .hero-two-columns-content {
+  padding: 15% 15px 8px;
+}
+
 .hero-two-columns .hero-two-columns-content h3 {
   color: #333;
   font-family: proxima-nova, arial, sans-serif;
@@ -73,6 +78,15 @@
 @media (width >= 600px) {
   .hero-two-columns .hero-two-columns-content h1 {
     font-size: 32px;
+  }
+
+  /* financial-assistance tablet: prevent H1 wrapping, adjust padding */
+  .hero-banner-financial-assistance .hero-two-columns-content {
+    padding: 20% 15px 8px;
+  }
+
+  .hero-banner-financial-assistance .hero-two-columns-content h1 {
+    max-width: 640px;
   }
 }
 
@@ -135,6 +149,10 @@
     line-height: 60px;
     max-width: 540px;
     margin-left: 30px;
+  }
+
+  .hero-banner-financial-assistance .hero-two-columns-content h1 {
+    max-width: 640px;
   }
 }
 

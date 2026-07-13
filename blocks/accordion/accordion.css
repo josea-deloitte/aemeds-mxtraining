@@ -110,6 +110,130 @@
     }
 }
 
+/* ---------- Insurance variant (financial-assistance coverage picker) ---------- */
+
+.accordion.insurance {
+    --accordion-ins-card-bg: #eff6f9;
+    --accordion-ins-title-color: #333;
+    --accordion-icon-color: #005f86;
+}
+
+/* constrain the section wrappers around an insurance accordion */
+.section:has(.accordion.insurance) .accordion-wrapper,
+.section:has(.accordion.insurance) .default-content-wrapper {
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* section heading above the insurance accordion */
+.section:has(.accordion.insurance) .default-content-wrapper h2 {
+    font-size: 24px;
+    color: #046183;
+    padding-bottom: 24px;
+}
+
+/* each row is a rounded, borderless card with a gap */
+.accordion.insurance .accordion-item {
+    margin-bottom: 16px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    overflow: hidden;
+}
+
+.accordion.insurance .accordion-item:last-child {
+    margin-bottom: 0;
+}
+
+/* light-blue header, white panel body */
+.accordion.insurance .accordion-trigger {
+    background: var(--accordion-ins-card-bg);
+    color: var(--accordion-ins-title-color);
+    padding: 24px 60px 24px 56px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+.accordion.insurance .accordion-panel {
+    background: var(--accordion-ins-card-bg);
+}
+
+.accordion.insurance .accordion-trigger:hover,
+.accordion.insurance .accordion-trigger:focus-visible {
+    background: var(--accordion-ins-card-bg);
+}
+
+/* open item: title turns magenta */
+.accordion.insurance .accordion-trigger[aria-expanded="true"] {
+    color: #c02c57;
+}
+
+/* bold label before the colon; regular description after */
+.accordion.insurance .accordion-trigger strong {
+    font-weight: 700;
+}
+
+.accordion.insurance .accordion-trigger::after {
+    right: 56px;
+    border-color: var(--accordion-icon-color);
+}
+
+.accordion.insurance .accordion-panel-content {
+    padding: 0 56px 24px;
+    color: #333;
+}
+
+.accordion.insurance .accordion-panel-cell p,
+.accordion.insurance .accordion-panel-cell li {
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.accordion.insurance .accordion-panel-cell ul {
+    margin: 0 0 16px;
+    padding-left: 20px;
+}
+
+.accordion.insurance .accordion-panel-cell li::marker {
+    color: #c02c57;
+}
+
+/* footnote paragraphs render smaller */
+.accordion.insurance .accordion-panel-cell p.small-size-p {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.accordion.insurance .accordion-panel-cell a:any-link {
+    color: #046183;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+/* primary CTA button inside the panel */
+.accordion.insurance .accordion-panel-cell a.button.primary:any-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+    border-radius: 100px;
+    padding: 19px 29px;
+    background-color: #046183;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.accordion.insurance .accordion-panel-cell a.button.primary:any-link::after {
+    content: "";
+    width: 22px;
+    height: 10px;
+    background: url("/icons/cta-button-arrow-20-global-white.svg") center / contain no-repeat;
+}
+
 /* ---------- FAQ variant (vyepti.com/vyepti-faq) ---------- */
 
 .accordion.faq {
@@ -120,6 +244,7 @@
 }
 
 /* each category is a rounded card with a soft shadow */
+/* stylelint-disable-next-line no-descending-specificity */
 .accordion.faq .accordion-item {
     margin-bottom: 24px;
     padding: 32px 16px;
@@ -133,6 +258,7 @@
     margin-bottom: 0;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .accordion.faq .accordion-trigger {
     background: transparent;
     color: var(--accordion-faq-title-color);
@@ -186,6 +312,7 @@
     border-top: 1px solid var(--accordion-faq-divider-color);
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .accordion.faq .accordion-panel-cell a {
     font-weight: 700;
     text-decoration: underline;
