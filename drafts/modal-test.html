@@ -26,6 +26,27 @@
           Variante opcional desktop split:
           <a href="#hcp-modal-split">Abrir modal split-desktop</a>
         </p>
+        <p>
+          Trigger con button + data attribute:
+          <button type="button" data-modal-target="image-modal">Abrir modal con imagen</button>
+        </p>
+        <p>
+          Modal sin botones de acción:
+          <a href="#info-modal">Abrir modal informativo</a>
+        </p>
+
+        <h2>Authoring Examples</h2>
+        <p>Estos dos ejemplos están pensados para copiarse tal cual en modo de autoría.</p>
+
+        <p>
+          Ejemplo con button:
+          <button type="button" data-modal-target="button-example-modal">Open button modal</button>
+        </p>
+
+        <p>
+          Ejemplo con link:
+          <a href="#link-example-modal">Open link modal</a>
+        </p>
 
         <div id="hcp-modal" class="modal">
           <div>
@@ -108,6 +129,94 @@
               <p>Contenido secundario con CTA.</p>
               <p>
                 <a href="#"><strong>Continue</strong></a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div id="image-modal" class="modal">
+          <div>
+            <div>
+              <p>
+                <img src="/icons/logo-vyepti.svg" alt="Vyepti" width="220" height="80" />
+              </p>
+              <h3>Modal con imagen + botón trigger</h3>
+              <p>
+                Este ejemplo se abre con un elemento button usando
+                <code>data-modal-target="image-modal"</code>.
+              </p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>
+                <a href="#" data-modal-close><em>Close</em></a>
+              </p>
+            </div>
+            <div>
+              <p>
+                <a href="/drafts/index"><strong>Go to Draft Index</strong></a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div id="info-modal" class="modal">
+          <div>
+            <div>
+              <h3>Modal solo de contenido</h3>
+              <p>
+                Este ejemplo no define fila de acciones con dos columnas. Se usa para mensajes
+                informativos largos o legales.
+              </p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>
+                <a href="#" data-modal-close><strong>Cerrar</strong></a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div id="button-example-modal" class="modal">
+          <div>
+            <div>
+              <h3>Button-triggered modal</h3>
+              <p>Este modal se abre desde un botón usando <code>data-modal-target</code>.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>
+                <a href="#" data-modal-close><em>Cancel</em></a>
+              </p>
+            </div>
+            <div>
+              <p>
+                <a href="#" data-modal-close><strong>Continue</strong></a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div id="link-example-modal" class="modal">
+          <div>
+            <div>
+              <h3>Link-triggered modal</h3>
+              <p>Este modal se abre desde un enlace con hash al id del modal.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>
+                <a href="#" data-modal-close><em>Back</em></a>
+              </p>
+            </div>
+            <div>
+              <p>
+                <a href="#" data-modal-close><strong>Proceed</strong></a>
               </p>
             </div>
           </div>
