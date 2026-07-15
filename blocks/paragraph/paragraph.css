@@ -1,6 +1,5 @@
 .paragraph-block, .paragraph-center {
   max-width: 1140px;
-  padding: 0 30px;
 }
 
 .paragraph-block h2,
@@ -65,6 +64,10 @@
     color: #046183;
 }
 
+.paragraph-block a {
+    color: #046183;
+}
+
 @media (width >= 900px) {
   .paragraph-block h2 {
     font-size: 20px;
@@ -80,12 +83,12 @@
   .paragraph-block, .paragraph-center {
     padding: 0 10px;
   }
-  
+
 }
 
 @media (width < 450px) {
   .paragraph-block, .paragraph-center {
     padding: 0;
   }
-  
+
 }

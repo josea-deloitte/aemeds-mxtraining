@@ -3,6 +3,7 @@ import {
   loadFooter,
   decorateIcons,
   decorateSections,
+  decorateBlock,
   decorateBlocks,
   decorateTemplateAndTheme,
   waitForFirstImage,
@@ -55,7 +56,9 @@ function buildWidgetAutoBlocks(main) {
 function buildAutoBlocks(main) {
   try {
     // auto load `*/fragments/*` references
-    const fragments = [...main.querySelectorAll('a[href*="/fragments/"]')].filter((f) => !f.closest('.fragment'));
+    const fragments = [...main.querySelectorAll('a[href*="/fragments/"]')].filter(
+      (f) => !f.closest('.fragment'),
+    );
     if (fragments.length > 0) {
       // eslint-disable-next-line import/no-cycle
       import('../blocks/fragment/fragment.js').then(({ loadFragment }) => {
@@ -63,7 +66,9 @@ function buildAutoBlocks(main) {
           try {
             const { pathname } = new URL(fragment.href);
             const frag = await loadFragment(pathname);
-            fragment.parentElement.replaceWith(...frag.children);
+            if (frag && fragment.parentElement) {
+              fragment.parentElement.replaceWith(...frag.children);
+            }
           } catch (error) {
             // eslint-disable-next-line no-console
             console.error('Fragment loading failed', error);
@@ -94,7 +99,9 @@ function decorateButtons(main) {
     // skip URL display links
     try {
       if (new URL(a.href).href === new URL(text, window.location).href) return;
-    } catch { /* continue */ }
+    } catch {
+      /* continue */
+    }
 
     // require authored formatting for buttonization
     const strong = a.closest('strong');
@@ -103,7 +110,8 @@ function decorateButtons(main) {
 
     p.className = 'button-wrapper';
     a.className = 'button';
-    if (strong && em) { // high-impact call-to-action
+    if (strong && em) {
+      // high-impact call-to-action
       a.classList.add('accent');
       const outer = strong.contains(em) ? strong : em;
       outer.replaceWith(a);
@@ -129,7 +137,9 @@ function decorateExternalLinks(main) {
         a.target = '_blank';
         a.rel = 'noopener noreferrer';
       }
-    } catch { /* leave malformed links untouched */ }
+    } catch {
+      /* leave malformed links untouched */
+    }
   });
 }
 
@@ -189,23 +199,35 @@ async function loadEager(doc) {
 }
 
 /**
- * Loads the global Important Safety Information (ISI) block on every page.
- * The ISI content lives in a shared fragment so it is authored in one place;
- * the isi block renders both the inline panel and the fixed condensed band.
+ * Injects the global Important Safety Information (ISI) block on every page.
+ *
+ * The isi block fetches its own content from the shared `/fragments/isi`
+ * fragment (see blocks/isi/isi.js); this only appends an empty block and
+ * runs it through the standard decorateBlock()/loadSection() pipeline. The
+ * appended section is never pre-hidden, so no section can be left stuck in
+ * `data-section-status="initialized"` if anything downstream fails.
+ *
  * @param {Element} main The main container element
  */
 async function loadISI(main) {
+  // Skip when an author already placed an isi block, or when viewing the
+  // ISI source fragment itself (its content would render twice).
   if (!main || main.querySelector('.isi')) return;
-  // eslint-disable-next-line import/no-cycle
-  const { loadFragment } = await import('../blocks/fragment/fragment.js');
-  const fragment = await loadFragment('/fragments/isi');
-  if (!fragment) return;
-  const isiBlock = buildBlock('isi', { elems: [...fragment.childNodes] });
-  const section = document.createElement('div');
-  section.append(isiBlock);
-  main.append(section);
-  decorateSections(main);
-  await loadSection(section);
+  if (window.location.pathname === '/fragments/isi') return;
+  try {
+    const block = buildBlock('isi', '');
+    const wrapper = document.createElement('div');
+    wrapper.append(block);
+    const section = document.createElement('div');
+    section.classList.add('section');
+    section.append(wrapper);
+    main.append(section);
+    decorateBlock(block);
+    await loadSection(section);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Global ISI loading failed', error);
+  }
 }
 
 /**
@@ -247,13 +269,16 @@ async function loadLazy(doc) {
   const main = doc.querySelector('main');
   await loadSections(main);
 
-  await loadISI(main);
-
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
 
   loadFooter(doc.querySelector('footer'));
+
+  // Fire-and-forget: the isi block time-boxes its own fragment fetch and
+  // always resolves, so it must never delay the footer or lazy assets.
+  // Deep links to #SafetyPanelInfo are handled inside the block itself.
+  loadISI(main);
 
   loadBackToTop();
 

@@ -7,6 +7,7 @@ helix-importer-ui
 .DS_Store
 *.bak
 .idea
+.gitattributes
 
 # Ensure these files are tracked
 !CLAUDE.md
@@ -21,3 +22,6 @@ package.json
 .github/copilot-instructions.md
 .vscode/extensions.json
 .vscode/settings.json
+
+# Local git configuration
+.gitattributes

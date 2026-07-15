@@ -31,7 +31,7 @@
   grid-area: stack;
   z-index: 1;
   align-self: start;
-  padding: 24px 15px 8px;
+  padding: 10% 15px 8px;
   text-align: center;
 }
 
@@ -69,6 +69,13 @@
   font-style: italic;
 }
 
+/* large phones / small tablets: bump the title while keeping the mobile layout */
+@media (width >= 600px) {
+  .hero-two-columns .hero-two-columns-content h1 {
+    font-size: 32px;
+  }
+}
+
 /* tablet+ : full-bleed background image, text overlaid and centered */
 @media (width >= 768px) {
   .hero-two-columns .hero-two-columns-caption {
@@ -90,6 +97,7 @@
     width: 100%;
     max-width: 1140px;
     min-height: 220px;
+    padding: 24px 15px 8px;
     text-align: left;
     display: flex;
     flex-direction: column;

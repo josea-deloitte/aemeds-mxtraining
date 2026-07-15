@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Teaser Block Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="nav" content="/drafts/nav">
+    <meta name="footer" content="/drafts/footer">
+    <script src="/scripts/aem.js" type="module"></script>
+    <script src="/scripts/scripts.js" type="module"></script>
+    <link rel="stylesheet" href="/styles/styles.css"/>
+  </head>
+  <body>
+    <header></header>
+    <main>
+
+      <div>
+        <div>
+          <h1>Teaser Block — Test Page</h1>
+          <p>All three variants plus a legacy-name block are shown below. Resize the browser to test responsive behaviour.</p>
+        </div>
+      </div>
+
+      <!-- ─── Variant 1: Image Right ─────────────────────────────────── -->
+      <div>
+        <div class="teaser image-right">
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="/media_165cf1628eb6572e2e51469a3421f202d0f9afad7.png?width=750&format=webply&optimize=medium">
+                <img loading="lazy" alt="Woman holding her head in relief from migraine" src="/media_165cf1628eb6572e2e51469a3421f202d0f9afad7.png?width=750&format=png&optimize=medium">
+              </picture>
+            </div>
+            <div>
+              <p><strong>IS MIGRAINE IMPACTING YOUR LIFE?</strong></p>
+              <h2>The battle with migraine disability.</h2>
+              <p>Let's face it—no matter how often you get migraine attacks, living with migraine can be a constant struggle. But there may be a way to help take back your days.</p>
+              <p><a href="#" class="button primary">Learn More</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── Variant 2: Image Left (content authored FIRST — tests image-cell detection) ── -->
+      <div>
+        <div class="teaser image-left">
+          <div>
+            <div>
+              <p><strong>PEOPLE WITH MIGRAINE DESERVE BETTER</strong></p>
+              <h2>67% say control feels impossible.</h2>
+              <p>Because of insurance coverage rules, people with migraine often need to try certain types of treatments before others.</p>
+              <ul>
+                <li>Pushing through pain again and again</li>
+                <li>Unable to make or stick to plans</li>
+                <li>Struggling to keep up with daily responsibilities</li>
+              </ul>
+              <p><a href="#" class="button primary">See The Data</a></p>
+            </div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="/media_165cf1628eb6572e2e51469a3421f202d0f9afad7.png?width=750&format=webply&optimize=medium">
+                <img loading="lazy" alt="Patient discussing treatment options with doctor" src="/media_165cf1628eb6572e2e51469a3421f202d0f9afad7.png?width=750&format=png&optimize=medium">
+              </picture>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── Variant 3: Image Center ────────────────────────────────── -->
+      <div>
+        <div class="teaser image-center">
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="/media_165cf1628eb6572e2e51469a3421f202d0f9afad7.png?width=750&format=webply&optimize=medium">
+                <img loading="lazy" alt="VYEPTI treatment illustration" src="/media_165cf1628eb6572e2e51469a3421f202d0f9afad7.png?width=750&format=png&optimize=medium">
+              </picture>
+            </div>
+            <div>
+              <p><strong>COULD VYEPTI BE RIGHT FOR YOU?</strong></p>
+              <h2>Say yep to more migraine-free days.</h2>
+              <p>VYEPTI is a prescription IV infusion for preventive treatment, given once every 3 months by a healthcare provider.</p>
+              <p><a href="#" class="button primary">See If You Qualify</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── Legacy variant name (published content back-compat) ────── -->
+      <div>
+        <div class="teaser teaser-image-right-align-first">
+          <div>
+            <div>
+              <picture>
+                <source type="image/webp" srcset="/media_165cf1628eb6572e2e51469a3421f202d0f9afad7.png?width=750&format=webply&optimize=medium">
+                <img loading="lazy" alt="Legacy variant test image" src="/media_165cf1628eb6572e2e51469a3421f202d0f9afad7.png?width=750&format=png&optimize=medium">
+              </picture>
+            </div>
+            <div>
+              <h3><strong>Legacy header name still works</strong></h3>
+              <p>This block was authored with the old "Teaser (Teaser Image Right Align First)" header and is auto-mapped to the Image Right layout.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+    <footer></footer>
+  </body>
+</html>
