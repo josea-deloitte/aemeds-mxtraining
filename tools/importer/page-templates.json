@@ -43,6 +43,23 @@
           ]
         }
       ]
+    },
+    {
+      "name": "stay-connected",
+      "urls": [
+        "https://www.vyepti.com/stay-connected"
+      ],
+      "representativeUrl": "https://www.vyepti.com/stay-connected",
+      "coverageGaps": [],
+      "description": "VYEPTI Stay Connected page: sign-up (\"Stay Connected\") lead-capture form. Only the signUpForm is migrated; global header, footer, and ISI are handled separately.",
+      "blocks": [
+        {
+          "name": "form",
+          "instances": [
+            ".signUpForm"
+          ]
+        }
+      ]
     }
   ]
 }

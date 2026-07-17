@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://www.vyepti.com/stay-connected",
+  "path": "stay-connected",
+  "timestamp": "2026-07-16T17:12:13.189Z",
+  "title": "Sign Up and Stay Connected With VYEPTI®",
+  "template": "stay-connected",
+  "blocks": [
+    "form"
+  ]
+}
