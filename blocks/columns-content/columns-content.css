@@ -78,6 +78,29 @@
   text-decoration: underline;
 }
 
+/* dark variant element colors (declared here for specificity ordering) */
+.columns-content.dark h1,
+.columns-content.dark h2,
+.columns-content.dark h3,
+.columns-content.dark h4,
+.columns-content.dark h5,
+.columns-content.dark h6,
+.columns-content.dark p {
+  color: #fff;
+}
+
+.columns-content.dark img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.columns-content.dark a:any-link {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
 @media (width >= 900px) {
   .columns-content > div {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -110,6 +133,52 @@
   padding-right: 14px;
 }
 
+.more-support .columns-content.dot-list ul li {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+/* more-support trailing disclaimer (default content below the block) */
+.more-support .default-content-wrapper {
+  width: 1140px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.more-support .default-content-wrapper p {
+  font-size: 14px;
+}
+
+.more-support .default-content-wrapper a:any-link {
+  color: #046183;
+}
+
+@media (width >= 900px) {
+  .more-support .default-content-wrapper p {
+    max-width: 100%;
+  }
+
+  /* wide text column (820px) + narrow icon column, no divider */
+  .more-support .columns-content.icon-right > div {
+    grid-template-columns: 820px 1fr;
+  }
+
+  .more-support .columns-content-left {
+    width: auto;
+    border-right: none;
+  }
+
+  /* push the icon to the right edge of the 1140px block */
+  .more-support .columns-content.icon-right .columns-content-right.has-icon {
+    display: block;
+  }
+
+  .more-support .columns-content.icon-right .columns-content-icon {
+    margin-left: auto;
+    margin-right: 0;
+  }
+}
+
 .columns-content.dot-list li::marker {
   color: #c02c57;
 }
@@ -124,6 +193,13 @@
     border-right: 0;
     padding-right: 0;
   }
+}
+
+/* Constrain the real-life-impact section wrappers to 1140px, edge-to-edge. */
+main > .section.real-life-impact > div {
+  max-width: 1140px;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /* ==========================================================================
@@ -155,6 +231,41 @@
   height: auto;
 }
 
+/* Costs variant (icon-right, no dot-list).
+   Mobile-first: stacked, centered, icon on top. Desktop below restores the
+   source 12-col grid (text ~81% / icon ~19%, no divider). */
+.columns-content.icon-right:not(.dot-list) {
+  max-width: 414px;
+  text-align: center;
+}
+
+.columns-content.icon-right:not(.dot-list) > div {
+  gap: 16px;
+}
+
+/* icon on top, text below */
+.columns-content.icon-right:not(.dot-list) .columns-content-right.has-icon {
+  order: 0;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.columns-content.icon-right:not(.dot-list) .columns-content-left {
+  order: 1;
+}
+
+/* center the icon graphic */
+.columns-content.icon-right:not(.dot-list) .columns-content-icon {
+  margin: 0 auto;
+}
+
+/* tablet: wider constrained width */
+@media (width >= 600px) {
+  .columns-content.icon-right:not(.dot-list) {
+    max-width: 540px;
+  }
+}
+
 .columns-content.icon-right .columns-content-icon-text > *:last-child {
   margin-bottom: 0;
 }
@@ -164,21 +275,46 @@
     width: 120px;
   }
 
-  /* restore the vertical divider between the two columns (dot-list removes it) */
+  /* more-support section: larger support icon */
+  .more-support .columns-content.icon-right .columns-content-icon {
+    width: 194px;
+  }
+
+  /* spacing between the two columns; no divider (matches source design) */
   .columns-content.icon-right .columns-content-left {
-    border-right: 1px solid #d0d5db;
     padding-right: 56px;
   }
+
+  /* Costs variant: source 12-col grid ratio (text ~81% / icon ~19%). */
+  .columns-content.icon-right:not(.dot-list) {
+    max-width: 1140px;
+    height: 215px;
+    text-align: left;
+  }
+
+  .columns-content.icon-right:not(.dot-list) > div {
+    grid-template-columns: 81% 19%;
+    gap: 30px;
+    align-items: center;
+  }
+
+  /* restore source column order: text left, icon right */
+  .columns-content.icon-right:not(.dot-list) .columns-content-left {
+    order: 0;
+    border-right: 0;
+    padding-right: 0;
+  }
+
+  .columns-content.icon-right:not(.dot-list) .columns-content-right.has-icon {
+    order: 1;
+    margin-bottom: 0;
+  }
+
+  .columns-content.icon-right:not(.dot-list) .columns-content-icon {
+    width: 137px;
+    margin: 0;
+  }
 }
-
-/* Constrain the real-life-impact section wrappers to 1140px, edge-to-edge. */
-main > .section.real-life-impact > div {
-  max-width: 1140px;
-  padding-left: 0;
-  padding-right: 0;
-}
-
-
 
 /* Full-width default content around a dot-list block (heading + intro + footer).
    Scoped to the real-life-impact section class (Section Metadata Style). */
@@ -219,5 +355,159 @@ main > .section.real-life-impact > div {
   .section.real-life-impact {
     padding-left: 15px;
     padding-right: 15px;
+  }
+}
+
+/* ==========================================================================
+   Variant: dark (e.g. copay $0 section)
+   Dark teal band, white text, image left / text + pill CTAs right.
+   ========================================================================== */
+
+.columns-content.dark {
+  max-width: 1140px;
+  margin: 0 auto;
+  color: #fff;
+}
+
+/* no callout background in the dark variant */
+.columns-content.dark .columns-content-callout {
+  background-color: transparent;
+  padding: 5px;
+}
+
+/* pill CTAs: primary (coral) + secondary (light).
+   Mobile/tablet: stacked and centered; desktop restores a row. */
+.columns-content.dark .button-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin: 25px 0 50px;
+}
+
+.columns-content.dark a.button:any-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 100px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.columns-content.dark a.button.primary:any-link {
+  padding: 19px 29px;
+  background-color: #c02c57;
+  color: #fff;
+  font-size: 18px;
+}
+
+/* arrow icon on the primary (enroll) CTA */
+.columns-content.dark a.button.primary:any-link::after {
+  content: "";
+  width: 22px;
+  height: 10px;
+  background: url("/icons/cta-button-arrow-20-global-white.svg") center / contain no-repeat;
+}
+
+.columns-content.dark a.button.secondary:any-link {
+  padding: 16px 35px;
+  background-color: #e1f0f6;
+  color: #046183;
+  font-size: 16px;
+}
+
+/* download icon on the secondary (brochure) CTA */
+.columns-content.dark a.button.secondary:any-link::after {
+  content: "";
+  width: 18px;
+  height: 19px;
+  background: url("/icons/download-18.svg") center / contain no-repeat;
+}
+
+/* full-bleed dark band via the section wrapper */
+main > .section.copay-dark {
+  background-color: #046183;
+  padding: 50px 15px 65px;
+}
+
+/* mobile: constrain and center the content wrappers */
+main > .section.copay-dark .columns-content-wrapper,
+main > .section.copay-dark .default-content-wrapper {
+  box-sizing: border-box;
+  width: 384px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* tablet: wider wrappers */
+@media (width >= 600px) {
+  main > .section.copay-dark .columns-content-wrapper,
+  main > .section.copay-dark .default-content-wrapper {
+    width: 540px;
+  }
+}
+
+main > .section.copay-dark .default-content-wrapper {
+  color: #fff;
+}
+
+/* heading + intro wrapper (above the block) is centered */
+main > .section.copay-dark .default-content-wrapper:first-of-type {
+  text-align: center;
+}
+
+main > .section.copay-dark .default-content-wrapper h2 {
+  color: #fff;
+  font-size: 32px;
+  line-height: 38px;
+  font-weight: 800;
+}
+
+main > .section.copay-dark .default-content-wrapper p {
+  color: #fff;
+}
+
+main > .section.copay-dark .default-content-wrapper a:any-link {
+  color: #fff;
+}
+
+/* trailing disclaimer wrapper (below the block): full width, small text */
+main > .section.copay-dark .default-content-wrapper:last-of-type {
+  margin-top: 24px;
+}
+
+main > .section.copay-dark .default-content-wrapper:last-of-type p {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+@media (width >= 900px) {
+  main > .section.copay-dark .columns-content-wrapper,
+  main > .section.copay-dark .default-content-wrapper {
+    width: auto;
+    max-width: 1140px;
+  }
+
+  .columns-content.dark > div {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 48px;
+    align-items: center;
+  }
+
+  /* vertical divider between the image and the text/CTA column */
+  .columns-content.dark .columns-content-left {
+    border-right: 1px solid rgb(255 255 255 / 40%);
+    padding-right: 48px;
+  }
+
+  /* desktop: CTAs side by side, left-aligned */
+  .columns-content.dark .button-wrapper {
+    flex-flow: row wrap;
+    align-items: stretch;
+  }
+
+  main > .section.copay-dark .default-content-wrapper:first-of-type {
+    margin-bottom: 60px;
   }
 }
