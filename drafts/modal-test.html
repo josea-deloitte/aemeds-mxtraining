@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Modal Block Test</title>
+    <meta
+      name="description"
+      content="Draft page to validate the modal block with nested content and nested blocks."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="nav" content="/drafts/nav" />
+    <meta name="footer" content="/drafts/footer" />
+    <script src="/scripts/aem.js" type="module"></script>
+    <script src="/scripts/scripts.js" type="module"></script>
+    <link rel="stylesheet" href="/styles/styles.css" />
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <div>
+        <h1>Modal Block Playground</h1>
+        <p>
+          Este botón abre un modal manual usando hash target:
+          <a href="#hcp-modal">Abrir modal manual</a>
+        </p>
+        <p>
+          Variante opcional desktop split:
+          <a href="#hcp-modal-split">Abrir modal split-desktop</a>
+        </p>
+        <p>
+          Trigger con button + data attribute:
+          <button type="button" data-modal-target="image-modal">Abrir modal con imagen</button>
+        </p>
+        <p>
+          Modal sin botones de acción:
+          <a href="#info-modal">Abrir modal informativo</a>
+        </p>
+
+        <h2>Authoring Examples</h2>
+        <p>Estos dos ejemplos están pensados para copiarse tal cual en modo de autoría.</p>
+
+        <p>
+          Ejemplo con button:
+          <button type="button" data-modal-target="button-example-modal">Open button modal</button>
+        </p>
+
+        <p>
+          Ejemplo con link:
+          <a href="#link-example-modal">Open link modal</a>
+        </p>
+
+        <div id="hcp-modal" class="modal">
+          <div>
+            <div>
+              <p><span class="icon icon-vyepti-logo"></span></p>
+              <h3>
+                You are now being directed to a website intended for US healthcare professionals.
+              </h3>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>
+                <a href="#"><em>Cancel</em></a>
+              </p>
+            </div>
+            <div>
+              <p>
+                <a href="#"><strong>Continue</strong></a>
+              </p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <table>
+                <tr>
+                  <th>Section</th>
+                  <th>Status</th>
+                </tr>
+                <tr>
+                  <td>Accessibility</td>
+                  <td>Enabled</td>
+                </tr>
+                <tr>
+                  <td>Nested Blocks</td>
+                  <td>Supported</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div>
+            <div>
+              <div class="columns">
+                <div>
+                  <div>
+                    <h4>Nested block: Columns</h4>
+                    <p>
+                      Este contenido prueba que el modal puede cargar bloques anidados al abrirse.
+                    </p>
+                    <p><a href="#">Learn more</a></p>
+                  </div>
+                  <div>
+                    <h4>Second Column</h4>
+                    <p>Puedes usar texto, links y otros patrones habituales de EDS.</p>
+                    <p><a href="#">Open resource</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="hcp-modal-split" class="modal split-desktop">
+          <div>
+            <div>
+              <h3>Split desktop variant</h3>
+              <p>Este modal valida alineación con el patrón opcional de 2 columnas en desktop.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <h4>Columna A</h4>
+              <p>Contenido informativo principal.</p>
+              <p>
+                <a href="#"><em>Cancel</em></a>
+              </p>
+            </div>
+            <div>
+              <h4>Columna B</h4>
+              <p>Contenido secundario con CTA.</p>
+              <p>
+                <a href="#"><strong>Continue</strong></a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div id="image-modal" class="modal">
+          <div>
+            <div>
+              <p>
+                <img src="/icons/logo-vyepti.svg" alt="Vyepti" width="220" height="80" />
+              </p>
+              <h3>Modal con imagen + botón trigger</h3>
+              <p>
+                Este ejemplo se abre con un elemento button usando
+                <code>data-modal-target="image-modal"</code>.
+              </p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>
+                <a href="#" data-modal-close><em>Close</em></a>
+              </p>
+            </div>
+            <div>
+              <p>
+                <a href="/drafts/index"><strong>Go to Draft Index</strong></a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div id="info-modal" class="modal">
+          <div>
+            <div>
+              <h3>Modal solo de contenido</h3>
+              <p>
+                Este ejemplo no define fila de acciones con dos columnas. Se usa para mensajes
+                informativos largos o legales.
+              </p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>
+                <a href="#" data-modal-close><strong>Cerrar</strong></a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div id="button-example-modal" class="modal">
+          <div>
+            <div>
+              <h3>Button-triggered modal</h3>
+              <p>Este modal se abre desde un botón usando <code>data-modal-target</code>.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>
+                <a href="#" data-modal-close><em>Cancel</em></a>
+              </p>
+            </div>
+            <div>
+              <p>
+                <a href="#" data-modal-close><strong>Continue</strong></a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div id="link-example-modal" class="modal">
+          <div>
+            <div>
+              <h3>Link-triggered modal</h3>
+              <p>Este modal se abre desde un enlace con hash al id del modal.</p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>
+                <a href="#" data-modal-close><em>Back</em></a>
+              </p>
+            </div>
+            <div>
+              <p>
+                <a href="#" data-modal-close><strong>Proceed</strong></a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <h2>Auto-open Variant</h2>
+        <p>Al cargar la página, este modal se abre automáticamente.</p>
+
+        <div id="welcome-modal" class="modal auto-open">
+          <div>
+            <div>
+              <h3>Welcome to the HCP experience</h3>
+              <p>
+                This auto-open modal is useful for interstitial confirmations and contextual alerts.
+              </p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <p>
+                <a href="#"><em>Dismiss</em></a>
+              </p>
+            </div>
+            <div>
+              <p>
+                <a href="#"><strong>Continue</strong></a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer></footer>
+  </body>
+</html>

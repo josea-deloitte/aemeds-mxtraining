@@ -15,6 +15,13 @@ helix-importer-ui
 
 # local agent tooling
 .claude/
+.prettierignore
+.prettierrc
+package-lock.json
+package.json
+.github/copilot-instructions.md
+.vscode/extensions.json
+.vscode/settings.json
 
 # Local git configuration
 .gitattributes

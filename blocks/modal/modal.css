@@ -1,0 +1,233 @@
+.modal {
+  display: none;
+}
+
+body.modal-is-open {
+  overflow: hidden;
+}
+
+.modal-overlay {
+  --modal-surface: #e8eef2;
+  --modal-shadow: 0 20px 48px rgb(8 41 60 / 25%);
+  --modal-primary: #0b6f95;
+  --modal-primary-hover: #085f80;
+  --modal-copy: #4d5961;
+  --modal-close: #535d63;
+
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgb(26 41 52 / 45%);
+  backdrop-filter: blur(1px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+.modal-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-overlay .modal-dialog {
+  position: relative;
+  width: min(680px, 100%);
+  max-height: calc(100dvh - 36px);
+  border-radius: 16px;
+  background: var(--modal-surface);
+  box-shadow: var(--modal-shadow);
+  overflow: auto;
+  transform: translateY(14px) scale(0.985);
+  transition: transform 220ms ease;
+}
+
+.modal-overlay.is-open .modal-dialog {
+  transform: translateY(0) scale(1);
+}
+
+.modal-overlay .modal-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 12px 0 0;
+}
+
+.modal-overlay .modal-close {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--modal-close);
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.modal-overlay .modal-close span {
+  display: block;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+.modal-overlay .modal-close:hover,
+.modal-overlay .modal-close:focus-visible {
+  color: #2f3b43;
+}
+
+.modal-overlay .modal-close:focus-visible {
+  outline: 2px solid #046183;
+  outline-offset: 1px;
+}
+
+.modal-overlay .modal-body {
+  padding: 0 24px 34px;
+  text-align: center;
+  color: var(--modal-copy);
+}
+
+.modal-overlay .modal-row {
+  margin-top: 0;
+}
+
+.modal-overlay .modal-row + .modal-row {
+  margin-top: 14px;
+}
+
+.modal-overlay .modal-row.modal-row-multi {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+
+.modal-overlay .modal-cell > :first-child {
+  margin-top: 0;
+}
+
+.modal-overlay .modal-cell > :last-child {
+  margin-bottom: 0;
+}
+
+.modal-overlay .modal-cell p.button-wrapper {
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+.modal-overlay .modal-cell .button {
+  min-width: 160px;
+  padding: 0.75em 1.7em;
+  border-radius: 999px;
+}
+
+.modal-overlay .modal-row-intro {
+  display: grid;
+  gap: 8px;
+}
+
+.modal-overlay .modal-row-intro .icon {
+  width: min(224px, 64vw);
+  height: auto;
+}
+
+.modal-overlay .modal-row-intro .icon img {
+  width: 100%;
+  height: auto;
+}
+
+.modal-overlay .modal-row-intro h1,
+.modal-overlay .modal-row-intro h2,
+.modal-overlay .modal-row-intro h3,
+.modal-overlay .modal-row-intro h4 {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: var(--modal-copy);
+  font-size: clamp(1.8rem, 2.8vw, 2.1rem);
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.modal-overlay .modal-row-actions {
+  margin-top: 20px;
+}
+
+.modal-overlay .modal-row.modal-row-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.modal-overlay .modal-row-actions .modal-cell {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-overlay .modal-row-actions .button.secondary,
+.modal-overlay .modal-row-actions .button.primary {
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+
+.modal-overlay .modal-row-actions .button.secondary {
+  border-color: var(--modal-primary);
+  color: var(--modal-primary);
+  background: transparent;
+}
+
+.modal-overlay .modal-row-actions .button.secondary:hover,
+.modal-overlay .modal-row-actions .button.secondary:focus-visible {
+  border-color: var(--modal-primary-hover);
+  color: var(--modal-primary-hover);
+}
+
+.modal-overlay .modal-row-actions .button.primary {
+  border-color: var(--modal-primary);
+  background: var(--modal-primary);
+  color: #fff;
+}
+
+.modal-overlay .modal-row-actions .button.primary:hover,
+.modal-overlay .modal-row-actions .button.primary:focus-visible {
+  border-color: var(--modal-primary-hover);
+  background: var(--modal-primary-hover);
+}
+
+.modal-overlay .modal-cell .block {
+  margin-top: 0;
+}
+
+@media (width < 480px) {
+  .modal-overlay .modal-row.modal-row-actions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (width >= 600px) {
+  .modal-overlay {
+    padding: 26px;
+  }
+
+  .modal-overlay .modal-body {
+    padding-right: 56px;
+    padding-left: 56px;
+    padding-bottom: 40px;
+  }
+}
+
+@media (width >= 900px) {
+  .modal-overlay.modal-overlay-split-desktop .modal-row.modal-row-multi {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-overlay,
+  .modal-overlay .modal-dialog {
+    transition: none;
+  }
+}
