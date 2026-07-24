@@ -1,4 +1,6 @@
-import { decorateBlock, loadBlock } from '../../scripts/aem.js';
+import {
+  buildBlock, createOptimizedPicture, decorateBlock, loadBlock,
+} from '../../scripts/aem.js';
 
 const ANIMATION_DURATION_MS = 220;
 const ANIMATION_EASING = 'cubic-bezier(0.25, 0.46, 0.45, 0.94)';
@@ -169,7 +171,60 @@ async function setItemExpanded(item, expanded, { animate = true } = {}) {
   await animatePanelClose(panel);
 }
 
+// Nested blocks authored inside a panel arrive as a raw <table> (the DA/markdown
+// pipeline does not convert a block nested inside another block's cell). Rebuild
+// each such table into a block div so it can be decorated like a top-level block.
+function convertNestedBlockTables(panel) {
+  const tables = [...panel.querySelectorAll('table')]
+    .filter((table) => table.closest('.accordion-panel') === panel);
+
+  tables.forEach((table) => {
+    const rows = [...table.querySelectorAll(':scope > tbody > tr, :scope > tr')];
+    if (!rows.length) return;
+
+    // first row = block name (single cell spanning the table)
+    const nameCell = rows[0].querySelector('td, th');
+    const blockName = nameCell ? nameCell.textContent.trim().toLowerCase().replace(/\s+/g, '-') : '';
+    if (!blockName) return;
+
+    const content = rows.slice(1).map((row) => (
+      [...row.children].map((cell) => ({ elems: [...cell.childNodes] }))
+    ));
+
+    const blockEl = buildBlock(blockName, content);
+    table.replaceWith(blockEl);
+  });
+}
+
+// The "download" variant renders its tiles inline (no separate block module):
+// each row becomes an <li> with an image cell and a body cell (heading, text,
+// action links). Styling lives in accordion.css under .accordion .download.
+function decorateDownloadGrid(grid) {
+  const ul = document.createElement('ul');
+  [...grid.children].forEach((row) => {
+    const li = document.createElement('li');
+    while (row.firstElementChild) li.append(row.firstElementChild);
+    [...li.children].forEach((div) => {
+      if (div.children.length === 1 && div.querySelector('picture')) div.className = 'accordion-download-card-image';
+      else div.className = 'accordion-download-card-body';
+    });
+    ul.append(li);
+  });
+  ul.querySelectorAll('picture > img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
+  grid.replaceChildren(ul);
+}
+
 async function loadNestedBlocks(panel) {
+  convertNestedBlockTables(panel);
+
+  [...panel.querySelectorAll('.accordion-download')]
+    .filter((grid) => grid.closest('.accordion-panel') === panel)
+    .filter((grid) => !grid.dataset.decorated)
+    .forEach((grid) => {
+      decorateDownloadGrid(grid);
+      grid.dataset.decorated = 'true';
+    });
+
   const nestedBlocks = [...panel.querySelectorAll(NESTED_BLOCK_SELECTORS)]
     .filter((candidate) => candidate.closest('.accordion-panel') === panel)
     .filter((candidate) => !candidate.dataset.blockStatus);
@@ -247,6 +302,13 @@ export default async function decorate(block) {
   });
 
   block.replaceChildren(...items);
+
+  // Convert any nested block tables in every panel up front so the structure is
+  // correct regardless of open state (the block JS/CSS still loads lazily on open).
+  items.forEach((item) => {
+    const panel = item.querySelector(':scope > .accordion-panel');
+    if (panel) convertNestedBlockTables(panel);
+  });
 
   items.forEach((item) => {
     const trigger = item.querySelector(':scope > .accordion-header > .accordion-trigger');
