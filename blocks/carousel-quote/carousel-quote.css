@@ -5,6 +5,12 @@
   --cq-arrow-bg: rgb(255 255 255 / 88%);
 }
 
+/* dark variant: dark teal slide, white text (e.g. nurse-support) */
+.carousel-quote.dark {
+  --cq-bg: #046183;
+  --cq-text: #fff;
+}
+
 .carousel-quote .carousel-quote-slides-container {
   position: relative;
   max-width: 1200px;
@@ -51,6 +57,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  box-sizing: border-box;
   width: 100%;
   margin: 0;
   padding: 48px 44px 44px 84px;
@@ -229,10 +236,25 @@
   transition: background-color 0.2s;
 }
 
+/* dark variant navigation arrow overrides (same specificity as indicator button, kept after it) */
+.carousel-quote.dark .carousel-quote-navigation-buttons button {
+  border-color: rgb(255 255 255 / 40%);
+  background-color: transparent;
+}
+
 .carousel-quote .carousel-quote-slide-indicators .carousel-quote-slide-indicator button:hover,
 .carousel-quote .carousel-quote-slide-indicators .carousel-quote-slide-indicator button:focus-visible,
 .carousel-quote .carousel-quote-slide-indicators .carousel-quote-slide-indicator button:disabled {
   background-color: var(--cq-accent);
+}
+
+.carousel-quote.dark .carousel-quote-navigation-buttons button:hover,
+.carousel-quote.dark .carousel-quote-navigation-buttons button:focus-visible {
+  background-color: rgb(255 255 255 / 15%);
+}
+
+.carousel-quote.dark .carousel-quote-navigation-buttons button::after {
+  border-color: #fff;
 }
 
 @media (width <= 767px) {
@@ -249,10 +271,87 @@
 
   .carousel-quote .carousel-quote-slide .carousel-quote-slide-content {
     order: 2;
+    min-width: 0;
     padding: 28px 24px 32px;
   }
 
   .carousel-quote .carousel-quote-navigation-buttons {
     inset: 40% 10px auto;
+  }
+
+  /* dark variant: source stacks content on top, image at the bottom */
+  .carousel-quote.dark .carousel-quote-slide .carousel-quote-slide-content {
+    order: 1;
+  }
+
+  .carousel-quote.dark .carousel-quote-slide .carousel-quote-slide-image {
+    order: 2;
+    min-height: 0;
+  }
+
+  /* let the picture flow so the column takes the image's height */
+  .carousel-quote.dark .carousel-quote-slide .carousel-quote-slide-image picture {
+    position: static;
+    height: auto;
+  }
+
+  /* show the whole portrait (no crop) */
+  .carousel-quote.dark .carousel-quote-slide .carousel-quote-slide-image picture > img {
+    position: static;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+/* dark variant content color overrides */
+.carousel-quote.dark .carousel-quote-slide .carousel-quote-slide-content p,
+.carousel-quote.dark .carousel-quote-slide .carousel-quote-slide-content strong,
+.carousel-quote.dark .carousel-quote-slide .carousel-quote-slide-content a {
+  color: #fff;
+}
+
+/* dark variant: anchor the portrait to the top so the face stays visible
+   when a tall quote makes the slide taller than the image's aspect ratio */
+.carousel-quote.dark .carousel-quote-slide .carousel-quote-slide-image picture > img {
+  object-position: right top;
+}
+
+/* dark variant: match the source layout (1140px card, ~329px tall, fixed 24px
+   quote) so the image is not upscaled/cropped and the slide stays compact */
+.carousel-quote.dark .carousel-quote-slides-container {
+  max-width: 1140px;
+}
+
+.carousel-quote.dark .carousel-quote-slide .carousel-quote-slide-content .quotation {
+  margin-bottom: 10px;
+}
+
+.carousel-quote.dark .carousel-quote-slide .carousel-quote-slide-content h2 {
+  max-width: 460px;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+@media (width >= 900px) {
+  /* Source layout: fixed 329px-tall card, image column ~475px. The portrait
+     shows at its natural size (390x329) anchored bottom-right, with the teal
+     background filling the headroom instead of upscaling/cropping the figure. */
+  .carousel-quote.dark .carousel-quote-slide {
+    grid-template-columns: minmax(0, 1fr) 475px;
+    min-height: 329px;
+    height: 329px;
+  }
+
+  .carousel-quote.dark .carousel-quote-slide .carousel-quote-slide-image {
+    min-height: 329px;
+  }
+
+  .carousel-quote.dark .carousel-quote-slide .carousel-quote-slide-image picture > img {
+    object-fit: contain;
+    object-position: right bottom;
+  }
+
+  .carousel-quote.dark .carousel-quote-slide .carousel-quote-slide-content {
+    padding: 24px 40px 24px 64px;
   }
 }
