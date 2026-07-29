@@ -53,6 +53,14 @@
   margin: 0 auto;
 }
 
+/* nurse-support: 1140px wide with no left/right padding or margin from the
+   section wrapper (overrides the global "main > .section > div" gutters) */
+main > .section > .columns-content-wrapper:has(.columns-content.nurse-support) {
+  max-width: 1140px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .columns-content.nurse-support .columns-content-callout {
   background-color: #eff6f9;
 }
@@ -442,6 +450,7 @@ main > .section.copay-dark {
 }
 
 /* mobile: constrain and center the content wrappers */
+/* stylelint-disable-next-line no-descending-specificity */
 main > .section.copay-dark .columns-content-wrapper,
 main > .section.copay-dark .default-content-wrapper {
   box-sizing: border-box;
@@ -519,5 +528,376 @@ main > .section.copay-dark .default-content-wrapper:last-of-type p {
 
   main > .section.copay-dark .default-content-wrapper:first-of-type {
     margin-bottom: 60px;
+  }
+}
+
+/* ==========================================================================
+   Variant: prepare-steps (what-to-expect)
+   Left: "choosing a location" content with a 4-icon row + infusion-network
+   list. Right: white "Prepare for each step" card with a magenta header,
+   three interactive icon tabs, and step panels. Built from a flat table by
+   decoratePrepareSteps() in columns-content.js.
+   ========================================================================== */
+
+.columns-content.prepare-steps {
+  max-width: 1140px;
+  margin: 0 auto;
+  color: #333;
+}
+
+/* reset the base ".columns-content > div" grid: this variant's direct children
+   are the left content column and the card, not a two-cell row */
+/* stylelint-disable-next-line no-descending-specificity */
+.columns-content.prepare-steps > div {
+  display: block;
+}
+
+/* left column: centered on mobile/tablet (desktop restores left align below) */
+.columns-content.prepare-steps .prepare-steps-content {
+  text-align: center;
+}
+
+/* left column */
+/* stylelint-disable-next-line no-descending-specificity */
+.columns-content.prepare-steps .prepare-steps-content h2 {
+  margin: 0 0 0.6em;
+  color: #046183;
+  font-size: 24px;
+  line-height: 29px;
+  font-weight: 800;
+}
+
+.columns-content.prepare-steps .prepare-steps-content h3 {
+  margin-top: 1.2em;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.columns-content.prepare-steps .prepare-steps-content p {
+  margin: 0 0 1em;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.columns-content.prepare-steps .prepare-steps-content ul {
+  margin: 0 0 1em;
+  padding-left: 20px;
+  text-align: left;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.columns-content.prepare-steps .prepare-steps-content li {
+  margin-bottom: 0.75em;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.columns-content.prepare-steps .prepare-steps-content li::marker {
+  color: #c02c57;
+}
+
+.columns-content.prepare-steps .prepare-steps-content .footnote {
+  margin-bottom: 0.25em;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+/* location icons: 2x2 on mobile/tablet, 4-across on desktop */
+.columns-content.prepare-steps .prepare-steps-locations {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px 16px;
+  max-width: 360px;
+  margin: 20px auto 28px;
+}
+
+.columns-content.prepare-steps .prepare-steps-locations > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.columns-content.prepare-steps .prepare-steps-location-icon {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 108px;
+  height: 108px;
+  margin-bottom: 12px;
+}
+
+.columns-content.prepare-steps .prepare-steps-location-icon img {
+  width: auto;
+  height: 100%;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.columns-content.prepare-steps .prepare-steps-locations p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 18px;
+  font-weight: 700;
+}
+
+/* right column: the prepare card */
+.columns-content.prepare-steps .prepare-steps-card {
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 2px 12px 0 rgb(46 50 51 / 15%);
+  overflow: hidden;
+}
+
+.columns-content.prepare-steps .prepare-steps-header {
+  background-color: #bf2c58;
+  padding: 16px;
+  text-align: center;
+}
+
+.columns-content.prepare-steps .prepare-steps-header h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 22px;
+  line-height: 27px;
+  font-weight: 700;
+}
+
+/* tabs row */
+.columns-content.prepare-steps .prepare-steps-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 24px 24px 20px;
+  border-bottom: 1px solid #e2e7ea;
+}
+
+.columns-content.prepare-steps .prepare-steps-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  justify-self: center;
+  width: 88px;
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+.columns-content.prepare-steps .prepare-steps-tab:focus-visible {
+  outline: 2px solid #046183;
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+.columns-content.prepare-steps .prepare-steps-tab-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 51px;
+  height: 51px;
+}
+
+.columns-content.prepare-steps .prepare-steps-tab-icon .icon,
+.columns-content.prepare-steps .prepare-steps-tab-icon img {
+  width: 51px;
+  height: 51px;
+}
+
+.columns-content.prepare-steps .prepare-steps-tab-label {
+  width: 88px;
+  border: 1px solid #7ebcc6;
+  border-radius: 6px;
+  padding: 4px 0;
+  background-color: rgb(4 97 131 / 3%);
+  color: #046183;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+}
+
+/* selected tab: dark-teal fill, white text */
+.columns-content.prepare-steps .prepare-steps-tab.is-active .prepare-steps-tab-label {
+  background-color: #046183;
+  color: #fff;
+}
+
+/* step panel */
+.columns-content.prepare-steps .prepare-steps-panel {
+  padding: 24px;
+}
+
+.columns-content.prepare-steps .prepare-steps-panel[hidden] {
+  display: none;
+}
+
+.columns-content.prepare-steps .prepare-steps-panel h5 {
+  margin: 0 0 6px;
+  color: #c02c57;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+.columns-content.prepare-steps .prepare-steps-panel h5:not(:first-child) {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #e2e7ea;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.columns-content.prepare-steps .prepare-steps-panel p {
+  margin: 0 0 8px;
+  color: #333;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.columns-content.prepare-steps .prepare-steps-panel ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.columns-content.prepare-steps .prepare-steps-panel li {
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.columns-content.prepare-steps .prepare-steps-panel li::marker {
+  color: #c02c57;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.columns-content.prepare-steps .prepare-steps-panel a:any-link {
+  color: #046183;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+@media (width >= 900px) {
+  .columns-content.prepare-steps {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 525px;
+    gap: 56px;
+    align-items: start;
+  }
+
+  /* desktop: text back to left-aligned */
+  .columns-content.prepare-steps .prepare-steps-content {
+    text-align: left;
+  }
+
+  /* desktop: icons back to a single 4-across row */
+  .columns-content.prepare-steps .prepare-steps-locations {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: none;
+    margin: 20px 0 28px;
+  }
+}
+
+/* ==========================================================================
+   Variant: stat-highlight (what-to-expect "88% ... was easy")
+   Tinted full-bleed band, circular graphic left + two-color stat headline
+   and supporting copy right. Built by decorateStatHighlight() in the JS.
+   ========================================================================== */
+
+/* full-bleed tinted band via the section wrapper */
+main > .section:has(.columns-content.stat-highlight) {
+  background-color: #e1f0f6;
+  margin: 0;
+  padding: 57px 0 48px;
+}
+
+.columns-content.stat-highlight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  max-width: 1140px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* reset the base ".columns-content > div" grid so the text stacks */
+/* stylelint-disable-next-line no-descending-specificity */
+.columns-content.stat-highlight > div {
+  display: block;
+}
+
+.columns-content.stat-highlight .stat-highlight-graphic {
+  flex-shrink: 0;
+}
+
+.columns-content.stat-highlight .stat-highlight-graphic .icon {
+  display: block;
+  width: 200px;
+  height: 200px;
+}
+
+.columns-content.stat-highlight .stat-highlight-graphic img {
+  display: block;
+  width: 200px;
+  height: auto;
+}
+
+.columns-content.stat-highlight .stat-highlight-text h3 {
+  margin: 0 0 16px;
+  color: #046183;
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: 800;
+}
+
+/* bold spans in the headline render in brand magenta */
+.columns-content.stat-highlight .stat-highlight-text h3 strong {
+  color: #c02c57;
+  font-weight: 800;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.columns-content.stat-highlight .stat-highlight-text p {
+  margin: 0 0 8px;
+  color: #484848;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.columns-content.stat-highlight .stat-highlight-text .stat-highlight-disclaimer {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.columns-content.stat-highlight .stat-highlight-text .stat-highlight-disclaimer em {
+  font-style: italic;
+}
+
+@media (width >= 900px) {
+  .columns-content.stat-highlight {
+    flex-direction: row;
+    align-items: center;
+    gap: 56px;
+    text-align: left;
+  }
+
+  .columns-content.stat-highlight .stat-highlight-graphic .icon {
+    width: 260px;
+    height: 260px;
+  }
+
+  .columns-content.stat-highlight .stat-highlight-graphic img {
+    width: 260px;
+  }
+
+  .columns-content.stat-highlight .stat-highlight-text h3 {
+    font-size: 32px;
+    line-height: 36px;
   }
 }

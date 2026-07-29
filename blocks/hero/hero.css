@@ -437,3 +437,233 @@
     transition: none;
   }
 }
+
+/* ── Prepare variant (interactive tabbed card) ─────────────────────────────
+   White card with a magenta header, three interactive icon tabs, and step
+   panels. Built from a flat table by decoratePrepare() in hero.js. Mirrors
+   the columns-content (prepare-steps) card so it can live inside a hero. */
+
+.hero.prepare {
+  max-width: 525px;
+  margin: 0 auto;
+  color: #333;
+}
+
+.hero.prepare .hero-prepare-card {
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 2px 12px 0 rgb(46 50 51 / 15%);
+  overflow: hidden;
+}
+
+.hero.prepare .hero-prepare-header {
+  background-color: #bf2c58;
+  padding: 16px;
+  text-align: center;
+}
+
+.hero.prepare .hero-prepare-header h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 22px;
+  line-height: 27px;
+  font-weight: 700;
+}
+
+/* tabs row */
+.hero.prepare .hero-prepare-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 24px 24px 20px;
+  border-bottom: 1px solid #e2e7ea;
+}
+
+.hero.prepare .hero-prepare-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 88px;
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+.hero.prepare .hero-prepare-tab:focus-visible {
+  outline: 2px solid #046183;
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+.hero.prepare .hero-prepare-tab-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 51px;
+  height: 51px;
+}
+
+.hero.prepare .hero-prepare-tab-icon .icon,
+.hero.prepare .hero-prepare-tab-icon img {
+  width: 51px;
+  height: 51px;
+}
+
+.hero.prepare .hero-prepare-tab-label {
+  width: 88px;
+  border: 1px solid #7ebcc6;
+  border-radius: 6px;
+  padding: 4px 0;
+  background-color: rgb(4 97 131 / 3%);
+  color: #046183;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+}
+
+/* selected tab: dark-teal fill, white text */
+.hero.prepare .hero-prepare-tab.is-active .hero-prepare-tab-label {
+  background-color: #046183;
+  color: #fff;
+}
+
+/* step panel */
+.hero.prepare .hero-prepare-panel {
+  padding: 24px;
+}
+
+.hero.prepare .hero-prepare-panel[hidden] {
+  display: none;
+}
+
+.hero.prepare .hero-prepare-panel h5 {
+  margin: 0 0 6px;
+  color: #c02c57;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+.hero.prepare .hero-prepare-panel h5:not(:first-child) {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #e2e7ea;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.hero.prepare .hero-prepare-panel p {
+  margin: 0 0 8px;
+  color: #333;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.hero.prepare .hero-prepare-panel ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.hero.prepare .hero-prepare-panel li {
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.hero.prepare .hero-prepare-panel li::marker {
+  color: #c02c57;
+}
+
+.hero.prepare .hero-prepare-panel a:any-link {
+  color: #046183;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* ── Media variant (heading + copy above a nested video block) ────────────
+   Centered title/description stacked over the reused `video` block. */
+
+/* neutralize base hero chrome (teal bg + white text) for this content variant */
+.hero.media {
+  max-width: 760px;
+  margin: 0 auto;
+  color: inherit;
+  background: none;
+}
+
+.hero.media .hero-media-text {
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.hero.media .hero-media-text h1,
+.hero.media .hero-media-text h2,
+.hero.media .hero-media-text h3 {
+  margin: 0 0 0.4em;
+  color: #000;
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: 800;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.hero.media .hero-media-text p {
+  margin: 0 auto 8px;
+  max-width: 760px;
+  color: #333;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.hero.media .hero-media-text p em {
+  font-style: italic;
+}
+
+/* constrain the nested video */
+.hero.media .video {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* transcript toggle: solid teal circle with a white +/−, fixed #046183 label
+   (only inside the media hero — the base video block keeps its own style) */
+.hero.media .video .video-transcript-toggle,
+.hero.media .video .video-transcript-toggle:hover {
+  color: #046183;
+}
+
+.hero.media .video .video-transcript-toggle::before {
+  border: 0;
+  background:
+    linear-gradient(#fff, #fff) center / 10px 2px no-repeat,
+    linear-gradient(#fff, #fff) center / 2px 10px no-repeat,
+    #046183;
+}
+
+.hero.media .video .video-transcript-toggle[aria-expanded="true"]::before {
+  background:
+    linear-gradient(#fff, #fff) center / 10px 2px no-repeat,
+    linear-gradient(#fff, #fff) center / 2px 0 no-repeat,
+    #046183;
+}
+
+@media (width >= 900px) {
+  .hero.media .hero-media-text {
+    text-align: left;
+  }
+
+  .hero.media .hero-media-text h1,
+  .hero.media .hero-media-text h2,
+  .hero.media .hero-media-text h3 {
+    font-size: 32px;
+    line-height: 36px;
+  }
+
+  .hero.media .hero-media-text p {
+    margin-left: 0;
+  }
+}
