@@ -317,9 +317,9 @@ one, author a single-cell `Hero` block containing the image and the `# H1`.
 For this project's branded hero treatment (headline + body + CTA + optional actor text),
 author two cells in one row so the first cell is media and the second is text:
 
-| Hero ||
-| --- | --- |
-| ![hero image](./media_hero.png) | # Does migraine keep stealing the spotlight?<br>Learn about possible signs that it may be time to ask a doctor about VYEPTI.<br>**[Explore your options](/could-vyepti-be-right-for-you)**<br>*Actor portrayal* |
+| Hero                            |                                                                                                                                                                                                                 |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![hero image](./media_hero.png) | # Does migraine keep stealing the spotlight?<br>Learn about possible signs that it may be time to ask a doctor about VYEPTI.<br>**[Explore your options](/could-vyepti-be-right-for-you)**<br>_Actor portrayal_ |
 
 - Cell 1: image only (prefer a landscape image where subjects are in the right half).
 - Cell 2: `#` heading, body paragraph, optional bold CTA link, optional italic
@@ -329,13 +329,13 @@ author two cells in one row so the first cell is media and the second is text:
 
 Supported hero variants (author in the block name):
 
-| Variant name | Author as | Effect |
-| --- | --- | --- |
-| Default | `Hero` | Mobile uses text-first composition with the image anchored to the lower half. |
-| Left focal point | `Hero (focus-left)` | Shifts image framing left. |
-| Center focal point | `Hero (focus-center)` | Centers subject framing. |
-| Right focal point | `Hero (focus-right)` | Shifts image framing right (default-like for VYEPTI imagery). |
-| Legacy mobile overlay | `Hero (mobile-overlay)` | Restores full-height mobile image with stronger overlay behind text. |
+| Variant name          | Author as               | Effect                                                                        |
+| --------------------- | ----------------------- | ----------------------------------------------------------------------------- |
+| Default               | `Hero`                  | Mobile uses text-first composition with the image anchored to the lower half. |
+| Left focal point      | `Hero (focus-left)`     | Shifts image framing left.                                                    |
+| Center focal point    | `Hero (focus-center)`   | Centers subject framing.                                                      |
+| Right focal point     | `Hero (focus-right)`    | Shifts image framing right (default-like for VYEPTI imagery).                 |
+| Legacy mobile overlay | `Hero (mobile-overlay)` | Restores full-height mobile image with stronger overlay behind text.          |
 
 You can combine focal-point and overlay variants in one block name, for example:
 `Hero (focus-right, mobile-overlay)`.
@@ -428,7 +428,87 @@ lazy-loads that widget's HTML/CSS/JS. Requires a developer to add the widget ass
 
 ---
 
-## 6. Pointing pages at the fragments (optional)
+## 6. Modal block (flexible patterns)
+
+Use `Modal` when you need interstitial confirmations, legal notices, promo messages, or
+contextual calls to action.
+
+Authoring model:
+
+- One row in the table = one visual row in the modal.
+- One cell row = full-width content row.
+- Two cell row = action row (buttons side by side when each cell has a link).
+
+### 6.1 Manual modal called by link
+
+Author the modal with an explicit id and open it from any link:
+
+| Modal                                             |              |
+| ------------------------------------------------- | ------------ |
+| id                                                | hcp-modal    |
+| Example Modal                                     |              |
+| Reprehenderit sit exercitation aute do qui dolor. |              |
+| _Cancel_                                          | **Continue** |
+
+Trigger from content anywhere on the same page:
+
+`[Open modal](#hcp-modal)`
+
+### 6.2 Manual modal called by button
+
+Use a real HTML button trigger with `data-modal-target`:
+
+```html
+<button type="button" data-modal-target="hcp-modal">Open modal</button>
+```
+
+This is useful when design requires a button trigger instead of a text link.
+
+### 6.3 Auto-open modal (robust authoring)
+
+Preferred authored pattern (works even if variant classes are not propagated):
+
+| Modal                         |              |
+| ----------------------------- | ------------ |
+| behavior                      | auto-open    |
+| Example Modal                 |              |
+| Welcome message or gate text. |              |
+| _Dismiss_                     | **Continue** |
+
+### 6.4 Modal with image
+
+Author image + copy as one content row:
+
+| Modal                                                                                   |              |
+| --------------------------------------------------------------------------------------- | ------------ |
+| id                                                                                      | image-modal  |
+| ![Vyepti logo](/icons/logo-vyepti.svg)<br>### Example Modal with image<br>Support text. |              |
+| _Close_                                                                                 | **Continue** |
+
+### 6.5 Modal without action buttons
+
+For purely informational content, skip the two-column action row:
+
+| Modal                                                           |            |
+| --------------------------------------------------------------- | ---------- |
+| id                                                              | info-modal |
+| ### Informational modal<br>Long legal or educational copy only. |            |
+
+Users can close it with the top-right X, `Esc`, or overlay click (unless disabled).
+
+### 6.6 Make Cancel/Close behave like the X button
+
+Inside modal content, add `data-modal-close` to any link/button:
+
+```html
+<a href="#" data-modal-close>Cancel</a> <a href="#" data-modal-close>Close</a>
+```
+
+This closes the modal without navigation and matches X-button behavior.
+
+---
+
+## 7. Pointing pages at the fragments (optional)
 
 By default the header reads from `/nav` and the footer from `/footer`. To use a different
 location for a specific page (e.g. a localized `/es/nav`), add a **Metadata** block to that
@@ -474,3 +554,5 @@ Need a new icon? Ask a developer to add an optimized SVG to `/icons` — then `:
       Carousel Quote, Cards Callout — and does **not** author the header, footer, or ISI.
 - [ ] CTAs you want as buttons are **bold** links; secondary buttons are _italic_.
 - [ ] Preview the page and tab through the nav to confirm dropdowns open via keyboard.
+- [ ] For `Modal`, use either `id | my-modal` + `#my-modal` trigger, or `behavior | auto-open`.
+- [ ] For action rows, ensure each action cell has a real link (not plain `[text](#)` literal text).
