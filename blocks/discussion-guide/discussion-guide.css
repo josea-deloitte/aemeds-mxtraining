@@ -1,0 +1,488 @@
+/* intro section (default content above the block) — apply via
+   Section Metadata → Style = discussion-guide-intro */
+main > .section.discussion-guide-intro .default-content-wrapper {
+  max-width: 788px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+main > .section.discussion-guide-intro h1,
+main > .section.discussion-guide-intro h2 {
+  color: var(--vyepti-teal, #046183);
+  font-weight: 700;
+}
+
+main > .section.discussion-guide-intro p {
+  font-size: var(--body-font-size-s);
+  color: #2b2b2b;
+}
+
+main > .section.discussion-guide-intro p em {
+  font-size: var(--body-font-size-xs);
+  color: var(--dark-color);
+}
+
+main > .section.discussion-guide-intro a:any-link {
+  color: var(--vyepti-teal, #046183);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.discussion-guide .dg-form {
+  max-width: 563px;
+  margin: 0 auto;
+}
+
+.discussion-guide .dg-quiz,
+.discussion-guide .dg-results {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgb(4 97 131 / 12%);
+  background-color: var(--background-color);
+}
+
+/* header bar */
+.discussion-guide .dg-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 26px;
+  background-color: var(--vyepti-teal, #046183);
+  color: #fff;
+}
+
+.discussion-guide .dg-step-num {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background-color: #fff;
+  color: var(--vyepti-teal, #046183);
+  font-size: var(--body-font-size-xs);
+  font-weight: 700;
+}
+
+.discussion-guide .dg-title {
+  margin: 0;
+  font-size: var(--heading-font-size-s);
+  line-height: 1.25;
+  color: #fff;
+}
+
+/* progress bar */
+.discussion-guide .dg-progress {
+  display: flex;
+  gap: 2px;
+  background-color: var(--background-color);
+}
+
+.discussion-guide .dg-progress-seg {
+  flex: 1 1 0;
+  height: 5px;
+  background-color: #d9e3e8;
+  transition: background-color 0.2s ease;
+}
+
+.discussion-guide .dg-progress-seg.dg-progress-done {
+  background-color: #e8615a;
+}
+
+/* steps */
+.discussion-guide .dg-steps {
+  padding: 22px 26px 8px;
+}
+
+.discussion-guide .dg-step {
+  display: none;
+}
+
+.discussion-guide .dg-step.dg-step-active {
+  display: block;
+}
+
+.discussion-guide .dg-step-count {
+  display: block;
+  text-align: right;
+  font-style: italic;
+  font-size: var(--body-font-size-xs);
+  color: var(--dark-color);
+}
+
+.discussion-guide .dg-question {
+  margin-bottom: 22px;
+}
+
+.discussion-guide .dg-question-heading {
+  margin: 0 0 6px;
+  font-size: var(--body-font-size-m);
+  font-weight: 700;
+  color: var(--vyepti-teal, #046183);
+}
+
+.discussion-guide .dg-question-help {
+  margin-bottom: 6px;
+  font-size: var(--body-font-size-xs);
+  color: var(--dark-color);
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.discussion-guide .dg-question-help p {
+  margin: 0 0 4px;
+}
+
+.discussion-guide .dg-question-help p:first-child {
+  font-style: italic;
+}
+
+/* the step count sits inline with the first help line */
+.discussion-guide .dg-step-count + .dg-question {
+  margin-top: -20px;
+}
+
+/* free-text inputs */
+.discussion-guide .dg-input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid var(--vyepti-teal, #046183);
+  border-radius: 10px;
+  font-size: var(--body-font-size-s);
+  background-color: var(--background-color);
+}
+
+.discussion-guide .dg-input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgb(4 97 131 / 30%);
+}
+
+/* answer cards */
+.discussion-guide .dg-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.discussion-guide .dg-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  border: 2px solid #cfdde3;
+  border-radius: 999px;
+  background-color: #fbfdfd;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.discussion-guide .dg-option:hover {
+  border-color: var(--vyepti-teal, #046183);
+}
+
+/* visually hide the native control but keep it accessible */
+.discussion-guide .dg-option input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+}
+
+.discussion-guide .dg-option-icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--vyepti-teal, #046183);
+}
+
+.discussion-guide .dg-option-icon:empty {
+  display: none;
+}
+
+.discussion-guide .dg-option-icon .icon,
+.discussion-guide .dg-option-icon img {
+  width: 26px;
+  height: 26px;
+}
+
+.discussion-guide .dg-option-label {
+  flex: 1 1 auto;
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  color: #2b2b2b;
+}
+
+/* checkbox / radio marker */
+.discussion-guide .dg-option-marker {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #b9c7cf;
+  background-color: var(--background-color);
+}
+
+.discussion-guide .dg-question-multiselect .dg-option-marker {
+  border-radius: 5px;
+}
+
+.discussion-guide .dg-question-singleselect .dg-option-marker {
+  border-radius: 999px;
+}
+
+.discussion-guide .dg-option input:checked ~ .dg-option-marker {
+  border-color: var(--vyepti-teal, #046183);
+  background-color: var(--vyepti-teal, #046183);
+}
+
+.discussion-guide .dg-option input:focus-visible ~ .dg-option-marker {
+  outline: 2px solid var(--vyepti-teal, #046183);
+  outline-offset: 2px;
+}
+
+.discussion-guide .dg-question-multiselect .dg-option input:checked ~ .dg-option-marker {
+  background-image: url("/icons/arrow.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 14px;
+}
+
+.discussion-guide .dg-option:has(input:checked) {
+  border-color: var(--vyepti-teal, #046183);
+  background-color: rgb(4 97 131 / 4%);
+}
+
+/* navigation */
+.discussion-guide .dg-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 26px 28px;
+}
+
+.discussion-guide .dg-nav button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 30px;
+  border-radius: 999px;
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  cursor: pointer;
+  border: 0;
+}
+
+.discussion-guide .dg-back {
+  background-color: transparent;
+  color: var(--vyepti-teal, #046183);
+}
+
+.discussion-guide .dg-next,
+.discussion-guide .dg-submit {
+  margin-left: auto;
+  background-color: #046183;
+  color: #fff;
+  border: 0;
+}
+
+.discussion-guide .dg-next:hover,
+.discussion-guide .dg-submit:hover {
+  background-color: #7fa9bb;
+}
+
+/* white arrow on the filled Next/Submit buttons */
+.discussion-guide .dg-next .icon img,
+.discussion-guide .dg-submit .icon img {
+  filter: brightness(0) invert(1);
+}
+
+.discussion-guide .dg-nav button[hidden] {
+  display: none;
+}
+
+.discussion-guide .dg-nav .icon,
+.discussion-guide .dg-nav .icon img {
+  width: 20px;
+  height: 20px;
+}
+
+.discussion-guide .dg-back .icon {
+  transform: scaleX(-1);
+}
+
+/* results view */
+.discussion-guide .dg-header-results {
+  justify-content: center;
+}
+
+.discussion-guide .dg-results-body {
+  padding: 26px 30px 32px;
+}
+
+.discussion-guide .dg-results-title {
+  margin: 0 0 22px;
+  text-align: center;
+  font-size: var(--heading-font-size-s);
+  color: var(--vyepti-teal, #046183);
+}
+
+.discussion-guide .dg-results-list {
+  margin: 0 0 22px;
+  padding-left: 22px;
+}
+
+.discussion-guide .dg-results-list li {
+  margin-bottom: 16px;
+  font-size: var(--body-font-size-xs);
+}
+
+.discussion-guide .dg-results-q {
+  display: block;
+}
+
+.discussion-guide .dg-results-a {
+  margin: 2px 0 0;
+}
+
+.discussion-guide .dg-answer {
+  color: var(--vyepti-teal, #046183);
+  font-weight: 700;
+}
+
+.discussion-guide .dg-actions-label {
+  margin: 0 0 12px;
+  font-weight: 700;
+  font-size: var(--body-font-size-xs);
+}
+
+.discussion-guide .dg-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.discussion-guide .dg-download.button,
+.discussion-guide .dg-email.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  border-radius: 999px;
+  background-color: #035270;
+  color: #fff;
+  font-weight: 700;
+  font-size: var(--body-font-size-s);
+  text-decoration: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.discussion-guide .dg-download.button:hover,
+.discussion-guide .dg-email.button:hover {
+  background-color: #046183;
+}
+
+.discussion-guide .dg-download .icon,
+.discussion-guide .dg-email .icon,
+.discussion-guide .dg-download .icon img,
+.discussion-guide .dg-email .icon img {
+  width: 18px;
+  height: 18px;
+}
+
+/* white icons on the filled Download/Email buttons */
+.discussion-guide .dg-download .icon img,
+.discussion-guide .dg-email .icon img {
+  filter: brightness(0) invert(1);
+}
+
+.discussion-guide .dg-note {
+  margin: 16px 0 0;
+  font-size: var(--body-font-size-xs);
+  color: var(--dark-color);
+}
+
+.discussion-guide .dg-results-body hr {
+  margin: 22px 0;
+  border: 0;
+  border-top: 1px solid #d9e3e8;
+}
+
+.discussion-guide .dg-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.discussion-guide .dg-cta-heading {
+  margin: 0;
+  font-size: var(--body-font-size-m);
+  font-weight: 700;
+  color: #2b2b2b;
+}
+
+.discussion-guide .dg-retake {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--vyepti-teal, #046183);
+  font-weight: 700;
+  font-size: var(--body-font-size-xs);
+  cursor: pointer;
+}
+
+.discussion-guide .dg-retake .icon,
+.discussion-guide .dg-retake .icon img {
+  width: 21px;
+  height: 16px;
+}
+
+.discussion-guide .dg-tips-heading {
+  margin: 0 0 10px;
+  font-size: var(--body-font-size-s);
+}
+
+.discussion-guide .dg-tips {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.discussion-guide .dg-tips li {
+  margin-bottom: 6px;
+  font-size: var(--body-font-size-xs);
+  color: #2b2b2b;
+}
+
+.discussion-guide .dg-tips li::marker {
+  color: #e8615a;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.discussion-guide .dg-tips a:any-link {
+  color: #046183;
+  text-decoration: underline;
+}
+
+@media (width >= 900px) {
+  .discussion-guide .dg-option {
+    padding: 16px 24px;
+  }
+}
+
+@media print {
+  .discussion-guide .dg-nav,
+  .discussion-guide .dg-progress,
+  .discussion-guide .dg-actions,
+  .discussion-guide .dg-retake {
+    display: none;
+  }
+}
